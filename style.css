@@ -1,0 +1,669 @@
+/*
+
+	Design by Free CSS Templates
+	http://www.freecsstemplates.org
+	Released for free under a Creative Commons Attribution License
+
+	Name       : Reverse Obscurity
+	Version    : 1.0
+	Released   : 20130222
+	
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #8f5038;
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	font-size: 10.5pt;
+	line-height: 1.75em;
+	font-family: Arial, sans-serif;
+	background: #e1e4e5 url('images/bg.png');
+	color: #383939;
+}
+
+br.clear {
+	clear: both;
+}
+
+h1,h2,h3,h4 {
+	/*text-transform: lowercase;*/
+	font-weight: normal;
+	font-family: "PT Sans Narrow";
+}
+
+h2,h3,h4 {
+	margin-bottom: 1em;
+	font-family: "PT Sans Narrow", sans-serif;
+	color: #000;
+}
+
+h2 {
+	font-size: 1.8em;
+}
+	
+h3 {
+	font-size: 1.4em;
+}
+
+img.left {
+	float: left;
+	margin: 8px 20px 20px 0;
+}
+
+img.top {
+	margin: 8px 0 20px 0;
+}
+
+p {
+	margin-bottom: 1.75em;
+}
+
+ul {
+	margin-bottom: 1.75em;
+}
+
+/*border-radius:25px;
+//-moz-border-radius:25px; /* Old Firefox */
+
+
+#resetLoginDiv {
+	font-family: "PT Sans Narrow";
+	font-size: 14pt;
+	/*text-transform:lowercase;*/
+}
+
+#resetLoginDiv fieldset {
+	height: 300px; 
+	width: 500px;	
+	background-color: #FFFFFF;
+	border-radius:7px;
+	-moz-border-radius:7px;	
+}
+
+#resetLoginForm  { 
+	width: 70%;
+	font-size: 14pt;
+	/*text-transform:lowercase;*/
+}
+
+#resetLoginForm input[type="password"] {
+	font-family: "PT Sans Narrow";
+	font-size: 14pt;
+}
+
+#resetLoginForm label { 
+	width:175px;    
+    	float:left; 
+}
+
+#loginDiv{ 
+   	font-family: "PT Sans Narrow";
+	font-size: 14pt;
+	/*text-transform:lowercase;*/
+}
+
+#loginDiv fieldset { 
+	height: 300px; 
+	width: 500px;	
+	background-color: #FFFFFF;
+	border-radius:7px;
+	-moz-border-radius:7px;	 
+}
+
+#loginForm input[type="password"] {
+	font-family: "PT Sans Narrow";
+	font-size: 14pt;
+}
+
+#loginForm input[type="text"] {
+	font-family: "PT Sans Narrow";
+	font-size: 14pt;
+}
+
+#loginForm { 	
+	width: 60%;
+	font-size: 14pt;
+	/*text-transform:lowercase;*/
+}
+
+#loginForm label { 
+	float: left;
+	width:90px;      	
+}
+
+#motd_notes {
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #A73914;
+	color: #FFFFFF;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+
+#motd_notes:hover {
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #CA8872;
+	color: #661A00;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+
+#tableHeading {
+	padding: 20px;
+	font-size: 16pt;
+	/*text-transform: lowercase;*/
+	font-family: "PT Sans Narrow";
+}
+
+#issueEdited {
+	display: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+}
+
+#changeTeamName {
+	display: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;
+}
+
+#issueAdded {
+	display: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+}
+
+#procError {
+	display: none;
+}
+
+#updateFailed {
+	display: none;
+}
+
+#updateSuccess {
+	display: none;
+}
+
+#changePassword {
+	display: none;
+}
+
+#changePassword label {
+	width: 150px;
+	float: left;
+}
+
+#changePassword input[type="password"] {
+	width: 50%;
+	font-size: 12pt;
+	font-family: "PT Sans Narrow";
+	border-radius:7px;
+	-moz-border-radius:7px;
+}
+
+#editIssue {
+	display: none;
+}
+
+#addIssue {
+	display: none;
+}
+
+#issueFail {
+	display: none;
+}
+
+#content legend {
+	padding-left: 5px;
+	padding-right: 5px;
+	
+}
+
+#leftIssue {
+	width: 47%;
+	float: left;
+}
+
+#rightIssue {
+	width: 47%;
+	float: right;
+}
+
+#content fieldset {
+	
+	font-size: 12pt;
+	/*text-transform: lowercase;*/
+	font-family: "PT Sans Narrow";
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 20px;
+	border-radius:7px;
+	-moz-border-radius:7px; /* Old Firefox */
+}
+
+#content input[type="text"] {
+	width: 100%;
+	font-size: 12pt;
+	font-family: "PT Sans Narrow";
+	border-radius:7px;
+	-moz-border-radius:7px;
+	margin-bottom: 15px;
+}
+
+#content textarea {
+	width: 100%;
+	height: 100px;
+	font-size: 12pt;
+	font-family: "PT Sans Narrow";
+	border-radius:7px;
+	-moz-border-radius:7px;
+	margin-bottom: 15px;
+}
+
+#content input[type="checkbox"] {
+	margin-left: 10px;
+
+}
+
+.lateName {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #A73914;
+	color: #FFFFFF;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+.lateName:hover {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #CA8872;
+	color: #661A00;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+
+.changeName {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #A73914;
+	color: #FFFFFF;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+.changeName:hover {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #CA8872;
+	color: #661A00;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+
+.issueName {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #A73914;
+	color: #FFFFFF;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+.issueName:hover {
+	margin-top: 10px;
+	text-align: center;
+	width: 200px;
+	height: 28px;
+	background: #CA8872;
+	color: #661A00;
+	border: none;
+	font-family: "PT Sans Narrow";
+	font-size: 12pt;	
+	/*text-transform:lowercase;*/
+	cursor: pointer;
+}
+
+.imageList {
+	list-style: none;
+}
+
+.imageList li {
+	clear: both;
+}
+
+#bg {
+	//background: url('images/highlight.png') top left repeat-x;
+}
+
+#banner {
+	position: relative;
+	padding: 28px;
+	height: 212px;
+	width: 1124px;
+	margin: 28px 0 0 0;
+	background: #ffffff;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+#box1 {
+	width: 855px;
+	overflow: hidden;
+	margin: 0px 0 24px 0;
+}
+
+#noSideBox1 {
+	width: 1127px;
+	overflow: hidden;
+	margin: 0px 0 24px 0;
+}
+
+#box2 {
+	width: 380px;
+	overflow: hidden;
+	float: left;
+}
+
+#box3 {
+	width: 400px;
+	overflow: hidden;
+	margin: 0px 0 0 440px;
+}
+
+#box4 {
+	width: 400px;
+	overflow: hidden;
+	margin: 0px 0 0 440px;
+}
+
+#content {
+	width: 855px;
+	margin: 0px 28px 0 272px;
+	padding: 28px;
+	background: #ffffff;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+#noSideContent {
+	width: 1125px;
+	margin: 0px 28px 0 0px;
+	padding: 28px;
+	background: #ffffff;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+#copyright {
+	margin: 28px 0 64px 0;
+	text-align: center;
+	text-shadow: 0 1px 0 #ffffff;
+	color: #787979;
+}
+
+#copyright a {
+	color: #787979;
+}
+
+#footer {
+	position: relative;
+	//padding: 28px;
+	margin: 28px 0 0 0;
+	width: 1184px;
+	background: #636363;
+	color: #d3d3d3;
+	border-bottom: solid 1px #444444;
+	text-shadow: 0 1px 0 #404040;
+}
+
+#footer a {
+	color: #eee;
+}
+
+#footer h2, #footer h3, #footer h4 {
+	color: #ffffff;
+}
+
+#footer ul {
+	list-style: none;
+	margin-bottom: 0;
+}
+
+#footer p {
+	margin-bottom: 0;
+}
+
+#footer ul li {
+	padding: 8px 0 8px 0;
+	border-top: dotted 1px #8c8c8c;
+}
+
+#footer ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#footerContent {
+	width: 812px;
+	float: left;
+}
+
+#footerSidebar {
+	width: 232px;
+	margin: 0px 0 0 892px;
+}
+
+#header {
+	position: relative;
+	padding: 28px;
+	height: 126px;
+	width: 1124px;
+}
+
+#logo {
+	text-align: center;
+	position: relative;
+	margin: -14px auto;
+	height: 98px;
+	line-height: 98px;
+}
+
+#logo a {
+	text-decoration: none;
+	color: #000;
+	text-shadow: 0px 3px 0px #ffffff;
+}
+
+#logo h1 {
+	font-size: 3.25em;
+	font-family: Lobster, cursive;
+}
+
+#main {
+	position: relative;
+	padding: 0px;
+	margin: 28px 0 0 0;
+	width: 1180px;
+	color: #474747;
+}
+
+#main strong {
+	color: #242424;
+}
+
+#main h2, #main h3, #main h4 {
+	color: #0d0d0d;
+}
+
+#main ul {
+	list-style: none;
+}
+
+#main ul li {
+	padding: 8px 0 8px 0;
+	border-top: dotted 1px #bdbdbd;
+}
+
+#main ul.imageList li {
+	padding: 16px 0 16px 0;
+}
+
+#main ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#nav {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 1180px;
+	height: 56px;
+	line-height: 56px;
+	margin: 28px 0 0 0;
+	background: #A73914;
+	font-size: 1.2em;
+	font-family: "PT Sans Narrow", sans-serif;
+	border-bottom: solid 1px #6f3018;
+	border-top: solid 1px #ffffff;
+	text-shadow: 0 1px 0px #6f3018;
+	/*text-transform: lowercase;*/
+}
+
+#nav a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+#nav ul {
+	list-style: none;
+	margin: 0 auto;
+	/*width: 1062px;*/
+	width: 100%;
+	text-align: center;
+}
+
+#nav ul li {
+	display: inline;
+	text-align: center;
+	padding: 0 1.00em 0 1.00em;
+}
+
+#outer {
+	position: relative;
+	width: 1180px;
+	padding-top: 30px;
+	margin: 0 auto 0 auto;
+}
+
+#search input.button {
+	margin-left: 1em;
+	border: 0px;
+	color: #ffffff;
+	background: #8f5038;
+	padding: 5px;
+}
+
+#search input.text {
+	border: dotted 1px #000;
+	padding: 4px;
+}
+
+#sidebar1 {
+	width: 202px;
+	float: left;
+	padding: 28px;
+	background: #ffffff;
+	color: #474747;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+#sidebar1 h2, #sidebar1 h3, #sidebar1 h4 {
+	color: #000;
+}
+
+#sidebar1 ul {
+	list-style: none;
+}
+
+#sidebar1 ul li {
+	padding: 8px 0 8px 0;
+	border-top: dotted 1px #bdbdbd;
+}
+
+#sidebar1 ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#sidebar2 {
+	width: 232px;
+	float: right;
+	padding: 28px;
+	background: #ffffff;
+	color: #474747;
+	border-bottom: solid 1px #c0c0c0;
+}
+
+#sidebar2 h2, #sidebar2 h3, #sidebar2 h4 {
+	color: #000;
+}
+
+#sidebar2 ul {
+	list-style: none;
+}
+
+#sidebar2 ul li {
+	padding: 8px 0 8px 0;
+	border-top: dotted 1px #bdbdbd;
+}
+
+#sidebar2 ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
