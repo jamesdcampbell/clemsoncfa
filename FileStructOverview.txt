@@ -1,0 +1,20 @@
+- The file structure is fairly simple for the CFA management system.
+
+template directory
+ - holds the main layout of the page
+ 
+includes directory
+ - holds db connection string, change here and it will change throughout
+ 
+modules directory 
+- holds 99% of database interactions..for a given page, it most likely has a page called getXXXX.php that handles all of its database calls
+
+root of public_html
+- holds the main pages for the site, most of them include template.php and call the corresponding template depending on how you want the page displayed
+
+misc..
+- the databases are simple and dirty..nothing above 1NF in there.
+
+To whomever comes behind me to work on this site, you're welcome for this brief overview..email and let me know if someone actually reads this ;)
+
+bart.cone@mail.swu.edu
