@@ -43,6 +43,13 @@ AND id NOT IN(
 	WHERE employee_id = TeamMemberInfo.id
 	AND review_time = 30
 )";
+
+//Manager's Reviews
+session_start();
+$id = $_SESSION["id"];
+$manager_review = "SELECT fName, lName, review_time FROM p_review, TeamMemberInfo
+WHERE manager_id = $id
+AND TeamMemberInfo.id = employee_id";
 ?>
 
 <!DOCTYPE html>
@@ -179,7 +186,18 @@ AND id NOT IN(
                 </tr>
               </thead>
               <tbody>
+			  <?php
 			  
+			  $query = $db->query($manager_review);
+			  print_r($query);
+			  foreach($query as $row)
+			  {
+				print "<pre>";
+				print_r($row);
+				print "</pre>";
+			  }
+			  
+			  ?>
               </tbody>
             </table>
           </div>
