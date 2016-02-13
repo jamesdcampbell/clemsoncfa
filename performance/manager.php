@@ -1,3 +1,52 @@
+<?php
+
+//Testing Stuff
+include '../includes/dbConnections.php';
+
+//Select Employees
+$query = $db->query("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", PDO::FETCH_ASSOC);
+
+//1-Year Reviews
+"SELECT * FROM TeamMemberInfo
+WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 1 YEAR)
+AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1000 YEAR)
+AND id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = 1
+)";
+
+//90-Day Reviews
+"SELECT * FROM TeamMemberInfo
+WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 90 DAY)
+AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1 YEAR)
+AND id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = 90
+)";
+
+//60-Day Reviews
+"SELECT * FROM TeamMemberInfo
+WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 60 DAY)
+AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 90 DAY)
+AND id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = 60
+)";
+
+//30-Day Reviews
+$thirty_day = "SELECT * FROM TeamMemberInfo
+WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 30 DAY)
+AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 60 DAY)
+AND id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = 30
+)";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -78,135 +127,74 @@
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <span class="text-muted">Section title</span>
             </div>
           </div>
 
-          <h2 class="sub-header">Section title</h2>
+		  <h2 class="sub-header">Upcoming Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Review Type</th>
+				  <th>Review</th>
                 </tr>
               </thead>
               <tbody>
+			  <?php
+			  
+			  ?>
+              </tbody>
+            </table>
+          </div>
+		  
+		  <h2 class="sub-header">Completed Reviews</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Review Type</th>
+				  <th>View</th>
                 </tr>
+              </thead>
+              <tbody>
+			  
+              </tbody>
+            </table>
+          </div>
+		  
+          <h2 class="sub-header">Employees</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Hired</th>
+				  <th>Review</th>
                 </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
+              </thead>
+              <tbody>
+				<?php
+				foreach($query as $row)
+				{
+					print "<tr>";
+					$fields = ["id", "fName", "lName", "hire_date"];
+					foreach($fields as $field)
+					{
+						print "<td>" . $row[$field] . "</td>";
+					}
+					print "<td><a href='#' class='btn'>Review</a></td>";
+					print "</tr>";
+				}
+				?>
               </tbody>
             </table>
           </div>
