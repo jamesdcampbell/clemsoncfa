@@ -3,11 +3,9 @@
 //Testing Stuff
 include '../includes/dbConnections.php';
 
-//Select Employees
-$query = $db->query("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", PDO::FETCH_ASSOC);
-
+$reviews = [];
 //1-Year Reviews
-"SELECT * FROM TeamMemberInfo
+$reviews["1-Year"] = "SELECT * FROM TeamMemberInfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 1 YEAR)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1000 YEAR)
 AND id NOT IN(
@@ -17,7 +15,7 @@ AND id NOT IN(
 )";
 
 //90-Day Reviews
-"SELECT * FROM TeamMemberInfo
+$reviews["90-Day"] = "SELECT * FROM TeamMemberInfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 90 DAY)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1 YEAR)
 AND id NOT IN(
@@ -27,7 +25,7 @@ AND id NOT IN(
 )";
 
 //60-Day Reviews
-"SELECT * FROM TeamMemberInfo
+$reviews["60-Day"] = "SELECT * FROM TeamMemberInfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 60 DAY)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 90 DAY)
 AND id NOT IN(
@@ -37,7 +35,7 @@ AND id NOT IN(
 )";
 
 //30-Day Reviews
-$thirty_day = "SELECT * FROM TeamMemberInfo
+$reviews["30-Day"] = "SELECT * FROM TeamMemberInfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 30 DAY)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 60 DAY)
 AND id NOT IN(
@@ -139,13 +137,30 @@ AND id NOT IN(
                   <th>#</th>
                   <th>First Name</th>
                   <th>Last Name</th>
+                  <th>Hire Date</th>
                   <th>Review Type</th>
 				  <th>Review</th>
                 </tr>
               </thead>
               <tbody>
 			  <?php
-			  
+			  foreach($reviews as $type=>$review)
+			  {
+			  $query = $db->query($review, PDO::FETCH_ASSOC);
+			  foreach($query as $row)
+			  {
+				  print "<tr>";
+				  $fields = ["id", "fName", "lName", "hire_date"];
+				  foreach($fields as $field)
+				  {
+					  print "<td>" . $row[$field] . "</td>";
+				  }
+				  
+				  print "<td>$type</td>";
+				  print "<td><a href='#' class='btn'>Review</a></td>";
+				  print "</tr>";
+			  }
+			  }
 			  ?>
               </tbody>
             </table>
@@ -183,6 +198,8 @@ AND id NOT IN(
               </thead>
               <tbody>
 				<?php
+				//Select Employees
+				$query = $db->query("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", PDO::FETCH_ASSOC);
 				foreach($query as $row)
 				{
 					print "<tr>";
