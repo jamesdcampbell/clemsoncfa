@@ -1,7 +1,7 @@
 <?php
 
 //Testing Stuff
-include '../includes/dbConnections.php';
+include '../../includes/dbConnections.php';
 
 $reviews = [];
 //1-Year Reviews
@@ -66,10 +66,10 @@ AND TeamMemberInfo.id = employee_id";
     <title>CFA Performance Review System</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="bootstrap/css/dashboard.css" rel="stylesheet">
+    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
   </head>
 
   <body>
@@ -189,13 +189,18 @@ AND TeamMemberInfo.id = employee_id";
 			  <?php
 			  
 			  $query = $db->query($manager_review);
-			  print_r($query);
+
 			  foreach($query as $row)
-			  {
-				print "<pre>";
-				print_r($row);
-				print "</pre>";
-			  }
+				{
+					print "<tr>";
+					$fields = ["fName", "lName", "review_time"];
+					foreach($fields as $field)
+					{
+						print "<td>" . $row[$field] . "</td>";
+					}
+					print "<td><a href='#' class='btn'>Review</a></td>";
+					print "</tr>";
+				}
 			  
 			  ?>
               </tbody>
@@ -226,7 +231,7 @@ AND TeamMemberInfo.id = employee_id";
 					{
 						print "<td>" . $row[$field] . "</td>";
 					}
-					print "<td><a href='#' class='btn'>Review</a></td>";
+					print "<td><a href='new_review?employee={$row["id"]}' class='btn'>Review</a></td>";
 					print "</tr>";
 				}
 				?>
@@ -239,6 +244,5 @@ AND TeamMemberInfo.id = employee_id";
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </html>
