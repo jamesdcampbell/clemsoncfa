@@ -76,10 +76,12 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">General Questions</h3>
 		  <p>These questions appear on every review.</p>
 		  <?php
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = -1");
+			$count = 0;
+			$results = $db->query("SELECT * FROM p_question WHERE review_time = 0");
 			foreach($results as $row)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}'></div>";
+				$text = htmlentities($row["question_text"], ENT_QUOTES);
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
@@ -90,11 +92,10 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">30-Day Questions</h3>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
-			$count = 0;
 			$results = $db->query("SELECT * FROM p_question WHERE review_time = 30");
 			foreach($results as $row)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}'></div>";
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='{$row["question_text"]}'></div>";
 				$count++;
 			}
 		  ?>
