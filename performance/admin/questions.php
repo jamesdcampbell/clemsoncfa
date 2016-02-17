@@ -91,7 +91,7 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">30-Day Questions</h3>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
-			$questions = Question::getType("30");
+			$questions = CfaQuestion::getType("30");
 			foreach($questions as $q)
 			{
 				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='{$row["question_text"]}'></div>";
