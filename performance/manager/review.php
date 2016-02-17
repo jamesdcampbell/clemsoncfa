@@ -1,14 +1,15 @@
 <?php
 
-//Testing Stuff
-include '../../includes/dbConnections.php';
-
-
+include '../includes/init.php';
 
 //Manager's Reviews
-session_start();
-$id = $_SESSION["id"];
+
+//Get Employee
 $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
+
+//Get Review Time
+$review_time = isset($_GET["time"]) ? (int) $_GET["employee"] : "0";
+
 
 ?>
 
@@ -84,9 +85,10 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
   </div>
   
   <h3 class="page-header">Questions</h3>
-  <?php
-  //Get Questions from Database
-  ?>
+	<?php
+	//Get Questions from Database
+	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time");
+	?>
   <div class="form-group">
     <label for="commentInput">Comments</label>
     <textarea type="text" class="form-control" id="commentInput"value="30-Day"></textarea>
