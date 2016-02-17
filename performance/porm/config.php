@@ -13,18 +13,18 @@ $porm = [
 	//Database Mappings
 	'dbs' => [
 		//Database Name
-		'mypoints' => [
+		'_cfa' => [
 			//Class => Table Name
-			'Customer' => 'customer',
-			'Merchant' => 'merchant',
-			'Punchcard' => 'punchcard',
-			'Referred' => 'referred',
-			'Purchase' => 'purchase'
+			'CfaEmployee' => 'teammemberinfo',
+			'CfaQuestion' => 'p_question',
+			'CfaComment' => 'p_comment',
+			'CfaReview' => 'p_review',
+			'CfaAnswer' => 'p_answer'
 		],
 	],
 	
 	//Default Database
-	'default_db' => 'mypoints',
+	'default_db' => '_cfa',
 ];
 
 ?>
