@@ -5,12 +5,17 @@ include '../includes/init.php';
 //Manager's Reviews
 
 //Get Employee
-$employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
+$employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
 
-$employee = 
+$employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '$employee_id'", [], "CfaEmployee");
+
+if(!$employee)
+{
+	exit("Invalid employee.");
+}
 
 //Get Review Time
-$review_time = isset($_GET["time"]) ? (int) $_GET["employee"] : "0";
+$review_time = isset($_GET["time"]) ? (int) $_GET["time"] : "0";
 
 
 ?>
@@ -78,18 +83,23 @@ $review_time = isset($_GET["time"]) ? (int) $_GET["employee"] : "0";
 		  <form>
   <div class="form-group">
     <label for="employeeInput">Employee</label>
-    <input type="text" name="employee" class="form-control" id="employeeInput" disabled value="Employee Name">
+    <input type="text" name="employee" class="form-control" id="employeeInput" disabled value="<?=$employee->fName . " " . $employee->lName?>">
   </div>
   
   <div class="form-group">
     <label for="typeInput">Review Type</label>
-    <input type="text" class="form-control" id="typeInput" disabled value="30-Day">
+    <input type="text" class="form-control" id="typeInput" disabled value="<?=$review_time?>">
   </div>
   
   <h3 class="page-header">Questions</h3>
 	<?php
 	//Get Questions from Database
 	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time");
+	
+	foreach($questions as $q)
+	{
+		//Display Question once Daniel has created the design.
+	}
 	?>
   <div class="form-group">
     <label for="commentInput">Comments</label>

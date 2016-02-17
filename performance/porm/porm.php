@@ -121,6 +121,22 @@ class Porm
 		return $array;
 	}
 	
+	//Read One
+	public function readOne($sql, $params = [], $type = 'StdClass')
+	{
+		$results = $this->read($sql, $params, $type);
+		
+		if(count($results))
+		{
+			return $results[0];
+		}
+		
+		else
+		{
+			return NULL;
+		}
+	}
+	
 	//Update Table (UPDATE)
 	public function update($row)
 	{
