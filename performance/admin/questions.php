@@ -2,8 +2,7 @@
 
 //Testing Stuff
 include '../../includes/dbConnections.php';
-
-
+include '../includes/init.php';
 
 //Manager's Reviews
 session_start();
@@ -77,10 +76,10 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = 0");
-			foreach($results as $row)
+			$questions = Question::getType("0");
+			foreach($questions as $q)
 			{
-				$text = htmlentities($row["question_text"], ENT_QUOTES);
+				$text = htmlentities($q["question_text"], ENT_QUOTES);
 				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
@@ -92,8 +91,8 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">30-Day Questions</h3>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = 30");
-			foreach($results as $row)
+			$questions = Question::getType("30");
+			foreach($questions as $q)
 			{
 				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='{$row["question_text"]}'></div>";
 				$count++;
