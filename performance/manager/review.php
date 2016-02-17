@@ -7,6 +7,8 @@ include '../includes/init.php';
 //Get Employee
 $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 
+$employee = 
+
 //Get Review Time
 $review_time = isset($_GET["time"]) ? (int) $_GET["employee"] : "0";
 
