@@ -76,7 +76,7 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
-			$questions = Question::getType("0");
+			$questions = CfaQuestion::getType("0");
 			foreach($questions as $q)
 			{
 				$text = htmlentities($q["question_text"], ENT_QUOTES);

@@ -1,5 +1,5 @@
 <?php
 
-include '../classes/question.php';
+include '../classes/CfaQuestion.php';
 
 ?>
