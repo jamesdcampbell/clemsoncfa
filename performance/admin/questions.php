@@ -76,10 +76,10 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
-			$questions = CfaQuestion::getType("0");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0", [], "CfaQuestion");
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q["question_text"], ENT_QUOTES);
+				$text = htmlentities($q->question_text, ENT_QUOTES);
 				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
@@ -91,10 +91,11 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">30-Day Questions</h3>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
-			$questions = CfaQuestion::getType("30");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 30", [], "CfaQuestion");
 			foreach($questions as $q)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='{$row["question_text"]}'></div>";
+				$text = htmlentities($q->question_text, ENT_QUOTES);
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
@@ -105,10 +106,11 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">60-Day Questions</h3>
 		  <p>These questions appear only on the 60-Day reviews.</p>
 		  <?php
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = 60");
-			foreach($results as $row)
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 60", [], "CfaQuestion");
+			foreach($questions as $q)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}'></div>";
+				$text = htmlentities($q->question_text, ENT_QUOTES);
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
@@ -119,10 +121,11 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">90-Day Questions</h3>
 		  <p>These questions appear only on the 90-Day reviews.</p>
 		  <?php
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = 90");
-			foreach($results as $row)
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 90", [], "CfaQuestion");
+			foreach($questions as $q)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}'></div>";
+				$text = htmlentities($q->question_text, ENT_QUOTES);
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
@@ -133,10 +136,11 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 		  <h3 class="page-header">1-Year Questions</h3>
 		  <p>These questions appear only on the 1-Year reviews.</p>
 		  <?php
-			$results = $db->query("SELECT * FROM p_question WHERE review_time = 1");
-			foreach($results as $row)
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 1", [], "CfaQuestion");
+			foreach($questions as $q)
 			{
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}'></div>";
+				$text = htmlentities($q->question_text, ENT_QUOTES);
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
