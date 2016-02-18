@@ -231,7 +231,7 @@ AND TeamMemberInfo.id = employee_id";
 					{
 						print "<td>" . $row[$field] . "</td>";
 					}
-					print "<td><a href='new_review?employee={$row["id"]}' class='btn'>Review</a></td>";
+					print "<td><a href='new_review.php?employee={$row["id"]}' class='btn'>Request Review</a></td>";
 					print "</tr>";
 				}
 				?>
