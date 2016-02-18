@@ -4,7 +4,7 @@
 	Porm's Config File
 */
 
-$porm = [
+$porm_config = [
 	//Connection Info
 	'pdo_string' => 'mysql:host=localhost;',
 	"user" => 'root',
