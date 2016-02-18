@@ -45,7 +45,7 @@ class CfaReview{
 			//Main Review Comment
 			if($qid == "review")
 			{
-				$qid = -1;
+				$qid = false;
 			}
 			
 			$comment = new CfaComment;

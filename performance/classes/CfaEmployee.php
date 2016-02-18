@@ -23,6 +23,7 @@ class CfaEmployee{
 		"60" => ["60 DAY", "90 DAY"],
 		"90" => ["90 DAY", "1 YEAR"],
 		"1" =>  ["1 YEAR", "100 YEAR"],
+		"0" =>  ["Custom Review"]
 	];
 	
 	//Get Employees with Upcoming Reviews
