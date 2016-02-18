@@ -10,10 +10,10 @@ include '../../includes/dbConnections.php';
 include '../porm/porm.php';
 $porm = new Porm();
 
-#PORM Classes
-include '../classes/CfaQuestion.php';
-include '../classes/CfaEmployee.php';
-include '../classes/CfaReview.php';
-include '../classes/CfaAnswer.php';
+#Include Classes
+foreach(glob("../classes/*.php") as $class)
+{
+	include $class;
+}
 
 ?>

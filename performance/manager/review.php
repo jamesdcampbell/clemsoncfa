@@ -64,14 +64,17 @@ include '../includes/header.php';
 	{
 		//Display Question once Daniel has created the design.
 		$count = $q->id;
+		print "<div class='form-group'>";
 		print "<h4>$q_num. {$q->question_text}</h4>";
 		print "<input type='radio' name='p_answer[$count]' value='1' required> {$q->developing_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='3'> {$q->proficient_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='5'> {$q->exemplary_text}<br>";
 		print "<textarea class='form-control' name='p_comment[$count]'>Comments...</textarea>";
-		$q_num;
+		print "</div>";
+		$q_num++;
 	}
 	?>
+	<h3 class="page-header">Comments</h3>
   <div class="form-group">
     <label for="commentInput">Comments</label>
     <textarea type="text" class="form-control" id="commentInput" name="review_comment"></textarea>
