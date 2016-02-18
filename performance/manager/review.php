@@ -69,7 +69,7 @@ include '../includes/header.php';
 		print "<input type='radio' name='p_answer[$count]' value='1' required> {$q->developing_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='3'> {$q->proficient_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='5'> {$q->exemplary_text}<br>";
-		print "<textarea class='form-control' name='p_comment[$count]'>Comments...</textarea>";
+		print "<textarea class='form-control' name='p_comment[$count]'></textarea>";
 		print "</div>";
 		$q_num++;
 	}

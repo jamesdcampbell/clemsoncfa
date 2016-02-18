@@ -33,6 +33,23 @@ class CfaReview{
 			$answer->answer = $value;
 			$porm->create($answer);
 		}
+		
+		//Add Comments
+		foreach($post["p_comment"] as $qid => $value)
+		{
+			if($value == "")
+			{
+				continue;
+			}
+			
+			$comment = new CfaComment;
+			$comment->review_id = $review->id;
+			$comment->question_id = $qid;
+			$comment->creator_id = $manager_id;
+			$comment->creator_type = "manager";
+			$comment->comment_text = $value;
+			$porm->create($comment);
+		}
 	}
 }
 
