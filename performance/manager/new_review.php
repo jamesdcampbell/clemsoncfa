@@ -6,10 +6,10 @@ include '../../includes/dbConnections.php';
 
 
 //Manager's Reviews
+
 session_start();
 $id = $_SESSION["id"];
 $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
-
 ?>
 
 <!DOCTYPE html>

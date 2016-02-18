@@ -83,18 +83,15 @@ AND TeamMemberInfo.id = employee_id";
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Performance Review System</a>
+          <a class="navbar-brand" href="#">PRS - Manager Dashboard</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a HREF="#completedreviews">Upcoming <span class="badge">10</span> </a></li>
+            <li><a href="#">Completed <span class="badge">10</span> </a></li>
+            <li><a href="#">Employees</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>
@@ -102,41 +99,12 @@ AND TeamMemberInfo.id = employee_id";
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Upcoming</a></li>
-            <li><a href="#">My Reviews</a></li>
-            <li><a href="#">New Review</a></li>
-            <li><a href="#">Employees</a></li>
-          </ul>
+		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
+			<h1 class="welcome"><small>Welcome back!</small></h1>
+			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Manager Dashboard</h1>
-
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Section title</span>
-            </div>
-          </div>
-
-		  <h2 class="sub-header">Upcoming Reviews</h2>
+		  <h2 class="sub-header">Upcoming Reviews <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -173,7 +141,7 @@ AND TeamMemberInfo.id = employee_id";
             </table>
           </div>
 		  
-		  <h2 class="sub-header">Completed Reviews</h2>
+		  <h2 class="sub-header">Completed Reviews <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -207,7 +175,7 @@ AND TeamMemberInfo.id = employee_id";
             </table>
           </div>
 		  
-          <h2 class="sub-header">Employees</h2>
+          <h2 class="sub-header">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -231,7 +199,7 @@ AND TeamMemberInfo.id = employee_id";
 					{
 						print "<td>" . $row[$field] . "</td>";
 					}
-					print "<td><a href='new_review?employee={$row["id"]}' class='btn'>Review</a></td>";
+					print "<td><a href='new_review.php?employee={$row["id"]}' class='btn'>Request Review</a></td>";
 					print "</tr>";
 				}
 				?>
