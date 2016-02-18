@@ -1,5 +1,9 @@
 <?php
 
+/*
+	The PORM class for the Review table
+*/
+
 class CfaReview{
 	public $id = false;
 	public $manager_id = false;

@@ -17,6 +17,8 @@ if(!$employee)
 //Get Review Time
 $review_time = isset($_GET["time"]) ? (int) $_GET["time"] : "0";
 
+$display_time = CfaEmployee::$review_times[$review_time][0];
+
 ?>
 <?php
 include '../includes/header.php';
@@ -42,17 +44,24 @@ include '../includes/header.php';
   
   <div class="form-group">
     <label for="typeInput">Review Type</label>
-    <input type="text" class="form-control" id="typeInput" disabled value="<?=$review_time?>">
+    <input type="text" class="form-control" id="typeInput" disabled value="<?=$display_time?>">
   </div>
   
   <h3 class="page-header">Questions</h3>
 	<?php
 	//Get Questions from Database
-	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time");
+	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time", [], "CfaQuestion");
 	
+	$count = 1;
 	foreach($questions as $q)
 	{
 		//Display Question once Daniel has created the design.
+		print "<h4>$count. {$q->question_text}</h4>";
+		print "<input type='radio' name='p_answer' value='1'> {$q->developing_text}<br>";
+		print "<input type='radio' name='p_answer' value='3'> {$q->proficient_text}<br>";
+		print "<input type='radio' name='p_answer' value='5'> {$q->exemplary_text}<br>";
+		print "<textarea class='form-control'>Comments...</textarea>";
+		$count++;
 	}
 	?>
   <div class="form-group">
