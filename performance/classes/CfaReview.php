@@ -42,6 +42,12 @@ class CfaReview{
 				continue;
 			}
 			
+			//Main Review Comment
+			if($qid == "review")
+			{
+				$qid = -1;
+			}
+			
 			$comment = new CfaComment;
 			$comment->review_id = $review->id;
 			$comment->question_id = $qid;
@@ -50,6 +56,8 @@ class CfaReview{
 			$comment->comment_text = $value;
 			$porm->create($comment);
 		}
+		
+		
 	}
 }
 

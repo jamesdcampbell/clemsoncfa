@@ -77,7 +77,7 @@ include '../includes/header.php';
 	<h3 class="page-header">Comments</h3>
   <div class="form-group">
     <label for="commentInput">Comments</label>
-    <textarea type="text" class="form-control" id="commentInput" name="review_comment"></textarea>
+    <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
   </div>
    <button type="submit" name="submit_review" class="btn btn-default">Submit Review</button>
 </form>
