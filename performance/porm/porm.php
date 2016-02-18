@@ -31,6 +31,7 @@ class Porm
 			$this->con->query("USE {$this->dbname}");
 			
 		} catch (PDOException $e) {
+			print $e->getMessage();
 			die("Could not connect to the database.");
 		}
 	}
