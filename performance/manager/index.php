@@ -2,6 +2,7 @@
 
 //Testing Stuff
 include '../includes/init.php';
+include '../includes/header.php';
 
 $id = $_SESSION["id"];
 ?>
@@ -28,28 +29,6 @@ $id = $_SESSION["id"];
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">PRS - Manager Dashboard</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a HREF="#completedreviews">Upcoming <span class="badge">10</span> </a></li>
-            <li><a href="#">Completed <span class="badge">10</span> </a></li>
-            <li><a href="#">Employees</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -58,7 +37,7 @@ $id = $_SESSION["id"];
 			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		  <h2 class="sub-header">Upcoming Reviews <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
+		  <h2 class="sub-header">Upcoming Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -101,7 +80,7 @@ $id = $_SESSION["id"];
             </table>
           </div>
 		  
-		  <h2 class="sub-header">Completed Reviews <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
+		  <h2 class="sub-header">Completed Reviews <small> <a href="test" <span class="label label-warning">Edit</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -162,7 +141,7 @@ AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
 					{
 						print "<td>" . $e->{$field} . "</td>";
 					}
-					print "<td><a href='new_review.php?employee={$e->id}' class='btn'>Request Review</a></td>";
+					print "<td><a href='review.php?employee={$e->id}' class='btn'>Request Review</a></td>";
 					print "</tr>";
 				}
 				?>

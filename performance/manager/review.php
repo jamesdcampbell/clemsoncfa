@@ -32,14 +32,10 @@ include '../includes/header.php';
 ?>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Upcoming</a></li>
-            <li><a href="#">My Reviews</a></li>
-            <li><a href="#">New Review</a></li>
-            <li><a href="#">Employees</a></li>
-          </ul>
+<div class="col-sm-3 col-md-2 sidebar">
+		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
+			<h1 class="welcome"><small>Welcome back!</small></h1>
+			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Review Employee</h1>
