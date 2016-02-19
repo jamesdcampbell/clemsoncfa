@@ -1,51 +1,8 @@
 <?php
 
 //Testing Stuff
-include '../../includes/dbConnections.php';
+include '../includes/init.php';
 
-$reviews = [];
-//1-Year Reviews
-$reviews["1-Year"] = "SELECT * FROM TeamMemberInfo
-WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 1 YEAR)
-AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1000 YEAR)
-AND id NOT IN(
-	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
-	AND review_time = 1
-)";
-
-//90-Day Reviews
-$reviews["90-Day"] = "SELECT * FROM TeamMemberInfo
-WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 90 DAY)
-AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 1 YEAR)
-AND id NOT IN(
-	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
-	AND review_time = 90
-)";
-
-//60-Day Reviews
-$reviews["60-Day"] = "SELECT * FROM TeamMemberInfo
-WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 60 DAY)
-AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 90 DAY)
-AND id NOT IN(
-	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
-	AND review_time = 60
-)";
-
-//30-Day Reviews
-$reviews["30-Day"] = "SELECT * FROM TeamMemberInfo
-WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL 30 DAY)
-AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL 60 DAY)
-AND id NOT IN(
-	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
-	AND review_time = 30
-)";
-
-//Manager's Reviews
-session_start();
 $id = $_SESSION["id"];
 $manager_review = "SELECT fName, lName, review_time FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
@@ -119,20 +76,22 @@ AND TeamMemberInfo.id = employee_id";
               </thead>
               <tbody>
 			  <?php
-			  foreach($reviews as $type=>$review)
+			  
+			  foreach(CfaEmployee::$review_times as $type => $type_array)
 			  {
-			  $query = $db->query($review, PDO::FETCH_ASSOC);
-			  foreach($query as $row)
+			  $employees = CfaEmployee::getUpcoming($type);
+			  foreach($employees as $e)
 			  {
 				  print "<tr>";
 				  $fields = ["id", "fName", "lName", "hire_date"];
 				  foreach($fields as $field)
 				  {
-					  print "<td>" . $row[$field] . "</td>";
+					  print "<td>" . $e->{$field} . "</td>";
 				  }
 				  
-				  print "<td>$type</td>";
-				  print "<td><a href='#' class='btn'>Review</a></td>";
+				  $type_display = $type_array[0];
+				  print "<td>$type_display</td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn'>Review</a></td>";
 				  print "</tr>";
 			  }
 			  }

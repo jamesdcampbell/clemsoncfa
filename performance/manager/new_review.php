@@ -1,15 +1,11 @@
 <?php
 
-//Testing Stuff
-include '../../includes/dbConnections.php';
-
-
+//Initialize
+include '../includes/init.php';
 
 //Manager's Reviews
+$employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
 
-session_start();
-$id = $_SESSION["id"];
-$employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +68,9 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Review</h1>
-		  <form>
+		  <form action="review.php" method="get">
   <div class="form-group">
+	<input type="hidden" name="time" value="0">
     <label for="employeeInput">Employee</label>
     <select name="employee" class="form-control" id="employeeInput">
 		<?php
@@ -84,16 +81,6 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 			print "<option value='{$employee["id"]}' $selected>{$employee["fName"]} {$employee["lName"]}</option>";
 		}
 		?>
-	</select>
-  </div>
-  
-  <div class="form-group">
-  <label for="reasonInput">Reason for Review</label>
-    <select name="employee" class="form-control" id="reasonInput">
-		<option>Reason 1</option>
-		<option>Reason 2</option>
-		<option>Reason 3</option>
-		<option>etc.</option>
 	</select>
   </div>
   

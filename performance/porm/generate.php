@@ -16,7 +16,7 @@ if(isset($_POST['db']) && isset($_POST['table']))
 	
 	//Connect to Database
 	try {
-		$con = new PDO($porm['pdo_string'], $porm['user'], $porm['pass']);
+		$con = new PDO($porm_config['pdo_string'], $porm_config['user'], $porm_config['pass']);
 	} catch (PDOException $e) {
 		die('I died.');
 	}	

@@ -19,7 +19,6 @@ class CfaQuestion
 	static function getType($type = "0")
 	{
 		global $db;
-		
 		$sql = "SELECT * FROM p_question WHERE review_time = $type";
 		
 		$results = $db->query($sql);

@@ -10,7 +10,7 @@ class Porm
 	
 	public function __construct($dbname = false)
 	{
-		global $porm;
+		global $porm_config;
 		
 		//Set Database Name
 		if($dbname)
@@ -20,13 +20,13 @@ class Porm
 		
 		else
 		{
-			$this->dbname = $porm['default_db'];
+			$this->dbname = $porm_config['default_db'];
 		}
 		
 		
 		//Connect to Database
 		try {
-			$this->con = new PDO($porm['pdo_string'], $porm['user'], $porm['pass']);
+			$this->con = new PDO($porm_config['pdo_string'], $porm_config['user'], $porm_config['pass']);
 			
 			$this->con->query("USE {$this->dbname}");
 			
@@ -232,10 +232,10 @@ class Porm
 	//Get Table Name from Class
 	public function getTableName($class)
 	{
-		global $porm;
+		global $porm_config;
 		
 		$name = get_class($class);
-		return $porm['dbs'][$this->dbname][$name];
+		return $porm_config['dbs'][$this->dbname][$name];
 	}
 	
 	//Create Statement and Bind Values
