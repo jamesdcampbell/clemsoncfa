@@ -4,9 +4,6 @@
 include '../includes/init.php';
 
 $id = $_SESSION["id"];
-$manager_review = "SELECT fName, lName, review_time FROM p_review, TeamMemberInfo
-WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id";
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +76,10 @@ AND TeamMemberInfo.id = employee_id";
 			  
 			  foreach(CfaEmployee::$review_times as $type => $type_array)
 			  {
+			  if($type == "0")
+			  {
+				  continue;
+			  }
 			  $employees = CfaEmployee::getUpcoming($type);
 			  foreach($employees as $e)
 			  {
@@ -115,15 +116,18 @@ AND TeamMemberInfo.id = employee_id";
               <tbody>
 			  <?php
 			  
-			  $query = $db->query($manager_review);
+			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id FROM p_review, TeamMemberInfo
+WHERE manager_id = $id
+AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
 
-			  foreach($query as $row)
+			  foreach($completed as $c)
 				{
 					print "<tr>";
 					$fields = ["fName", "lName", "review_time"];
+					print "<td>{$c->id}</td>";
 					foreach($fields as $field)
 					{
-						print "<td>" . $row[$field] . "</td>";
+						print "<td>" . $c->{$field} . "</td>";
 					}
 					print "<td><a href='#' class='btn'>Review</a></td>";
 					print "</tr>";
@@ -149,16 +153,16 @@ AND TeamMemberInfo.id = employee_id";
               <tbody>
 				<?php
 				//Select Employees
-				$query = $db->query("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", PDO::FETCH_ASSOC);
-				foreach($query as $row)
+				$employees = $porm->read("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", [], "CfaEmployee");
+				foreach($employees as $e)
 				{
 					print "<tr>";
 					$fields = ["id", "fName", "lName", "hire_date"];
 					foreach($fields as $field)
 					{
-						print "<td>" . $row[$field] . "</td>";
+						print "<td>" . $e->{$field} . "</td>";
 					}
-					print "<td><a href='new_review.php?employee={$row["id"]}' class='btn'>Request Review</a></td>";
+					print "<td><a href='new_review.php?employee={$e->id}' class='btn'>Request Review</a></td>";
 					print "</tr>";
 				}
 				?>
