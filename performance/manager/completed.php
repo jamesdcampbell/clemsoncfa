@@ -2,29 +2,14 @@
 
 include '../includes/init.php';
 
-//Manager's Reviews
+//Get Review
+$review_id = isset($_GET["review"]) ? (int) $_GET["review"] : die("Invalid review id.");
 
-//Get Employee
-$employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
+$review = $porm->readOne("SELECT * FROM p_review WHERE id = $review_id", [], "CfaReview");
 
-$employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '$employee_id'", [], "CfaEmployee");
+$display_time = CfaEmployee::$review_times[$review->review_time][0];
 
-if(!$employee)
-{
-	exit("Invalid employee.");
-}
-
-//Get Review Time
-$review_time = isset($_GET["time"]) ? (int) $_GET["time"] : "0";
-
-$display_time = CfaEmployee::$review_times[$review_time][0];
-
-//Create New Review
-if(isset($_POST["submit_review"]))
-{
-	//Create new Review
-	CfaReview::create($id, $employee_id, $review_time, $_POST);
-}
+$employee = $porm->readOne("SELECT * FROM teammemberinfo WHERE id = {$review->employee_id}", [], "CfaEmployee");
 
 ?>
 <?php
@@ -38,7 +23,7 @@ include '../includes/header.php';
 			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Review Employee</h1>
+          <h1 class="page-header">Completed Review</h1>
 		  <form method="post">
   <div class="form-group">
     <label for="employeeInput">Employee</label>
@@ -50,22 +35,36 @@ include '../includes/header.php';
     <input type="text" class="form-control" id="typeInput" disabled value="<?=$display_time?>">
   </div>
   
-  <h3 class="page-header">Questions</h3>
+  <h3 class="page-header">Answers</h3>
 	<?php
 	//Get Questions from Database
-	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time", [], "CfaQuestion");
+	$answers = $porm->read("SELECT * FROM p_answer WHERE review_id = $review_id", [], "CfaAnswer");
 	
 	$q_num = 1;
-	foreach($questions as $q)
+	foreach($answers as $a)
 	{
-		//Display Question once Daniel has created the design.
+		//Get Question Info
+		$q = $porm->readOne("SELECT * FROM p_question WHERE id = {$a->question_id}", [], "CfaQuestion");
+		
+		//Get Comment
+		$comment = $porm->readOne("SELECT * FROM p_comment WHERE review_id = $review_id AND question_id = {$a->question_id}", [], "CfaComment");
+		
+		$comment_text = $comment ? $comment->comment_text : "";
+		
 		$count = $q->id;
 		print "<div class='form-group'>";
 		print "<h4>$q_num. {$q->question_text}</h4>";
-		print "<input type='radio' name='p_answer[$count]' value='1' required> {$q->developing_text}<br>";
-		print "<input type='radio' name='p_answer[$count]' value='3'> {$q->proficient_text}<br>";
-		print "<input type='radio' name='p_answer[$count]' value='5'> {$q->exemplary_text}<br>";
-		print "<textarea class='form-control' name='p_comment[$count]'></textarea>";
+		$answer_options = ["1" => "developing_text", "3" => "proficient_text", "5" => "exemplary_text"];
+		foreach($answer_options as $val => $opt)
+		{
+			$answered = "";
+			if($val == $a->answer)
+			{
+				$answered = "checked";
+			}
+			print "<input type='radio' name='p_answer[$count]' value='$val' required $answered> {$q->{$opt}}<br>";
+		}
+		print "<textarea class='form-control' name='p_comment[$count]'>$comment_text</textarea>";
 		print "</div>";
 		$q_num++;
 	}
