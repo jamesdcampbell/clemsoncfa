@@ -95,7 +95,7 @@ $id = $_SESSION["id"];
               <tbody>
 			  <?php
 			  
-			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id FROM p_review, TeamMemberInfo
+			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
 AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
 
@@ -108,7 +108,7 @@ AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
 					{
 						print "<td>" . $c->{$field} . "</td>";
 					}
-					print "<td><a href='#' class='btn'>Review</a></td>";
+					print "<td><a href='completed.php?review={$c->review_id}' class='btn'>Edit/View</a></td>";
 					print "</tr>";
 				}
 			  
