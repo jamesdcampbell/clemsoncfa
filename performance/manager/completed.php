@@ -11,6 +11,13 @@ $display_time = CfaEmployee::$review_times[$review->review_time][0];
 
 $employee = $porm->readOne("SELECT * FROM teammemberinfo WHERE id = {$review->employee_id}", [], "CfaEmployee");
 
+//Create New Review
+if(isset($_POST["edit_review"]))
+{
+	//Create new Review
+	CfaReview::edit($_POST);
+}
+
 ?>
 <?php
 include '../includes/header.php';
@@ -25,6 +32,7 @@ include '../includes/header.php';
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Completed Review</h1>
 		  <form method="post">
+		  <input type="hidden" name="review_id" value="<?=$review_id?>">
   <div class="form-group">
     <label for="employeeInput">Employee</label>
     <input type="text" class="form-control" id="employeeInput" disabled value="<?=$employee->fName . " " . $employee->lName?>">
@@ -50,6 +58,7 @@ include '../includes/header.php';
 		$comment = $porm->readOne("SELECT * FROM p_comment WHERE review_id = $review_id AND question_id = {$a->question_id}", [], "CfaComment");
 		
 		$comment_text = $comment ? $comment->comment_text : "";
+		$comment_id = $comment ? $comment->id : "-1";
 		
 		$count = $q->id;
 		print "<div class='form-group'>";
@@ -62,9 +71,9 @@ include '../includes/header.php';
 			{
 				$answered = "checked";
 			}
-			print "<input type='radio' name='p_answer[$count]' value='$val' required $answered> {$q->{$opt}}<br>";
+			print "<input type='radio' name='p_answer[{$a->id}]' value='$val' required $answered> {$q->{$opt}}<br>";
 		}
-		print "<textarea class='form-control' name='p_comment[$count]'>$comment_text</textarea>";
+		print "<textarea class='form-control' name='p_comment[$comment_id]'>$comment_text</textarea>";
 		print "</div>";
 		$q_num++;
 	}
@@ -72,9 +81,9 @@ include '../includes/header.php';
 	<h3 class="page-header">Comments</h3>
   <div class="form-group">
     <label for="commentInput">Comments</label>
-    <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
+    <textarea type="text" class="form-control" id="commentInput" name="Xp_comment['review']"></textarea>
   </div>
-   <button type="submit" name="submit_review" class="btn btn-default">Submit Review</button>
+   <button type="submit" name="edit_review" class="btn btn-default">Edit Review</button>
 </form>
         </div>
       </div>
