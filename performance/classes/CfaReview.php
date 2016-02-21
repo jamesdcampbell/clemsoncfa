@@ -10,7 +10,8 @@ class CfaReview{
 	public $employee_id = false;
 	public $review_time = false;
 	public $active = false;
-	public $fields = ["id","manager_id","employee_id","review_time","active"];
+	public $review_date = false;
+	public $fields = ["id","manager_id","employee_id","review_time","active", "review_date"];
 	
 	//Create a New Review
 	static function create($manager_id, $employee_id, $review_time, $post)
