@@ -11,9 +11,10 @@ class CfaQuestion
 	public $developing_text = false;
 	public $proficient_text = false;
 	public $exemplary_text = false;
+	public $short_desc = false;
 	public $review_time = false;
 	public $question_order = false;
-	public $fields = ["id","question_text","developing_text","proficient_text","exemplary_text","review_time","question_order"];
+	public $fields = ["id","question_text","developing_text","proficient_text","exemplary_text","short_desc","review_time","question_order"];
 	
 	//Fetch Questions
 	static function getType($type = "0")
