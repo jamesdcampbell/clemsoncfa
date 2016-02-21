@@ -8,3 +8,8 @@ Should employees see aggregates or specific reviews?
 
 What happens to past reviews when quetions are edited/deleted?
 
+How do we tell the difference between front and back employees?
+
+How do we know which employees are managers?
+
+Should the employee see 30 day - 1 year reviews and custom reviews?
