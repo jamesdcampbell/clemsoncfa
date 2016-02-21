@@ -38,7 +38,7 @@ $id = $_SESSION["id"];
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		
-		  <h2 class="sub-header">Upcoming Reviews</h2>
+		  <h2 class="sub-header" id="upcoming">Upcoming Reviews</h2>
           <div class="table-responsive">
 		  
 		  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -111,7 +111,7 @@ $id = $_SESSION["id"];
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h2 class="sub-header">Recent Reviews</h2>
+		  <h2 class="sub-header" id="completed">Completed Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -128,10 +128,15 @@ $id = $_SESSION["id"];
 			  
 			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 10", [], "CfaEmployee");
+AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmployee");
 
+			  $count = 0;
 			  foreach($completed as $c)
 				{
+					if($count > 9)
+					{
+						break;
+					}
 					print "<tr>";
 					$fields = ["fName", "lName", "review_time"];
 					print "<td>{$c->id}</td>";
@@ -141,6 +146,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 10", [], "CfaEmpl
 					}
 					print "<td><a href='completed.php?review={$c->review_id}' class='btn'>Edit/View</a></td>";
 					print "</tr>";
+					$count++;
 				}
 			  
 			  ?>
@@ -154,7 +160,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 10", [], "CfaEmpl
 			?>
           </div>
 		  
-          <h2 class="sub-header">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
+          <h2 class="sub-header" id="employees">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
