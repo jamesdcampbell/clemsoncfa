@@ -37,8 +37,40 @@ $id = $_SESSION["id"];
 			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		  <h2 class="sub-header">Upcoming Reviews</h2>
+		
+		  <h2 class="sub-header" id="upcoming">Upcoming Reviews</h2>
           <div class="table-responsive">
+		  
+		  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		  
+			<?php
+			foreach(CfaEmployee::$review_times as $type => $type_array)
+			{
+				if($type == "0")
+				{
+					continue;
+				}
+				
+				$employees = CfaEmployee::getUpcoming($type);
+				
+				if(!count($employees))
+				{
+					continue;
+				}
+			?>
+			
+			<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="heading<?=$type?>">
+			<h4 class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$type?>" aria-expanded="true" aria-controls="collapse<?=$type?>">
+				View All <?=CfaEmployee::$review_times[$type][0]?> Reviews <span class="badge"><?=count($employees)?></span>
+			</a>
+			</h4>
+			</div>
+			
+			<div id="collapse<?=$type?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?=$type?>">
+			<div class="panel-body">
+			
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -52,14 +84,7 @@ $id = $_SESSION["id"];
               </thead>
               <tbody>
 			  <?php
-			  
-			  foreach(CfaEmployee::$review_times as $type => $type_array)
-			  {
-			  if($type == "0")
-			  {
-				  continue;
-			  }
-			  $employees = CfaEmployee::getUpcoming($type);
+
 			  foreach($employees as $e)
 			  {
 				  print "<tr>";
@@ -74,13 +99,19 @@ $id = $_SESSION["id"];
 				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn'>Review</a></td>";
 				  print "</tr>";
 			  }
-			  }
 			  ?>
               </tbody>
             </table>
+			      </div>
+			</div>
+			</div><!--end of accordion panel-->
+			<?php
+			}//end of for loop
+			?>
+			</div><!--end of accordion-->
           </div>
 		  
-		  <h2 class="sub-header">Completed Reviews <small> <a href="test" <span class="label label-warning">Edit</span></small></a></h2>
+		  <h2 class="sub-header" id="completed">Completed Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -95,12 +126,17 @@ $id = $_SESSION["id"];
               <tbody>
 			  <?php
 			  
-			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id FROM p_review, TeamMemberInfo
+			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
+AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmployee");
 
+			  $count = 0;
 			  foreach($completed as $c)
 				{
+					if($count > 9)
+					{
+						break;
+					}
 					print "<tr>";
 					$fields = ["fName", "lName", "review_time"];
 					print "<td>{$c->id}</td>";
@@ -108,16 +144,23 @@ AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
 					{
 						print "<td>" . $c->{$field} . "</td>";
 					}
-					print "<td><a href='#' class='btn'>Review</a></td>";
+					print "<td><a href='completed.php?review={$c->review_id}' class='btn'>Edit/View</a></td>";
 					print "</tr>";
+					$count++;
 				}
 			  
 			  ?>
               </tbody>
             </table>
+			<?php
+			if(count($completed) > 10)
+			{
+				print '<a href="completed.php" class="btn btn-primary">View All</a>';
+			}
+			?>
           </div>
 		  
-          <h2 class="sub-header">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
+          <h2 class="sub-header" id="employees">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>

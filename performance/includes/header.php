@@ -14,8 +14,11 @@
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom theme styles for this template -->
     <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="../bootstrap/css/custom.css" rel="stylesheet">
   </head>
 
   <body>
@@ -29,50 +32,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">PRS - Manager Dashboard</a>
+          <a class="navbar-brand" href="index.php">Performance Review System</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-		  
-			<!-- Prints out number of Upcoming reviews on badge -->
-            <li><a HREF="#completedreviews">Upcoming <span class="badge">
-			<?php
-			  $upcount = 0;
-			  foreach(CfaEmployee::$review_times as $type => $type_array)
-			  {
-			  if($type == "0")
-			  {
-				  continue;
-			  }
-			  $employees = CfaEmployee::getUpcoming($type);
-			  foreach($employees as $e)
-			  {
-				  $upcount++;
-			  }
-			  }
-			  print $upcount;
-			  ?>
-			
-			</span></a></li>
-			
-			<!-- Prints out number of completed reviews on badge -->
-            <li><a href="#">Completed <span class="badge">
-			<?php
-			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id FROM p_review, TeamMemberInfo
-				WHERE manager_id = $id
-				AND TeamMemberInfo.id = employee_id", [], "CfaEmployee");
-				$complcount = 0;
-				foreach($completed as $c)
-				{
-				$complcount++;
-				}
-			  	print $complcount;
-			  ?>
-			</span></a></li>
-		
-            <li><a href="#">Employees</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php#upcoming">Upcoming</a></li>
+            <li><a href="index.php#completed">Completed</a></li>
+            <li><a href="index.php#employees">Employees</a></li>
           </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
         </div>
       </div>
     </nav>
