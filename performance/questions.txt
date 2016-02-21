@@ -1,0 +1,10 @@
+Should employees see which manager reviewed them, or should it be anonymous? 
+
+Should employees see comments on reviews?
+
+Is there any interaction between employees and managers?
+
+Should employees see aggregates or specific reviews?
+
+What happens to past reviews when quetions are edited/deleted?
+
