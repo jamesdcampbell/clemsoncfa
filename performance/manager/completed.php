@@ -15,7 +15,7 @@ $employee = $porm->readOne("SELECT * FROM teammemberinfo WHERE id = {$review->em
 if(isset($_POST["edit_review"]))
 {
 	//Create new Review
-	CfaReview::edit($_POST);
+	CfaReview::edit($id, $_POST);
 }
 
 ?>
@@ -57,8 +57,8 @@ include '../includes/header.php';
 		//Get Comment
 		$comment = $porm->readOne("SELECT * FROM p_comment WHERE review_id = $review_id AND question_id = {$a->question_id}", [], "CfaComment");
 		
-		$comment_text = $comment ? $comment->comment_text : "";
-		$comment_id = $comment ? $comment->id : "-1";
+		$comment_text = $comment->comment_text;
+		$comment_id = $comment->id;
 		
 		$count = $q->id;
 		print "<div class='form-group'>";
@@ -79,10 +79,27 @@ include '../includes/header.php';
 	}
 	?>
 	<h3 class="page-header">Comments</h3>
-  <div class="form-group">
-    <label for="commentInput">Comments</label>
-    <textarea type="text" class="form-control" id="commentInput" name="Xp_comment['review']"></textarea>
-  </div>
+	<?php
+	
+	//Main Comments
+	$comments = $porm->read("SELECT * FROM p_comment WHERE review_id = $review_id AND question_id = 0 ORDER BY comment_date", [], "CfaComment");
+	
+	foreach($comments as $c)
+	{
+		?>
+		<div class="form-group">
+		<textarea type="text" class="form-control" id="commentInput" name="p_comment[<?=$c->id?>]"><?=$c->comment_text?></textarea>
+		</div>
+		<?php
+	}
+	
+	?>
+	
+	<div class="form-group">
+		<label for="commentInput">New Comment</label>
+		<textarea type="text" class="form-control" id="commentInput" name="p_comment[-1]"></textarea>
+		</div>
+	
    <button type="submit" name="edit_review" class="btn btn-default">Edit Review</button>
 </form>
         </div>

@@ -47,14 +47,13 @@ class CfaReview{
 			$comment->review_id = $review->id;
 			$comment->question_id = $qid;
 			$comment->creator_id = $manager_id;
-			$comment->creator_type = "manager";
 			$comment->comment_text = $value;
 			$porm->create($comment);
 		}
 	}
 	
 	//Edit a Completed Review
-	static function edit($post)
+	static function edit($manager_id, $post)
 	{
 		global $porm;
 		
@@ -72,14 +71,31 @@ class CfaReview{
 		}
 		
 		//Add Comments
+		print_r($post["p_comment"]);
 		foreach($post["p_comment"] as $cid => $value)
 		{
 			if($cid == "-1")
 			{
-				continue;
+				//Create Comment
+				if($value == "")
+				{
+					continue;
+				}
+				
+				else
+				{
+					print "creating comment.";
+					$comment = new CfaComment;
+					$comment->review_id = $review->id;
+					$comment->question_id = false;
+					$comment->creator_id = $manager_id;
+					$comment->comment_text = $value;
+					$porm->create($comment);
+				}
 			}
 			
 			$comment = $porm->readOne("SELECT * FROM p_comment WHERE id = $cid", [], "CfaComment");
+
 			if($comment)
 			{
 				$comment->comment_text = $value;
