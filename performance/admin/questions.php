@@ -1,37 +1,12 @@
 <?php
 
-//Testing Stuff
-include '../../includes/dbConnections.php';
 include '../includes/init.php';
-
-//Manager's Reviews
-session_start();
-$id = $_SESSION["id"];
-$employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
-
-    <title>CFA Performance Review System</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
+<?php
+include '../includes/header.php';
+?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -153,8 +128,6 @@ $employee_id = isset($_GET["employee"]) ? $_GET["employee"] : "";
         </div>
       </div>
     </div>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-</html>
+<?php
+include '../includes/footer.php';
+?>

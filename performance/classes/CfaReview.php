@@ -104,6 +104,29 @@ class CfaReview{
 			}
 		}
 	}
+	
+	//Get Competed Reviews (for Admins)
+	static function getCompleted()
+	{
+		global $porm;
+		
+		$ordered = [];
+		
+		$completed = $porm->read("
+SELECT review_time, fName, lName, SUM(answer) / (COUNT(DISTINCT p_answer.question_id) * COUNT(DISTINCT p_review.id)) as score
+FROM p_review, teammemberinfo, p_answer
+WHERE employee_id = teammemberinfo.id
+AND p_review.id = p_answer.review_id
+GROUP BY employee_id, review_time
+", [], "CfaReview");
+		
+		foreach($completed as $review)
+		{
+			$ordered[$review->review_time][] = $review;
+		}
+
+		return $ordered;
+	}
 }
 
 ?>

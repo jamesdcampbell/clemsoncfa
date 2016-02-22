@@ -1,9 +1,24 @@
+h1, h2, h3{
+	margin-bottom:0px;
+	margin-top:10px;
+}
+
 h1
 {
 	background-color: rgb(195,31,56);
 	color: white;
 	padding-top: 5px;
 	padding-left: 5px;
+	padding-bottom: 2px;
+}
+
+h3
+{
+	background-color: rgb(195,31,56);
+	color: white;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
 }
 
 body
@@ -20,3 +35,26 @@ radio
 {
 	margin-top: -5px;
 }
+
+.welcome
+{
+	color: white;
+}
+
+
+
+
+.panel-heading:nth-of-type(even){background-color: rgb(200,200,200)}
+
+	
+	
+
+
+
+tr:nth-of-type(odd){background-color: rgb(200,200,200);}
+tr:nth-of-type(even){background-color: rgb(200,200,200);}
+
+
+
+
+

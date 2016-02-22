@@ -3,42 +3,22 @@
 //Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-
+include '../includes/footer.php';
 $id = $_SESSION["id"];
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
 
-    <title>CFA Performance Review System</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
 		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1 class="welcome"><small>Welcome back!</small></h1>
-			<h1 class="manager_name">$Manager Name</h1>
+			<h1 class="welcome">Welcome back!</h1>
+			<h1 class="manager_name">Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		
-		  <h2 class="sub-header" id="upcoming">Upcoming Reviews</h2>
+		  <h1 class="sub-header" id="upcoming">Upcoming Reviews</h1>
           <div class="table-responsive">
 		  
 		  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -111,7 +91,7 @@ $id = $_SESSION["id"];
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h2 class="sub-header" id="completed">Completed Reviews</h2>
+		  <h1 class="sub-header" id="completed">Completed Reviews</h1>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -160,7 +140,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 			?>
           </div>
 		  
-          <h2 class="sub-header" id="employees">Employees <small> <a href="test" <span class="label label-success">View All</span></small></a></h2>
+          <h1 class="sub-header" id="employees">Employees</h1>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -194,8 +174,6 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
         </div>
       </div>
     </div>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-</html>
+<?php
+include '../includes/footer.php';
+?>
