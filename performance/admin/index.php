@@ -33,7 +33,7 @@ include '../includes/header.php';
 			  print "<h3>{$value[0]}</h3>";
 			  
 			  //Generate Table
-			  CfaTable::generate(["fName", "lName", "score"], $completed[$time]);
+			  CfaTable::generate(["fName", "lName", "score", "review_link", "compare_link"], $completed[$time]);
 		  }
 		  
 		  ?>

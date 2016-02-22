@@ -13,6 +13,70 @@ class CfaReview{
 	public $review_date = false;
 	public $fields = ["id","manager_id","employee_id","review_time","active", "review_date"];
 	
+	/*
+		Displays averages for a review of a specific time by all managers.
+		Uses a review object for the employee id and review time. 
+	*/
+	public function displayAverage()
+	{
+		global $porm;
+		
+		//All reviews of this type and employee
+		$reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = {$this->employee_id} AND review_time = {$this->review_time}", [], "CfaReview");
+		
+		//Get Answer Averages
+		$questoin_avgs = [];
+		$answers = [];
+		
+		foreach($reviews as $review)
+		{
+			$answers = $porm->read("SELECT * FROM p_answer WHERE review_id = {$review->id}", [], "CfaAnswer");
+			  
+			foreach($answers as $answer)
+			{	  
+				//Get Question Info
+				$question = $porm->readOne("SELECT * FROM p_question WHERE id = {$answer->question_id}", [], "CfaQuestion");
+				
+				if(isset($question_avgs[$question->id]))
+				{
+					$question_avgs[$question->id][1] += $answer->answer;
+				}
+				else
+				{
+					$question_avgs[$question->id] = [$question->short_desc, $answer->answer];
+				}
+			}
+		}
+		
+		print '<table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Performance (1 to 5)</th>
+                </tr>
+              </thead>
+              <tbody>';
+			  
+			  $total = 0;
+			  $max = count($answers) * 5;
+			  foreach($question_avgs as $q_avg)
+			  {
+				  $cat = $q_avg[0];
+				  $avg_score = $q_avg[1] / count($reviews);
+				  $total += $avg_score;
+				  print "<tr>";
+				  print "<td>$cat</td>";
+				  print "<td>$avg_score</td>";
+				  print "</tr>";
+			  }
+			  
+			  $avg = ($total / $max) * 5;
+			  print "<tr><th>Average</th><th>$avg</th></tr>";
+
+              print '</tbody>
+            </table>';
+	}
+	
 	//Create a New Review
 	static function create($manager_id, $employee_id, $review_time, $post)
 	{
@@ -113,7 +177,7 @@ class CfaReview{
 		$ordered = [];
 		
 		$completed = $porm->read("
-SELECT review_time, fName, lName, SUM(answer) / (COUNT(DISTINCT p_answer.question_id) * COUNT(DISTINCT p_review.id)) as score
+SELECT p_review.id, review_time, fName, lName, SUM(answer) / (COUNT(DISTINCT p_answer.question_id) * COUNT(DISTINCT p_review.id)) as score
 FROM p_review, teammemberinfo, p_answer
 WHERE employee_id = teammemberinfo.id
 AND p_review.id = p_answer.review_id
@@ -122,6 +186,8 @@ GROUP BY employee_id, review_time
 		
 		foreach($completed as $review)
 		{
+			$review->review_link = "<a href='review.php?id={$review->id}' class='btn btn-default'>View Details</a>";
+			$review->compare_link = "<form action='compare.php'><select name='cmp_type'><option value='same'>Same Review Time</option><option value='type'>Same Type (front/back)</option><option value='all'>All</option></select><input type='hidden' name='review_id' value='{$review->id}'><input type='submit' class='btn btn-default' value='Compare'></form>";
 			$ordered[$review->review_time][] = $review;
 		}
 

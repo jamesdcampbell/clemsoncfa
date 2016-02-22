@@ -1,7 +1,7 @@
 <?php
-include '../includes/header.php';
+
 include '../includes/init.php';
-include '../includes/footer.php';
+
 //Manager's Reviews
 
 //Get Employee

@@ -21,7 +21,7 @@ $id = 81; //testing
 		  <?php
 		  
 		  //Employee's 30-Day Reviews
-		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = 0", [], "CfaReview");
+		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = 60", [], "CfaReview");
 
 		  //Get Answer Averages
 		  $questoin_avgs = [];
