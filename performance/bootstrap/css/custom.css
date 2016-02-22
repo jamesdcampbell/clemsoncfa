@@ -7,6 +7,15 @@ h1
 	padding-bottom: 2px;
 }
 
+h3
+{
+	background-color: rgb(195,31,56);
+	color: white;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+}
+
 body
 {
 	background-color: rgb(220,215,210);
@@ -27,10 +36,15 @@ radio
 	color: white;
 }
 
-table
-{
-	background-color: rgb(0,230,230);
-}
+
+
+
+.panel-heading:nth-of-type(even){background-color: rgb(200,200,200)}
+
+	
+	
+
+
 
 tr:nth-of-type(odd){background-color: rgb(200,200,200);}
 tr:nth-of-type(even){background-color: rgb(200,200,200);}

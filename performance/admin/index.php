@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<?php
+include '../includes/init.php';
+include '../includes/header.php';
+include '../includes/footer.php';
+?>
+<?php /*<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +22,7 @@
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
   </head>
+  */?>
 
   <body>
 
