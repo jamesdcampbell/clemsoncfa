@@ -140,7 +140,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 			?>
           </div>
 		  
-          <h1 class="sub-header" id="employees">Employees &nbsp<small> <a href="test" <span class="label label-success">View All</span></small></a></h1>
+          <h1 class="sub-header" id="employees">Employees</h1>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
