@@ -3,7 +3,7 @@
 //Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-
+include '../includes/footer.php';
 $id = $_SESSION["id"];
 ?>
 

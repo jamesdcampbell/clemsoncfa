@@ -1,9 +1,39 @@
+<<<<<<< HEAD
 <?php
+=======
+<!DOCTYPE html>
+<?php
+include '../includes/init.php';
+include '../includes/header.php';
+include '../includes/footer.php';
+?>
+<?php /*<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../favicon.ico">
+>>>>>>> 01bd73f8314e4b66574796a4f9040824d7bfb029
 
 include '../includes/init.php';
 include '../includes/header.php';
 
+<<<<<<< HEAD
 ?>
+=======
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
+  </head>
+  */?>
+
+  <body>
+>>>>>>> 01bd73f8314e4b66574796a4f9040824d7bfb029
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">

@@ -1,7 +1,7 @@
 <?php
-
+include '../includes/header.php';
 include '../includes/init.php';
-
+include '../includes/footer.php';
 //Manager's Reviews
 
 //Get Employee
@@ -34,7 +34,7 @@ include '../includes/header.php';
       <div class="row">
 <div class="col-sm-3 col-md-2 sidebar">
 		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1 class="welcome"><small>Welcome back!</small></h1>
+			<h1 class="welcome">Welcome back!</h1>
 			<h1 class="manager_name">$Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -59,18 +59,22 @@ include '../includes/header.php';
 	foreach($questions as $q)
 	{
 		//Display Question once Daniel has created the design.
+		print "<br>";
 		$count = $q->id;
 		print "<div class='form-group'>";
 		print "<h4>$q_num. {$q->question_text}</h4>";
 		print "<input type='radio' name='p_answer[$count]' value='1' required> {$q->developing_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='3'> {$q->proficient_text}<br>";
 		print "<input type='radio' name='p_answer[$count]' value='5'> {$q->exemplary_text}<br>";
+		print "<br>";
+		print "Comment";
 		print "<textarea class='form-control' name='p_comment[$count]'></textarea>";
+		print "<hr>";
 		print "</div>";
 		$q_num++;
 	}
 	?>
-	<h3 class="page-header">Comments</h3>
+	<h3 class="page-header">Final Comments</h3>
   <div class="form-group">
     <label for="commentInput">Comments</label>
     <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
