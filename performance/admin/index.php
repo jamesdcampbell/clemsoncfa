@@ -1,7 +1,9 @@
+
 <?php
 include '../includes/init.php';
 include '../includes/header.php';
 ?>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -21,10 +23,6 @@ include '../includes/header.php';
 		  
 		  $completed = CfaReview::getCompleted();
 		  
-		  print "<pre>";
-		  print_r($completed);
-		  print "</pre>";
-		  
 		  foreach(CfaEmployee::$review_times as $time => $value)
 		  {
 			  //Skip Custom Reviews
@@ -32,7 +30,7 @@ include '../includes/header.php';
 			  {
 				  continue;
 			  }
-			  print "<h3 class='page-header'>{$value[0]}</h3>";
+			  print "<h3>{$value[0]}</h3>";
 			  
 			  //Generate Table
 			  CfaTable::generate(["fName", "lName", "score"], $completed[$time]);
