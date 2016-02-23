@@ -12,7 +12,7 @@ h1
 	padding-bottom: 2px;
 }
 
-h3
+h2
 {
 	background-color: rgb(195,31,56);
 	color: white;
@@ -36,12 +36,54 @@ radio
 	margin-top: -5px;
 }
 
-.welcome
+
+
+.edit
 {
+	background-color: rgb(0,120,130);
 	color: white;
+	margin-top: 5px;
+	margin-right: 5px;
+	border-radius: 7px;
 }
 
+.delete
+{
+	border-radius: 7px;
+	background-color: rgb(130,30,30);
+	color: white;
+	margin-right: 5px;
+	margin-top: 5px;
+}
 
+.add
+{
+	border-radius: 7px;
+	background-color: rgb(30,130,30);
+	color: white;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+.save
+{
+	border-radius: 5px;
+	background-color: rgb(195,195,200);
+	padding: 5px;
+	margin: -5px 0px 15px 10px;
+	font-size: 16px;
+	font-weight: bold;	
+}
+
+.submit
+{
+	border-radius: 5px;
+	background-color: rgb(200,200,200);
+	padding: 5px;
+	margin: -5px 0px 15px 10px;
+	font-size: 16px;
+	font-weight: bold;	
+}
 
 
 .panel-heading:nth-of-type(even){background-color: rgb(200,200,200)}
