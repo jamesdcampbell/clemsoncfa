@@ -22,12 +22,17 @@ $id = 81; //testing
 		//Run through days and print
 		for ($countvar=0;$countvar < 4;$countvar++){
 				  
+				  if ($countvar == 0) {$reviewvar = 30;};
+				  if ($countvar == 1) {$reviewvar = 60;};
+				  if ($countvar == 2) {$reviewvar = 90;};
+				  if ($countvar == 3) {$reviewvar = 1;};
+				  
 	  
 		  //Employee's 30/60/90/Year Reviews
-		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = $countvar", [], "CfaReview");
+		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = $reviewvar", [], "CfaReview");
 
 		  //Get Answer Averages
-		  $questoin_avgs = [];
+		  $question_avgs = [];
 		  $answers = [];
 		  foreach($reviews as $review)
 		  {
