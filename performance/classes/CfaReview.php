@@ -17,7 +17,7 @@ class CfaReview{
 		Displays averages for a review of a specific time by all managers.
 		Uses a review object for the employee id and review time. 
 	*/
-	public function displayAverage()
+	public function displayAllAverages()
 	{
 		global $porm;
 		
@@ -75,6 +75,23 @@ class CfaReview{
 
               print '</tbody>
             </table>';
+	}
+	
+	//Display a Single Review
+	public function displayReview()
+	{
+		global $porm;
+		//Get Questions
+		$answers = $porm->read("
+SELECT answer, short_desc, comment_text FROM p_answer, p_question, p_comment
+WHERE p_answer.review_id = {$this->id}
+AND p_question.id = p_answer.question_id
+AND p_comment.review_id = {$this->id}
+AND p_comment.question_id = p_question.id
+", [], "CfaAnswer"
+		);
+		
+		print_r($answers);
 	}
 	
 	//Create a New Review

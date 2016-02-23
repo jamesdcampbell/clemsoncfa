@@ -40,8 +40,21 @@ $employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '{$review->e
 		  <?php
 		  
 		  //Display Review Averages
-		  $review->displayAverage();
+		  $review->displayAllAverages();
 		  
+		  ?>
+		  
+		  <h2 class="page-header">Individual Reviews</h2>
+		  <?php
+		  
+		  //Get All Review of this Type and Employee
+		  $reviews = $porm->read("SELECT * FROM p_review WHERE review_time = {$review->review_time} AND employee_id = {$review->employee_id}", [], "CfaReview");
+		  
+		  //Display Results
+		  foreach($reviews as $r)
+		  {
+			  $r->displayReview();
+		  }
 		  ?>
 			</div>
         </div>

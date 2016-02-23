@@ -1,9 +1,7 @@
 <?php
-
 //Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-
 $id = $_SESSION["id"];
 $id = 81; //testing
 ?>
@@ -18,13 +16,20 @@ $id = 81; //testing
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		
 		  <h1 class="page-header" id="upcoming">My Performance</h1>
-		  <?php
-		  
-		  //Employee's 30-Day Reviews
-		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = 60", [], "CfaReview");
-
+		  <?php		  
+		//Run through days and print
+		for ($countvar=0;$countvar < 4;$countvar++){
+				  
+				  if ($countvar == 0) {$reviewvar = 30;};
+				  if ($countvar == 1) {$reviewvar = 60;};
+				  if ($countvar == 2) {$reviewvar = 90;};
+				  if ($countvar == 3) {$reviewvar = 1;};
+				  
+	  
+		  //Employee's 30/60/90/Year Reviews
+		  $reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = $reviewvar", [], "CfaReview");
 		  //Get Answer Averages
-		  $questoin_avgs = [];
+		  $question_avgs = [];
 		  $answers = [];
 		  foreach($reviews as $review)
 		  {
@@ -45,40 +50,38 @@ $id = 81; //testing
 				}
 			  }
 		  }
-		  ?>
-		  <h2>30-Day Reviews</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Performance (1 to 5)</th>
-                </tr>
-              </thead>
-              <tbody>
-			  <?php
-			  
+		  
+				  if ($countvar == 0) {$title = "30 Day";};
+				  if ($countvar == 1) {$title = "60 Day";};
+				  if ($countvar == 2) {$title = "90 Day";};
+				  if ($countvar == 3) {$title = "Year";};
+				  
+			  print "<h2>$title Reviews</h2><div class='table-responsive'><table class='table table-striped'><thead><tr><th>Category</th><th>Performance (1 to 5)</th></tr></thead><tbody>";
 			  $total = 0;
 			  $max = count($answers) * 5;
 			  foreach($question_avgs as $q_avg)
 			  {
 				  $cat = $q_avg[0];
-				  $avg_score = $q_avg[1] / count($reviews);
-				  $total += $avg_score;
+				  
+				  if (count($reviews) != '0')
+				  {
+					  $avg_score = $q_avg[1] / count($reviews);
+					  $total += $avg_score;
+					}
+				if (count($reviews) != '0'){
 				  print "<tr>";
 				  print "<td>$cat</td>";
 				  print "<td>$avg_score</td>";
 				  print "</tr>";
+				}
 			  }
 			  
 			  print "<tr><th>Total</th><th>$total / $max</th></tr>";
-			  
+			  print "</tbody></table></div>";
+			  }
 			  ?>
-              </tbody>
-            </table>
-			</div>
-			</div>
-
+			  
+			  </div>
         </div>
       </div>
 
