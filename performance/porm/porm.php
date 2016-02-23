@@ -142,7 +142,7 @@ class Porm
 	//Get by ID and Class
 	public function get($id, $class)
 	{
-		$table = $this->getTableName($class);
+		$table = $this->getTableName(new $class);
 		
 		$result = $this->readOne("SELECT * FROM $table WHERE id = ?", [$id], $class);
 		

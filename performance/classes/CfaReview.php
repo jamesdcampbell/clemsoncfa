@@ -81,6 +81,10 @@ class CfaReview{
 	public function displayReview()
 	{
 		global $porm;
+		
+		//Manager Name
+		$manager = $porm->get($this->manager_id, "CfaEmployee");
+
 		//Get Questions
 		$answers = $porm->read("
 SELECT answer, short_desc, comment_text FROM p_answer, p_question, p_comment
@@ -91,7 +95,28 @@ AND p_comment.question_id = p_question.id
 ", [], "CfaAnswer"
 		);
 		
-		print_r($answers);
+		print "<h3>{$manager->fName} {$manager->lName}</h3>";
+		print '<table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Performance (1 to 5)</th>
+				  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody>';
+			  
+		foreach($answers as $answer)
+		{
+			print "<tr>";
+			print "<td>" . $answer->short_desc . "</td>";
+			print "<td>" . $answer->answer . "</td>";
+			print "<td>" . $answer->comment_text . "</td>";
+			print "</tr>";
+		}
+		
+		print "</tbody></table>";
+		
 	}
 	
 	//Create a New Review
