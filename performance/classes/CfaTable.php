@@ -8,6 +8,7 @@ class CfaTable
 {
 	static function generate($fields, $table_array)
 	{
+		print "<div class='table-responsive'>";
 		print "<table class='table table-striped'>";
 		print "<thead><tr>";
 		foreach($fields as $field)
@@ -28,7 +29,7 @@ class CfaTable
 			print "</tr>";
 		}
 		print "</tbody>";
-		print "</table>";
+		print "</table></div>";
 	}
 }
 
