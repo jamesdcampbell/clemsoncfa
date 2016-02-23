@@ -55,14 +55,19 @@ include '../includes/header.php';
 			foreach($questions as $q)
 			{
 				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label>
+				<input class='form-control' id='questionInput{$count}' value='$text'>
+				<button class='edit'>Edit</button>
+					<button class='delete'>Delete</button>
+				</div>";
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-			<button class="btn btn-default">Add Question</button>
+		<button class="add">Add Question</button>
 		</div>
 		  
+		  <hr>
 		  <h3 class="page-header">30-Day Questions</h3>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
@@ -70,14 +75,14 @@ include '../includes/header.php';
 			foreach($questions as $q)
 			{
 				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-			<button class="btn btn-default">Add Question</button>
+		<button class="add">Add Question</button>
 		</div>
-		  
+		  <hr>
 		  <h3 class="page-header">60-Day Questions</h3>
 		  <p>These questions appear only on the 60-Day reviews.</p>
 		  <?php
@@ -85,12 +90,15 @@ include '../includes/header.php';
 			foreach($questions as $q)
 			{
 				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label>
+				  <input class='form-control' id='questionInput{$count}' value='$text'>
+
+				  </div>";
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-			<button class="btn btn-default">Add Question</button>
+			<button class="add">Add Question</button>
 		</div>
 		  
 		  <h3 class="page-header">90-Day Questions</h3>
@@ -105,7 +113,7 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-			<button class="btn btn-default">Add Question</button>
+			<button class="add">Add Question</button>
 		</div>
 		  
 		  <h3 class="page-header">1-Year Questions</h3>
@@ -120,10 +128,13 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-			<button class="btn btn-default">Add Question</button>
+			<button class="add">Add Question</button>
 		</div>
   
-  <button type="submit" class="btn btn-default">Save Changes</button>
+  <br>
+  <button type="submit" class="save">Save Changes</button>
+  <br>
+   <br>
 </form>
         </div>
       </div>

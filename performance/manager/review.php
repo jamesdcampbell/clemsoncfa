@@ -50,7 +50,7 @@ include '../includes/header.php';
     <input type="text" class="form-control" id="typeInput" disabled value="<?=$display_time?>">
   </div>
   
-  <h3 class="page-header">Questions</h3>
+  <h2 lass="page-header">Questions</h2>
 	<?php
 	//Get Questions from Database
 	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time", [], "CfaQuestion");
@@ -74,12 +74,14 @@ include '../includes/header.php';
 		$q_num++;
 	}
 	?>
-	<h3 class="page-header">Final Comments</h3>
+	<h2 class="page-header">Final Comments</h2>
   <div class="form-group">
     <label for="commentInput">Comments</label>
     <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
   </div>
-   <button type="submit" name="submit_review" class="btn btn-default">Submit Review</button>
+   <br>
+   <button type="submit" name="submit_review" class="submit">Submit Review</button>
+   <br><br>
 </form>
         </div>
       </div>
