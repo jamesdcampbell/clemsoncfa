@@ -20,7 +20,8 @@ $porm_config = [
 			'CfaComment' => 'p_comment',
 			'CfaReview' => 'p_review',
 			'CfaAnswer' => 'p_answer',
-			'CfaRequest' => 'p_request'
+			'CfaRequest' => 'p_request',
+			'CfaAdminComment' => 'p_admin_comment'
 		],
 	],
 	

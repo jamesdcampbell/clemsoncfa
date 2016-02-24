@@ -15,6 +15,16 @@ if(isset($_POST["post"]))
 	$porm->con->query("INSERT INTO p_review_active(employee_id, review_time, show_rank) VALUES({$employee->id}, {$review->review_time}, '{$_POST["rank"]}')");
 }
 
+//Add Note Form
+if(isset($_POST["note"]))
+{
+	$note = new CfaAdminComment;
+	$note->comment_text = $_POST["note_text"];
+	$note->employee_id = $employee->id;
+	$note->review_time = $review->review_time;
+	$porm->create($note);
+}
+
 include '../includes/header.php';
 include 'modals.php';
 ?>
@@ -48,8 +58,17 @@ include 'modals.php';
 	<label>Action</label>
 	<br>
     <button class="btn btn-default" data-toggle="modal" data-target="#postModal">Post Results</button>
-    <button class="btn btn-default">Add Note</button>
+    <button class="btn btn-default"  data-toggle="modal" data-target="#noteModal">Add Note</button>
   </div>
+  
+  <?php
+  $notes = $porm->read("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time} ORDER BY comment_date ASC", [], "CfaAdminComment");
+  
+  foreach($notes as $note)
+  {
+	  print "<textarea class='form-control'>{$note->comment_text}</textarea>";
+  }
+  ?>
 		  
 		  <h2 class="page-header">Average Reviews</h2>
 		  <?php
