@@ -74,6 +74,7 @@
 		                                        lastName: { editable: true, validation: { required: true} },
 		                                        phoneNumber: { editable: true },
 		                                        emailAddress: { editable: true },
+												position: { editable: true, nullable:false },
 		                                        canLogin: { type: "boolean", editable: true}
 		                                    }
 		                                }
@@ -92,6 +93,7 @@
 		                            { field: "lastName", title: "LastName", width: "110px" },
 		                            { field: "phoneNumber", title: "Phone #", width: "100px" },
 		                            { field: "emailAddress", title: "Email", width: "200px" },
+		                            { field: "position", title: "Front/Back", width: "75px" },
 		                            { field: "canLogin", title: "Manager", width: "75px" },
 		                            { command: ["edit", "destroy"], title: "&nbsp;" }],
 		                        editable: "popup"

@@ -15,14 +15,13 @@ if(isset($_POST["post"]))
 	$porm->con->query("INSERT INTO p_review_active(employee_id, review_time, show_rank) VALUES({$employee->id}, {$review->review_time}, '{$_POST["rank"]}')");
 }
 
+$note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");
+
 //Add Note Form
 if(isset($_POST["note"]))
 {
-	$note = new CfaAdminComment;
 	$note->comment_text = $_POST["note_text"];
-	$note->employee_id = $employee->id;
-	$note->review_time = $review->review_time;
-	$porm->create($note);
+	$porm->update($note);
 }
 
 include '../includes/header.php';
@@ -55,20 +54,19 @@ include 'modals.php';
   </div>
   
   <div class="form-group">
-	<label>Action</label>
+	<label>Post Results</label>
 	<br>
     <button class="btn btn-default" data-toggle="modal" data-target="#postModal">Post Results</button>
-    <button class="btn btn-default"  data-toggle="modal" data-target="#noteModal">Add Note</button>
   </div>
   
-  <?php
-  $notes = $porm->read("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time} ORDER BY comment_date ASC", [], "CfaAdminComment");
+  <form action="" method="post">
+  <div class="form-group">
+	<label>Notes</label>
+	<textarea name="note_text" class="form-control"><?=$note->comment_text?></textarea>
+	<button type="submit" name="note" class="btn btn-default" value="Add Note">Add Note</button>
+  </div>
+  </form>
   
-  foreach($notes as $note)
-  {
-	  print "<textarea class='form-control'>{$note->comment_text}</textarea>";
-  }
-  ?>
 		  
 		  <h2 class="page-header">Average Reviews</h2>
 		  <?php
