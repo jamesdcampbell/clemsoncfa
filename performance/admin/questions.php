@@ -47,7 +47,7 @@ include '../includes/header.php';
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Edit Questions</h1>
 		  <form>
-		  <h3 class="page-header">General Questions</h3>
+		  <h2 class="page-header">General Questions</h2>
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
@@ -64,7 +64,7 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-		<button class="add">Add Question</button>
+		<button class="btn btn-default add">Add Question</button>
 		</div>
 		  
 		  <hr>
@@ -80,7 +80,7 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-		<button class="add">Add Question</button>
+		<button class="btn btn-default add">Add Question</button>
 		</div>
 		  <hr>
 		  <h3 class="page-header">60-Day Questions</h3>
@@ -98,7 +98,7 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-			<button class="add">Add Question</button>
+				<button class="btn btn-default add">Add Question</button>
 		</div>
 		  
 		  <h3 class="page-header">90-Day Questions</h3>
@@ -113,7 +113,7 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-			<button class="add">Add Question</button>
+		<button class="btn btn-default add">Add Question</button>
 		</div>
 		  
 		  <h3 class="page-header">1-Year Questions</h3>
@@ -128,11 +128,11 @@ include '../includes/header.php';
 			}
 		  ?>
 		<div class="form-group">
-			<button class="add">Add Question</button>
+		<button class="btn btn-default add">Add Question</button>
 		</div>
   
   <br>
-  <button type="submit" class="save">Save Changes</button>
+  <button type="submit" class="btn btn-default save">Save Changes</button>
   <br>
    <br>
 </form>
