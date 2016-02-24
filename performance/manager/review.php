@@ -23,7 +23,8 @@ $display_time = CfaEmployee::$review_times[$review_time][0];
 if(isset($_POST["submit_review"]))
 {
 	//Create new Review
-	CfaReview::create($id, $employee_id, $review_time, $_POST);
+	$request_id = isset($_GET["request"]) ? $_GET["request"] : false;
+	CfaReview::create($id, $employee_id, $review_time, $request_id, $_POST);
 }
 
 ?>
@@ -58,7 +59,6 @@ include '../includes/header.php';
 	$q_num = 1;
 	foreach($questions as $q)
 	{
-		//Display Question once Daniel has created the design.
 		print "<br>";
 		$count = $q->id;
 		print "<div class='form-group'>";

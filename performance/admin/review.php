@@ -1,7 +1,6 @@
 
 <?php
 include '../includes/init.php';
-include '../includes/header.php';
 
 $review_id = isset($_GET["id"]) ? $_GET["id"] : die("Invalid review id.");
 
@@ -9,6 +8,15 @@ $review = $porm->readOne("SELECT * FROM p_review WHERE id = $review_id", [], "Cf
 
 $employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '{$review->employee_id}'", [], "CfaEmployee");
 
+//Post Results Form
+if(isset($_POST["post"]))
+{
+	$porm->con->query("DELETE FROM p_review_active WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}");
+	$porm->con->query("INSERT INTO p_review_active(employee_id, review_time, show_rank) VALUES({$employee->id}, {$review->review_time}, '{$_POST["rank"]}')");
+}
+
+include '../includes/header.php';
+include 'modals.php';
 ?>
 
     <div class="container-fluid">
@@ -35,6 +43,13 @@ $employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '{$review->e
     <label for="typeInput">Review Type</label>
     <input type="text" class="form-control" id="typeInput" disabled value="<?=CfaEmployee::$review_times[$review->review_time][0]?>">
   </div>
+  
+  <div class="form-group">
+	<label>Action</label>
+	<br>
+    <button class="btn btn-default" data-toggle="modal" data-target="#postModal">Post Results</button>
+    <button class="btn btn-default">Add Note</button>
+  </div>
 		  
 		  <h2 class="page-header">Average Reviews</h2>
 		  <?php
@@ -43,7 +58,7 @@ $employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '{$review->e
 		  $review->displayAllAverages();
 		  
 		  ?>
-		  
+
 		  <h2 class="page-header">Individual Reviews</h2>
 		  <?php
 		  

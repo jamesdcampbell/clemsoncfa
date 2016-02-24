@@ -120,7 +120,7 @@ if(isset($_POST["request"]))
 				<tbody>
 				<?php
 				
-				$requests = $porm->read("SELECT * FROM p_request ORDER BY request_date DESC", [], "CfaRequest");
+				$requests = $porm->read("SELECT * FROM p_request WHERE employee_id NOT IN (SELECT employee_id FROM p_review WHERE manager_id = $id AND request_id = p_request.id) ORDER BY request_date DESC", [], "CfaRequest");
 				
 				foreach($requests as $request)
 				{

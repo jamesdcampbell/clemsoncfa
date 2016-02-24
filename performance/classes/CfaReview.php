@@ -9,10 +9,9 @@ class CfaReview{
 	public $manager_id = false;
 	public $employee_id = false;
 	public $review_time = false;
-	public $active = false;
+	public $request_id = false;
 	public $review_date = false;
-	public $show_rank = false;
-	public $fields = ["id","manager_id","employee_id","review_time","active", "review_date", "show_rank"];
+	public $fields = ["id","manager_id","employee_id","review_time", "request_id", "review_date"];
 	
 	/*
 		Displays averages for a review of a specific time by all managers.
@@ -121,7 +120,7 @@ AND p_comment.question_id = p_question.id
 	}
 	
 	//Create a New Review
-	static function create($manager_id, $employee_id, $review_time, $post)
+	static function create($manager_id, $employee_id, $review_time, $request_id, $post)
 	{
 		global $porm;
 		
@@ -130,6 +129,7 @@ AND p_comment.question_id = p_question.id
 		$review->manager_id = $manager_id;
 		$review->employee_id = $employee_id;
 		$review->review_time = $review_time;
+		$review->request_id = $request_id;
 		$porm->create($review);
 		
 		//Add Questions

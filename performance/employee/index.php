@@ -27,7 +27,7 @@ $id = 81; //testing
 			}		
 
 			//Employee's 30/60/90/Year Reviews
-			$reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = $time AND active = 1 LIMIT 1", [], "CfaReview");
+			$reviews = $porm->read("SELECT * FROM p_review WHERE employee_id = $id AND review_time = $time AND employee_id IN (SELECT employee_id FROM p_review_active WHERE p_review_active.review_time = p_review.review_time) LIMIT 1", [], "CfaReview");
 			
 			//Display Averages
 			foreach($reviews as $review)

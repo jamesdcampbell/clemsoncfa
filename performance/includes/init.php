@@ -13,4 +13,10 @@ foreach(glob("../classes/*.php") as $class)
 	include $class;
 }
 
+#Include Functions
+foreach(glob("functions/*.php") as $func)
+{
+	include $func;
+}
+
 ?>

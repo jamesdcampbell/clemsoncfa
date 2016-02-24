@@ -13,9 +13,10 @@ class CfaEmployee{
 	public $address = false;
 	public $email = false;
 	public $login = false;
+	public $position = false;
 	public $password = false;
 	public $hire_date = false;
-	public $fields = ["id","fName","lName","phone","address","email","login","password","hire_date"];
+	public $fields = ["id","fName","lName","phone","address","email","login", "position" ,"password","hire_date"];
 	
 	//Review Times (Keys are times, and values are [interval, upper limit] for reviews)
 	static $review_times = [
