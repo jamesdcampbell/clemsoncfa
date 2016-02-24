@@ -1,10 +1,25 @@
 <?php
 
-//Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-include '../includes/footer.php';
+
+//Modal Dropdowns for Forms
+include 'modals.php';
+
 $id = $_SESSION["id"];
+
+//Request Review Form
+if(isset($_POST["request"]))
+{
+	$request = new CfaRequest;
+	$request->requester_id = $id;
+	$request->employee_id = $_POST["employee"];
+	$request->reason = $_POST["reason"];
+	
+	$porm->create($request);
+	
+	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
+}
 ?>
 
 
@@ -91,7 +106,7 @@ $id = $_SESSION["id"];
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h2>Review Requests</h2>
+		  <h2>Review Requests <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#requestModal">Request Review</button></h2>
 		  <div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -99,6 +114,7 @@ $id = $_SESSION["id"];
 						<th>Requester</th>
 						<th>Employee</th>
 						<th>Reason for Review</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -112,9 +128,10 @@ $id = $_SESSION["id"];
 					$manager = $porm->get($request->requester_id, "CfaEmployee");
 					
 					print "<tr>";
-					print "<td>{$employee->fName} {$manager->lName}</td>";
-					print "<td>{$employee->fName} {$manager->lName}</td>";
+					print "<td>{$manager->fName} {$manager->lName}</td>";
+					print "<td>{$employee->fName} {$employee->lName}</td>";
 					print "<td>{$request->reason}</td>";
+					print "<td><a href='review.php?employee={$employee->id}&request={$request->id}'>Review</td>";
 					print "</tr>";
 				}
 				
