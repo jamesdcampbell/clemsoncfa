@@ -11,7 +11,8 @@ class CfaReview{
 	public $review_time = false;
 	public $active = false;
 	public $review_date = false;
-	public $fields = ["id","manager_id","employee_id","review_time","active", "review_date"];
+	public $show_rank = false;
+	public $fields = ["id","manager_id","employee_id","review_time","active", "review_date", "show_rank"];
 	
 	/*
 		Displays averages for a review of a specific time by all managers.

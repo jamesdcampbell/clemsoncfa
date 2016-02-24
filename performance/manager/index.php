@@ -17,8 +17,8 @@ $id = $_SESSION["id"];
 			<h1 class="manager_name">Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		
-		  <h1 class="sub-header" id="upcoming">Upcoming Reviews</h1>
+		<h1>Manager Dashboard</h1>
+		  <h2 id="upcoming">Upcoming Reviews</h2>
           <div class="table-responsive">
 		  
 		  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -91,7 +91,39 @@ $id = $_SESSION["id"];
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h1 class="sub-header" id="completed">Completed Reviews</h1>
+		  <h2>Review Requests</h2>
+		  <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Requester</th>
+						<th>Employee</th>
+						<th>Reason for Review</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+				
+				$requests = $porm->read("SELECT * FROM p_request ORDER BY request_date DESC", [], "CfaRequest");
+				
+				foreach($requests as $request)
+				{
+					$employee = $porm->get($request->employee_id, "CfaEmployee");
+					$manager = $porm->get($request->requester_id, "CfaEmployee");
+					
+					print "<tr>";
+					print "<td>{$employee->fName} {$manager->lName}</td>";
+					print "<td>{$employee->fName} {$manager->lName}</td>";
+					print "<td>{$request->reason}</td>";
+					print "</tr>";
+				}
+				
+				?>
+				</tbody>
+			</table>
+		  </div>
+		  
+		  <h2 id="completed">Completed Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -140,7 +172,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 			?>
           </div>
 		  
-          <h1 class="sub-header" id="employees">Employees</h1>
+          <h2 id="employees">Employees</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>

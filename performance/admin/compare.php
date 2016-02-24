@@ -16,7 +16,7 @@ include '../includes/header.php';
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header" id="upcoming">Compare Reviews</h1>
 		
-		<form action="" style="inline">
+		<form action="" method="post">
 			<div class="col-md-6">
 				<h2>Review 1</h2>
 				<div class="form-group">
@@ -112,11 +112,37 @@ include '../includes/header.php';
 		</form>
 		
 			<div class="col-md-6">
-			<h3>Results (Front)</h3>
+			<h2>Results 1</h2>
+			<?php
+			
+			if(isset($_POST["compare"]))
+			{
+				$time = $_POST["time"][0];
+				$employee_id = $_POST["employee"][0];
+				
+				$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				
+				$review->displayAllAverages();
+			}
+			
+			?>
 			</div>
 			
 			<div class="col-md-6">
-			<h3>Results (Back)</h3>
+			<h2>Results 2</h2>
+			<?php
+			
+			if(isset($_POST["compare"]))
+			{
+				$time = $_POST["time"][1];
+				$employee_id = $_POST["employee"][1];
+				
+				$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				
+				$review->displayAllAverages();
+			}
+			
+			?>
 			</div>
 		</div>
         </div>
