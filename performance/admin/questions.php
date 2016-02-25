@@ -55,10 +55,30 @@ include '../includes/header.php';
 			foreach($questions as $q)
 			{
 				$text = htmlentities($q->question_text, ENT_QUOTES);
-				print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label>
+				print "<div class='form-group question_header'><label for='questionInput{$count}'>Question Text</label>
 				<input class='form-control' id='questionInput{$count}' value='$text'>
+				<br>
+				<label>Developing: </label>
+				<br>
+				<label class='desc'>Description here</label> 
+				<br>
+				<textarea name='developing' rows='5' cols='75'></textarea>
+				<br><br>
+				<label>Proficient: </label>
+				<br>
+				<label class='desc'>Description here</label> 
+				<br>
+				<textarea name='proficient' rows='5' cols='75'></textarea>
+				<br><br>
+				<label>Exemplory: </label>
+				<br>
+				<label class='desc'>Description here</label> 
+				<br>
+				<textarea name='exemplory' rows='5' cols='75'></textarea>
+				<br>
 				<button class='edit'>Edit</button>
-					<button class='delete'>Delete</button>
+				<button class='delete'>Delete</button>
+				<hr>
 				</div>";
 				$count++;
 			}

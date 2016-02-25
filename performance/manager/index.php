@@ -106,7 +106,7 @@ if(isset($_POST["request"]))
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h2>Review Requests <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#requestModal">Request Review</button></h2>
+		  <h2>Review Requests <button class="btn btn-default btn-sm rightfloat" data-toggle="modal" data-target="#requestModal">Request Review</button></h2>
 		  <div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
