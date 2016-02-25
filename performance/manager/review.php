@@ -54,7 +54,7 @@ include '../includes/header.php';
   <h2 lass="page-header">Questions</h2>
 	<?php
 	//Get Questions from Database
-	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time", [], "CfaQuestion");
+	$questions = $porm->read("SELECT * FROM p_question WHERE (review_time = 0 OR review_time = $review_time) AND active = 1", [], "CfaQuestion");
 	
 	$q_num = 1;
 	foreach($questions as $q)

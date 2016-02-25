@@ -1,7 +1,21 @@
 <?php
 
 include '../includes/init.php';
-include '../includes/header.php';
+
+//Create Question
+if(isset($_POST["add"]))
+{
+	$question = new CfaQuestion;
+
+	$fields = ["review_time", "question_text", "developing_text", "proficient_text", "exemplary_text", "short_desc"];
+	
+	foreach($fields as $field)
+	{
+		$question->{$field} = $_POST[$field];
+	}
+	$porm->create($question);
+	BS::alert("Question created successfully.", "success");
+}
 
 //Edit Question
 if(isset($_POST["edit"]))
@@ -33,6 +47,9 @@ if(isset($_POST["delete"]))
 	$porm->update($question);
 	BS::alert("Question deleted successfully.", "success");
 }
+
+include '../includes/header.php';
+include 'modals.php';
 
 ?>
 
@@ -74,6 +91,11 @@ if(isset($_POST["delete"]))
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Edit Questions</h1>
+		  
+		<div class="form-group">
+			<button class="btn btn-success" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
+		</div>
+		  
 		  <h2 class="page-header">General Questions</h2>
 		  <p>These questions appear on every review.</p>
 		  <?php
@@ -85,11 +107,7 @@ if(isset($_POST["delete"]))
 				$count++;
 			}
 		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
-		  
-		  <hr>
+
 		  <h2 class="page-header">30-Day Questions</h2>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
@@ -105,10 +123,7 @@ if(isset($_POST["delete"]))
 				$count++;
 			}
 		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
-		  <hr>
+
 		  <h2 class="page-header">60-Day Questions</h2>
 		  <p>These questions appear only on the 60-Day reviews.</p>
 		  <?php
@@ -120,9 +135,6 @@ if(isset($_POST["delete"]))
 				$count++;
 			}
 		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
 		  
 		  <h2 class="page-header">90-Day Questions</h2>
 		  <p>These questions appear only on the 90-Day reviews.</p>
@@ -135,9 +147,6 @@ if(isset($_POST["delete"]))
 				$count++;
 			}
 		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
 		  
 		  <h2 class="page-header">1-Year Questions</h2>
 		  <p>These questions appear only on the 1-Year reviews.</p>
@@ -150,38 +159,9 @@ if(isset($_POST["delete"]))
 				$count++;
 			}
 		  ?>
+		  
 		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
-		
-		<h2 class="page-header">Front Employee Questions</h2>
-		  <p>These questions are only on the reviews for front employees.</p>
-		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE position = 'front' AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
-			$count = 0;
-			foreach($questions as $q)
-			{
-				$q->displayQuestion($count);
-				$count++;
-			}
-		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
-		</div>
-		
-		<h2 class="page-header">Back Employee Questions</h2>
-		  <p>These questions are only on the reviews for back employees.</p>
-		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE position = 'back' AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
-			$count = 0;
-			foreach($questions as $q)
-			{
-				$q->displayQuestion($count);
-				$count++;
-			}
-		  ?>
-		<div class="form-group">
-			<button class="btn btn-success">Add Question</button>
+			<button class="btn btn-success" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
 		</div>
 		
         </div>
