@@ -1,11 +1,39 @@
 <?php
 
 include '../includes/init.php';
-
-?>
-
-<?php
 include '../includes/header.php';
+
+//Edit Question
+if(isset($_POST["edit"]))
+{
+	//Questions cannot be edited as it would mess up past reviews. They are disabled and new questions are created.
+	$question = $porm->get((int) $_POST["question_id"], "CfaQuestion");
+	$question->active = 0;
+	$porm->update($question);
+	
+	//New Question
+	$fields = ["question_text", "developing_text", "proficient_text", "exemplary_text", "short_desc"];
+	$new_question = new CfaQuestion;
+	foreach($fields as $field)
+	{
+		$new_question->{$field} = $_POST[$field];
+	}
+	$porm->create($new_question);
+	BS::alert("Question updated successfully.", "success");
+}
+
+//Delete Question
+if(isset($_POST["delete"]))
+{
+	//Questions cannot be deleted, but only disabled so that past reviews will still show up on reviews.
+	$question = $porm->get((int) $_POST["question_id"], "CfaQuestion");
+	
+	$question->active = 0;
+	
+	$porm->update($question);
+	BS::alert("Question deleted successfully.", "success");
+}
+
 ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,116 +74,116 @@ include '../includes/header.php';
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Edit Questions</h1>
-		  <form>
 		  <h2 class="page-header">General Questions</h2>
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q->question_text, ENT_QUOTES);
-				print "<div class='form-group question_header'><label for='questionInput{$count}'>Question Text</label>
-				<input class='form-control' id='questionInput{$count}' value='$text'>
-				<br>
-				<label>Developing: </label>
-				<br>
-				<label class='desc'>Description here</label> 
-				<br>
-				<textarea name='developing' rows='5' cols='75'></textarea>
-				<br><br>
-				<label>Proficient: </label>
-				<br>
-				<label class='desc'>Description here</label> 
-				<br>
-				<textarea name='proficient' rows='5' cols='75'></textarea>
-				<br><br>
-				<label>Exemplory: </label>
-				<br>
-				<label class='desc'>Description here</label> 
-				<br>
-				<textarea name='exemplory' rows='5' cols='75'></textarea>
-				<br>
-				<button class='edit'>Edit</button>
-				<button class='delete'>Delete</button>
-				<hr>
-				</div>";
+				$q->displayQuestion($count);
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-		<button class="btn btn-default add">Add Question</button>
+			<button class="btn btn-success">Add Question</button>
 		</div>
 		  
 		  <hr>
-		  <h3 class="page-header">30-Day Questions</h3>
+		  <h2 class="page-header">30-Day Questions</h2>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 30", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 30 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q->question_text, ENT_QUOTES);
-				print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				foreach($questions as $q)
+				{
+					$q->displayQuestion($count);
+					$count++;
+				}
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-		<button class="btn btn-default add">Add Question</button>
+			<button class="btn btn-success">Add Question</button>
 		</div>
 		  <hr>
-		  <h3 class="page-header">60-Day Questions</h3>
+		  <h2 class="page-header">60-Day Questions</h2>
 		  <p>These questions appear only on the 60-Day reviews.</p>
 		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 60", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 60 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label>
-				  <input class='form-control' id='questionInput{$count}' value='$text'>
-
-				  </div>";
+				$q->displayQuestion($count);
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-				<button class="btn btn-default add">Add Question</button>
+			<button class="btn btn-success">Add Question</button>
 		</div>
 		  
-		  <h3 class="page-header">90-Day Questions</h3>
+		  <h2 class="page-header">90-Day Questions</h2>
 		  <p>These questions appear only on the 90-Day reviews.</p>
 		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 90", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 90 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				$q->displayQuestion($count);
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-		<button class="btn btn-default add">Add Question</button>
+			<button class="btn btn-success">Add Question</button>
 		</div>
 		  
-		  <h3 class="page-header">1-Year Questions</h3>
+		  <h2 class="page-header">1-Year Questions</h2>
 		  <p>These questions appear only on the 1-Year reviews.</p>
 		  <?php
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 1", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 1 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
 			foreach($questions as $q)
 			{
-				$text = htmlentities($q->question_text, ENT_QUOTES);
-				  print "<div class='form-group'><label for='questionInput{$count}'>Question Text</label><input class='form-control' id='questionInput{$count}' value='$text'></div>";
+				$q->displayQuestion($count);
 				$count++;
 			}
 		  ?>
 		<div class="form-group">
-		<button class="btn btn-default add">Add Question</button>
+			<button class="btn btn-success">Add Question</button>
 		</div>
-  
-  <br>
-  <button type="submit" class="btn btn-default save">Save Changes</button>
-  <br>
-   <br>
-</form>
+		
+		<h2 class="page-header">Front Employee Questions</h2>
+		  <p>These questions are only on the reviews for front employees.</p>
+		  <?php
+			$questions = $porm->read("SELECT * FROM p_question WHERE position = 'front' AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
+			foreach($questions as $q)
+			{
+				$q->displayQuestion($count);
+				$count++;
+			}
+		  ?>
+		<div class="form-group">
+			<button class="btn btn-success">Add Question</button>
+		</div>
+		
+		<h2 class="page-header">Back Employee Questions</h2>
+		  <p>These questions are only on the reviews for back employees.</p>
+		  <?php
+			$questions = $porm->read("SELECT * FROM p_question WHERE position = 'back' AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
+			foreach($questions as $q)
+			{
+				$q->displayQuestion($count);
+				$count++;
+			}
+		  ?>
+		<div class="form-group">
+			<button class="btn btn-success">Add Question</button>
+		</div>
+		
         </div>
       </div>
     </div>
