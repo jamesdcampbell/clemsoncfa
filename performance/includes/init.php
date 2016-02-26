@@ -1,7 +1,18 @@
 <?php
 
+#Session
 session_start();
-$id = isset($_SESSION["id"]) ? $_SESSION["id"] : exit("Not logged in!");
+
+if(isset($_SESSION["id"]))
+{
+	$id = $_SESSION["id"];
+}
+
+else
+{
+	header("location: /index.php");
+	exit;
+}
 
 #PORM
 include '../porm/porm.php';
@@ -17,6 +28,40 @@ foreach(glob("../classes/*.php") as $class)
 foreach(glob("functions/*.php") as $func)
 {
 	include $func;
+}
+
+#Security
+
+$user = $porm->get((int) $id, "CfaEmployee");
+
+//Admin Level
+if(strpos($_SERVER["REQUEST_URI"], "/admin/"))
+{
+	if($user->email != "vickijordancfa@gmail.com" and $user->email != "sheldonjuncker@gmail.com")
+	{
+		header("location: /index.php");
+		exit;
+	}
+}
+
+//Manager Level
+if(strpos($_SERVER["REQUEST_URI"], "/manager/"))
+{
+	if($user->login != "true"  and $user->email != "sheldonjuncker@gmail.com")
+	{
+		header("location: /index.php");
+		exit;
+	}
+}
+
+//Employee Level
+if(strpos($_SERVER["REQUEST_URI"], "/employee/"))
+{
+	if($user->login != "false" and $user->email != "sheldonjuncker@gmail.com")
+	{
+		header("location: /index.php");
+		exit;
+	}
 }
 
 ?>
