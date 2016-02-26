@@ -47,7 +47,7 @@ include 'modals.php';
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Review Results</h1>
+          <h1>Review Results</h1>
 		  
 		  <div class="form-group">
     <label for="employeeInput">Employee</label>
@@ -74,7 +74,7 @@ include 'modals.php';
   </form>
   
 		  
-		  <h2 class="page-header">Average Reviews</h2>
+		  <h2>Average Reviews</h2>
 		  <?php
 		  
 		  //Display Review Averages
@@ -82,7 +82,7 @@ include 'modals.php';
 		  
 		  ?>
 
-		  <h2 class="page-header">Individual Reviews</h2>
+		  <h2>Individual Reviews</h2>
 		  <?php
 		  
 		  //Get All Review of this Type and Employee

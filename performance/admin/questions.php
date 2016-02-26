@@ -90,13 +90,13 @@ include 'modals.php';
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Edit Questions</h1>
+          <h1>Edit Questions</h1>
 		  
 		<div class="form-group">
 			<button class="btn btn-success" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
 		</div>
 		  
-		  <h2 class="page-header">General Questions</h2>
+		  <h2>General Questions</h2>
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
@@ -108,7 +108,7 @@ include 'modals.php';
 			}
 		  ?>
 
-		  <h2 class="page-header">30-Day Questions</h2>
+		  <h2>30-Day Questions</h2>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php
 			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 30 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
@@ -124,7 +124,7 @@ include 'modals.php';
 			}
 		  ?>
 
-		  <h2 class="page-header">60-Day Questions</h2>
+		  <h2>60-Day Questions</h2>
 		  <p>These questions appear only on the 60-Day reviews.</p>
 		  <?php
 			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 60 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
@@ -136,7 +136,7 @@ include 'modals.php';
 			}
 		  ?>
 		  
-		  <h2 class="page-header">90-Day Questions</h2>
+		  <h2>90-Day Questions</h2>
 		  <p>These questions appear only on the 90-Day reviews.</p>
 		  <?php
 			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 90 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
@@ -148,7 +148,7 @@ include 'modals.php';
 			}
 		  ?>
 		  
-		  <h2 class="page-header">1-Year Questions</h2>
+		  <h2>1-Year Questions</h2>
 		  <p>These questions appear only on the 1-Year reviews.</p>
 		  <?php
 			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 1 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
