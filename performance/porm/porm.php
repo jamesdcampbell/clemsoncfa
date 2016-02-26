@@ -99,7 +99,7 @@ class Porm
 	
 	//Read (SELECT FROM table)
 	public function read($sql, $params = [], $type = 'StdClass')
-	{		
+	{
 		//Prepare Query
 		$stmt = $this->createStatement($sql, $params);
 		
@@ -137,6 +137,16 @@ class Porm
 		{
 			return NULL;
 		}
+	}
+	
+	//Get by ID and Class
+	public function get($id, $class)
+	{
+		$table = $this->getTableName(new $class);
+		
+		$result = $this->readOne("SELECT * FROM $table WHERE id = ?", [$id], $class);
+		
+		return $result;
 	}
 	
 	//Update Table (UPDATE)

@@ -1,7 +1,7 @@
 <?php
-include '../includes/header.php';
+
 include '../includes/init.php';
-include '../includes/footer.php';
+
 //Manager's Reviews
 
 //Get Employee
@@ -23,7 +23,8 @@ $display_time = CfaEmployee::$review_times[$review_time][0];
 if(isset($_POST["submit_review"]))
 {
 	//Create new Review
-	CfaReview::create($id, $employee_id, $review_time, $_POST);
+	$request_id = isset($_GET["request"]) ? $_GET["request"] : false;
+	CfaReview::create($id, $employee_id, $review_time, $request_id, $_POST);
 }
 
 ?>
@@ -50,15 +51,14 @@ include '../includes/header.php';
     <input type="text" class="form-control" id="typeInput" disabled value="<?=$display_time?>">
   </div>
   
-  <h3 class="page-header">Questions</h3>
+  <h2 lass="page-header">Questions</h2>
 	<?php
 	//Get Questions from Database
-	$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 OR review_time = $review_time", [], "CfaQuestion");
+	$questions = $porm->read("SELECT * FROM p_question WHERE (review_time = 0 OR review_time = $review_time) AND active = 1", [], "CfaQuestion");
 	
 	$q_num = 1;
 	foreach($questions as $q)
 	{
-		//Display Question once Daniel has created the design.
 		print "<br>";
 		$count = $q->id;
 		print "<div class='form-group'>";
@@ -74,12 +74,14 @@ include '../includes/header.php';
 		$q_num++;
 	}
 	?>
-	<h3 class="page-header">Final Comments</h3>
+	<h2 class="page-header">Final Comments</h2>
   <div class="form-group">
     <label for="commentInput">Comments</label>
     <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
   </div>
-   <button type="submit" name="submit_review" class="btn btn-default">Submit Review</button>
+   <br>
+   <button type="submit" name="submit_review" class="submit">Submit Review</button>
+   <br><br>
 </form>
         </div>
       </div>

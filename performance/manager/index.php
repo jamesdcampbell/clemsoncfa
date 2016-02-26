@@ -1,10 +1,25 @@
 <?php
 
-//Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-include '../includes/footer.php';
+
+//Modal Dropdowns for Forms
+include 'modals.php';
+
 $id = $_SESSION["id"];
+
+//Request Review Form
+if(isset($_POST["request"]))
+{
+	$request = new CfaRequest;
+	$request->requester_id = $id;
+	$request->employee_id = $_POST["employee"];
+	$request->reason = $_POST["reason"];
+	
+	$porm->create($request);
+	
+	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
+}
 ?>
 
 
@@ -17,8 +32,8 @@ $id = $_SESSION["id"];
 			<h1 class="manager_name">Manager Name</h1>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		
-		  <h1 class="sub-header" id="upcoming">Upcoming Reviews</h1>
+		<h1>Manager Dashboard</h1>
+		  <h2 id="upcoming">Upcoming Reviews</h2>
           <div class="table-responsive">
 		  
 		  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -91,7 +106,41 @@ $id = $_SESSION["id"];
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h1 class="sub-header" id="completed">Completed Reviews</h1>
+		  <h2>Review Requests <button class="btn btn-default btn-sm rightfloat" data-toggle="modal" data-target="#requestModal">Request Review</button></h2>
+		  <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Requester</th>
+						<th>Employee</th>
+						<th>Reason for Review</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+				
+				$requests = $porm->read("SELECT * FROM p_request WHERE employee_id NOT IN (SELECT employee_id FROM p_review WHERE manager_id = $id AND request_id = p_request.id) ORDER BY request_date DESC", [], "CfaRequest");
+				
+				foreach($requests as $request)
+				{
+					$employee = $porm->get($request->employee_id, "CfaEmployee");
+					$manager = $porm->get($request->requester_id, "CfaEmployee");
+					
+					print "<tr>";
+					print "<td>{$manager->fName} {$manager->lName}</td>";
+					print "<td>{$employee->fName} {$employee->lName}</td>";
+					print "<td>{$request->reason}</td>";
+					print "<td><a href='review.php?employee={$employee->id}&request={$request->id}'>Review</td>";
+					print "</tr>";
+				}
+				
+				?>
+				</tbody>
+			</table>
+		  </div>
+		  
+		  <h2 id="completed">Completed Reviews</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -140,7 +189,7 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 			?>
           </div>
 		  
-          <h1 class="sub-header" id="employees">Employees</h1>
+          <h2 id="employees">Employees</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>

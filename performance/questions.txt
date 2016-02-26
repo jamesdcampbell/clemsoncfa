@@ -13,3 +13,7 @@ How do we tell the difference between front and back employees?
 How do we know which employees are managers?
 
 Should the employee see 30 day - 1 year reviews and custom reviews?
+
+What types of reports do the managers need to generate?
+
+How detailed of information should be reported?

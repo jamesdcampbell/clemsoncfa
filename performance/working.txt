@@ -1,0 +1,7 @@
+Fixing the questions page for the admin.
+
+Fixing the admin dashboard tables
+
+Allow for front/back positions to be assigned and used
+
+Work on manager dashboard design
