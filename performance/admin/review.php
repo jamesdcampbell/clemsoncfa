@@ -17,6 +17,12 @@ if(isset($_POST["post"]))
 
 $note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");
 
+if(!$note)
+{
+	$note = new CfaAdminComment;
+	$note->comment_text = "";
+}
+
 //Add Note Form
 if(isset($_POST["note"]))
 {

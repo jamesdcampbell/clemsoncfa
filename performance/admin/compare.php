@@ -2,6 +2,12 @@
 
 //Testing Stuff
 include '../includes/init.php';
+
+
+$review_id = (int) $_GET["id"];
+
+$review = $porm->get($review_id, "CfaReview");
+
 include '../includes/header.php';
 
 ?>
@@ -27,7 +33,12 @@ include '../includes/header.php';
 					{
 						if($time != "0")
 						{
-							print "<option value='$time'>{$value[0]}</option>";
+							$selected = "";
+							if($time == $review->review_time)
+							{
+								$selected = "selected";
+							}
+							print "<option value='$time' $selected>{$value[0]}</option>";
 						}
 					}
 					?>
@@ -37,7 +48,7 @@ include '../includes/header.php';
 				<div class="form-group">
 					<label>Employee Type</label>
 					<select name="type[0]" class="form-control">
-						<option value="specific">Specific Employee</option>
+						<option value="specific" selected>Specific Employee</option>
 						<option value="front">Front</option>
 						<option value="back">Back</option>
 					</select>
@@ -52,7 +63,12 @@ include '../includes/header.php';
 					
 					foreach($employees as $e)
 					{
-						print "<option value='{$e->id}'>{$e->fName} {$e->lName}</option>";
+						$selected = "";
+						if($e->id == $review->employee_id)
+						{
+							$selected = "selected";
+						}
+						print "<option value='{$e->id}' $selected>{$e->fName} {$e->lName}</option>";
 					}
 					
 					?>

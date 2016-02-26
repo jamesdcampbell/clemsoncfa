@@ -188,38 +188,6 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 			}
 			?>
           </div>
-		  
-          <h2 id="employees">Employees</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Hired</th>
-				  <th>Review</th>
-                </tr>
-              </thead>
-              <tbody>
-				<?php
-				//Select Employees
-				$employees = $porm->read("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", [], "CfaEmployee");
-				foreach($employees as $e)
-				{
-					print "<tr>";
-					$fields = ["id", "fName", "lName", "hire_date"];
-					foreach($fields as $field)
-					{
-						print "<td>" . $e->{$field} . "</td>";
-					}
-					print "<td><a href='review.php?employee={$e->id}' class='btn'>Request Review</a></td>";
-					print "</tr>";
-				}
-				?>
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </div>

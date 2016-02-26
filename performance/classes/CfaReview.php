@@ -230,7 +230,7 @@ GROUP BY employee_id, review_time
 		foreach($completed as $review)
 		{
 			$review->review_link = "<a href='review.php?id={$review->id}' class='btn btn-default'>View Details</a>";
-			$review->compare_link = "<form action='compare.php'><select name='cmp_type'><option value='same'>Same Review Time</option><option value='type'>Same Type (front/back)</option><option value='all'>All</option></select><input type='hidden' name='review_id' value='{$review->id}'><input type='submit' class='btn btn-default' value='Compare'></form>";
+			$review->compare_link = "<a href='compare.php?id={$review->id}' class='btn btn-default'>Compare</a>";
 			$ordered[$review->review_time][] = $review;
 		}
 

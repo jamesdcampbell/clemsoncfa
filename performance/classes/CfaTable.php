@@ -6,6 +6,11 @@
 
 class CfaTable
 {
+	/*
+		Generates a Table
+		$fields = ["object_prop" => "display_name"]
+		$table_array = PDO Table Object
+	*/
 	static function generate($fields, $table_array)
 	{
 		print "<div class='table-responsive'>";
@@ -13,7 +18,16 @@ class CfaTable
 		print "<thead><tr>";
 		foreach($fields as $field)
 		{
-			print "<th>$field</th>";
+			if(is_array($field))
+			{
+				$field_name = $field[1];
+			}
+			
+			else
+			{
+				$field_name = $field;
+			}
+			print "<th>$field_name</th>";
 		}
 		print"</tr></thead>";
 		print "<tbody>";
@@ -21,9 +35,19 @@ class CfaTable
 		{
 			print "<tr>";
 			reset($fields);
-			foreach($fields as $field2)
+			foreach($fields as $field)
 			{
-				$cell = $row->{$field2};
+				if(is_array($field))
+				{
+					$prop = $field[0];
+				}
+				
+				else
+				{
+					$prop = $field;
+				}
+				
+				$cell = $row->{$prop};
 				print "<td>$cell</td>";
 			}
 			print "</tr>";
