@@ -14,11 +14,9 @@ include '../includes/header.php';
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1><small>Welcome back!</small></h1>
-
-        </div>
+        <?php
+		include "../manager/manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 id="upcoming">Compare Reviews</h1>
 		

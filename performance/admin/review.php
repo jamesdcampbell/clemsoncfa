@@ -36,16 +36,9 @@ include 'modals.php';
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">Managers</a></li>
-            <li><a href="#">Employees</a></li>
-          </ul>
-        </div>
+        <?php
+		include "../manager/manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1>Review Results</h1>
 		  
