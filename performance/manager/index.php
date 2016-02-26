@@ -6,8 +6,6 @@ include '../includes/header.php';
 //Modal Dropdowns for Forms
 include 'modals.php';
 
-$id = $_SESSION["id"];
-
 //Request Review Form
 if(isset($_POST["request"]))
 {
@@ -21,16 +19,11 @@ if(isset($_POST["request"]))
 	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
 }
 ?>
-
-
-
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1 class="welcome">Welcome back!</h1>
-			<h1 class="manager_name">Manager Name</h1>
-        </div>
+        <?php
+		include "manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1>Manager Dashboard</h1>
 		  <h2 id="upcoming">Upcoming Reviews</h2>
