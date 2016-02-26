@@ -1,0 +1,1 @@
+<?php//Includes use "../"chdir("porm");include 'includes/init.php';?>

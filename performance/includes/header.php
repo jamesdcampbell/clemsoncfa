@@ -36,10 +36,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="index.php#upcoming">Upcoming</a></li>
-            <li><a href="index.php#completed">Completed</a></li>
-            <li><a href="index.php#employees">Employees</a></li>
+            <li><a href="/">CFA Home</a></li>
+            <li><a href="/performance/admin/">Admin</a></li>
+            <li><a href="/performance/manager/">Manager</a></li>
+            <li><a href="/performance/employee/">Employee</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

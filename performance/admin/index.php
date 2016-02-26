@@ -6,19 +6,12 @@ include '../includes/header.php';
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">Managers</a></li>
-            <li><a href="#">Employees</a></li>
-          </ul>
-        </div>
+        <?php
+		include "../manager/manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Admin Dashboard</h1>
-		  <h2 class="page-header">Completed Reviews</h2>
+          <h1>Admin Dashboard</h1>
+		  <h2>Completed Reviews</h2>
 		  <?php
 		  
 		  $completed = CfaReview::getCompleted();
@@ -33,7 +26,13 @@ include '../includes/header.php';
 			  print "<h3>{$value[0]}</h3>";
 			  
 			  //Generate Table
-			  CfaTable::generate(["fName", "lName", "score", "review_link", "compare_link"], $completed[$time]);
+			  CfaTable::generate([
+					["fName", "First Name"],
+					["lName", "Last Name"],
+					["score", "Score"],
+					["review_link", "Review"],
+					["compare_link", "Compare"]
+				] ,$completed[$time]);
 		  }
 		  
 		  ?>

@@ -2,19 +2,23 @@
 
 //Testing Stuff
 include '../includes/init.php';
+
+
+$review_id = (int) $_GET["id"];
+
+$review = $porm->get($review_id, "CfaReview");
+
 include '../includes/header.php';
 
 ?>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1><small>Welcome back!</small></h1>
-
-        </div>
+        <?php
+		include "../manager/manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		<h1 class="page-header" id="upcoming">Compare Reviews</h1>
+		<h1 id="upcoming">Compare Reviews</h1>
 		
 		<form action="" method="post">
 			<div class="col-md-6">
@@ -27,7 +31,12 @@ include '../includes/header.php';
 					{
 						if($time != "0")
 						{
-							print "<option value='$time'>{$value[0]}</option>";
+							$selected = "";
+							if($time == $review->review_time)
+							{
+								$selected = "selected";
+							}
+							print "<option value='$time' $selected>{$value[0]}</option>";
 						}
 					}
 					?>
@@ -37,7 +46,7 @@ include '../includes/header.php';
 				<div class="form-group">
 					<label>Employee Type</label>
 					<select name="type[0]" class="form-control">
-						<option value="specific">Specific Employee</option>
+						<option value="specific" selected>Specific Employee</option>
 						<option value="front">Front</option>
 						<option value="back">Back</option>
 					</select>
@@ -52,7 +61,12 @@ include '../includes/header.php';
 					
 					foreach($employees as $e)
 					{
-						print "<option value='{$e->id}'>{$e->fName} {$e->lName}</option>";
+						$selected = "";
+						if($e->id == $review->employee_id)
+						{
+							$selected = "selected";
+						}
+						print "<option value='{$e->id}' $selected>{$e->fName} {$e->lName}</option>";
 					}
 					
 					?>

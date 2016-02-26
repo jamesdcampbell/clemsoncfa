@@ -17,6 +17,12 @@ if(isset($_POST["post"]))
 
 $note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");
 
+if(!$note)
+{
+	$note = new CfaAdminComment;
+	$note->comment_text = "";
+}
+
 //Add Note Form
 if(isset($_POST["note"]))
 {
@@ -30,18 +36,11 @@ include 'modals.php';
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reviews</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">Managers</a></li>
-            <li><a href="#">Employees</a></li>
-          </ul>
-        </div>
+        <?php
+		include "../manager/manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Review Results</h1>
+          <h1>Review Results</h1>
 		  
 		  <div class="form-group">
     <label for="employeeInput">Employee</label>
@@ -68,7 +67,7 @@ include 'modals.php';
   </form>
   
 		  
-		  <h2 class="page-header">Average Reviews</h2>
+		  <h2>Average Reviews</h2>
 		  <?php
 		  
 		  //Display Review Averages
@@ -76,7 +75,7 @@ include 'modals.php';
 		  
 		  ?>
 
-		  <h2 class="page-header">Individual Reviews</h2>
+		  <h2>Individual Reviews</h2>
 		  <?php
 		  
 		  //Get All Review of this Type and Employee

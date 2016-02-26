@@ -6,8 +6,6 @@ include '../includes/header.php';
 //Modal Dropdowns for Forms
 include 'modals.php';
 
-$id = $_SESSION["id"];
-
 //Request Review Form
 if(isset($_POST["request"]))
 {
@@ -21,16 +19,11 @@ if(isset($_POST["request"]))
 	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
 }
 ?>
-
-
-
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-		 <img src="../../images/cfaicon.png" class="img-responsive" alt="../../images/cfaicon.jpg" width="304" height="236"> 
-			<h1 class="welcome">Welcome back!</h1>
-			<h1 class="manager_name">Manager Name</h1>
-        </div>
+        <?php
+		include "manager_side.php";
+		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1>Manager Dashboard</h1>
 		  <h2 id="upcoming">Upcoming Reviews</h2>
@@ -187,38 +180,6 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 				print '<a href="completed.php" class="btn btn-primary">View All</a>';
 			}
 			?>
-          </div>
-		  
-          <h2 id="employees">Employees</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Hired</th>
-				  <th>Review</th>
-                </tr>
-              </thead>
-              <tbody>
-				<?php
-				//Select Employees
-				$employees = $porm->read("SELECT * FROM TeamMemberInfo WHERE login = 'false' AND fname != ''", [], "CfaEmployee");
-				foreach($employees as $e)
-				{
-					print "<tr>";
-					$fields = ["id", "fName", "lName", "hire_date"];
-					foreach($fields as $field)
-					{
-						print "<td>" . $e->{$field} . "</td>";
-					}
-					print "<td><a href='review.php?employee={$e->id}' class='btn'>Request Review</a></td>";
-					print "</tr>";
-				}
-				?>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
