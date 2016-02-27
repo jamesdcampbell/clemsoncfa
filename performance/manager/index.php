@@ -6,6 +6,24 @@ include '../includes/header.php';
 //Modal Dropdowns for Forms
 include 'modals.php';
 
+//Ignore a Review Form
+if(isset($_POST["ignore"]))
+{
+	$time = $_POST["time"];
+	$employee = $_POST["employee"];
+	$porm->con->query("INSERT INTO p_review_ignore(employee_id, review_time) VALUES($employee, $time)");
+	BS::alert("Successfully ignored the review.", "success");
+}
+
+//Unignore a Review Form
+if(isset($_POST["unignore"]))
+{
+	$time = $_POST["time"];
+	$employee = $_POST["employee"];
+	$porm->con->query("DELETE FROM p_review_ignore WHERE employee_id = $employee AND review_time = $time");
+	BS::alert("Successfully unignored the review.", "success");
+}
+
 //Request Review Form
 if(isset($_POST["request"]))
 {
@@ -16,7 +34,7 @@ if(isset($_POST["request"]))
 	
 	$porm->create($request);
 	
-	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
+	BS::alert("The request was created successfully.", "success");
 }
 ?>
     <div class="container-fluid">
@@ -67,7 +85,7 @@ if(isset($_POST["request"]))
                   <th>Last Name</th>
                   <th>Hire Date</th>
                   <th>Review Type</th>
-				  <th>Review</th>
+				  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +102,7 @@ if(isset($_POST["request"]))
 				  
 				  $type_display = $type_array[0];
 				  print "<td>$type_display</td>";
-				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn'>Review</a></td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='ignore' class='btn btn-default'>Ignore</button></form></td>";
 				  print "</tr>";
 			  }
 			  ?>
@@ -148,17 +166,22 @@ if(isset($_POST["request"]))
               <tbody>
 			  <?php
 			  
-			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
+			  $completed = $porm->read("
+SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id
+FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmployee");
+AND TeamMemberInfo.id = employee_id
+AND TeamMemberInfo.id NOT IN(
+	SELECT employee_id
+	FROM p_review_active
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = p_review.review_time
+)
+ORDER BY review_date"
+				, [], "CfaEmployee");
 
-			  $count = 0;
 			  foreach($completed as $c)
 				{
-					if($count > 9)
-					{
-						break;
-					}
 					print "<tr>";
 					$fields = ["fName", "lName", "review_time"];
 					print "<td>{$c->id}</td>";
@@ -168,19 +191,80 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 					}
 					print "<td><a href='completed.php?review={$c->review_id}' class='btn'>Edit/View</a></td>";
 					print "</tr>";
-					$count++;
 				}
 			  
 			  ?>
               </tbody>
             </table>
-			<?php
-			if(count($completed) > 10)
+          </div><!--end of completed reviews-->
+		  
+		  <h2 id="ignored">Ignored Reviews</h2>
+          <div class="table-responsive">
+		  
+		  <div class="panel-group" id="ignore_accordion" role="tablist" aria-multiselectable="true">
+			<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="ignore_heading">
+			<h4 class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#ignore_accordion" href="#ignore_collapse" aria-expanded="true" aria-controls="collapse">
+				View Ignored Reviews
+			</a>
+			</h4>
+			</div>
+			
+			<div id="ignore_collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ignore_heading">
+			<div class="panel-body">
+			
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Review Type</th>
+				  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+			  <?php
+
+			foreach(CfaEmployee::$review_times as $type => $type_array)
 			{
-				print '<a href="completed.php" class="btn btn-primary">View All</a>';
+				if($type == "0")
+				{
+					continue;
+				}
+				
+				$ignored = CfaEmployee::getIgnored($type);
+				
+				if(!count($ignored))
+				{
+					continue;
+				}
+			  
+			  foreach($ignored as $e)
+			  {
+				  print "<tr>";
+				  $fields = ["id", "fName", "lName"];
+				  foreach($fields as $field)
+				  {
+					  print "<td>" . $e->{$field} . "</td>";
+				  }
+				  
+				  $type_display = $type_array[0];
+				  print "<td>$type_display</td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='unignore' class='btn btn-default'>Unignore</button></form></td>";
+				  print "</tr>";
+			  }
 			}
-			?>
+			  ?>
+              </tbody>
+            </table>
+			      </div>
+			</div>
+			</div><!--end of accordion panel-->
+			</div><!--end of accordion-->
           </div>
+		  
         </div>
       </div>
     </div>

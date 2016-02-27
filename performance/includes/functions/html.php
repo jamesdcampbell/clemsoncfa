@@ -5,7 +5,7 @@
 */
 
 //Prints out a Table Cell
-function td(...$args)
+function td($args)
 {
 	print "<td>";
 	foreach($args as $arg)
@@ -13,6 +13,14 @@ function td(...$args)
 		print $arg;
 	}
 	print "</td>";
+}
+
+//Display Array
+function pre($a)
+{
+	print "<pre>";
+	print_r($a);
+	print "</pre>";
 }
 
 ?>

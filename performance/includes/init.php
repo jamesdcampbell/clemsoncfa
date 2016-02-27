@@ -14,6 +14,7 @@ else
 	exit;
 }
 
+
 #PORM
 include '../porm/porm.php';
 $porm = new Porm();
@@ -25,7 +26,7 @@ foreach(glob("../classes/*.php") as $class)
 }
 
 #Include Functions
-foreach(glob("functions/*.php") as $func)
+foreach(glob("../includes/functions/*.php") as $func)
 {
 	include $func;
 }

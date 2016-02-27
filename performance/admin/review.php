@@ -8,11 +8,37 @@ $review = $porm->readOne("SELECT * FROM p_review WHERE id = $review_id", [], "Cf
 
 $employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '{$review->employee_id}'", [], "CfaEmployee");
 
-//Post Results Form
+//Is Review Active
+$active = $porm->read("SELECT * FROM p_review_active WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}");
+
+if($active)
+{
+	$published = true;
+}
+
+else
+{
+	$published = false;
+}
+
+
+
+//Publish/Unpublish Results Form
 if(isset($_POST["post"]))
 {
-	$porm->con->query("DELETE FROM p_review_active WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}");
-	$porm->con->query("INSERT INTO p_review_active(employee_id, review_time, show_rank) VALUES({$employee->id}, {$review->review_time}, '{$_POST["rank"]}')");
+	//Unpublish
+	if($published)
+	{
+		$porm->con->query("DELETE FROM p_review_active WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}");
+		$published = false;
+	}
+	
+	else
+	{
+		//Publish
+		$porm->con->query("INSERT INTO p_review_active(employee_id, review_time, show_rank) VALUES({$employee->id}, {$review->review_time}, '{$_POST["rank"]}')");
+		$published = true;
+	}
 }
 
 $note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");
@@ -55,7 +81,20 @@ include 'modals.php';
   <div class="form-group">
 	<label>Post Results</label>
 	<br>
-    <button class="btn btn-default" data-toggle="modal" data-target="#postModal">Post Results</button>
+	<?php
+	
+	if(!$published)
+	{
+		print '<button class="btn btn-default" data-toggle="modal" data-target="#postModal">Publish Results</button>';
+	}
+	
+	else
+	{
+		print '<form action="" method="post"><button type="submit" class="btn btn-default" name="post">Unpublish Results</button></form>';
+	}
+	
+	?>
+    
   </div>
   
   <form action="" method="post">
@@ -85,6 +124,13 @@ include 'modals.php';
 		  foreach($reviews as $r)
 		  {
 			  $r->displayReview();
+			  
+			  //Load Main Comment
+			  $comment = $porm->readOne("SELECT * FROM p_comment WHERE review_id = {$r->id} AND question_id = 0", [], "CfaComment");
+			  if($comment)
+			  {
+				  print "<h3>Comment</h3><textarea class='form-control'>{$comment->comment_text}</textarea>";
+			  }
 		  }
 		  ?>
 			</div>

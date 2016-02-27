@@ -5,7 +5,20 @@ include '../includes/init.php';
 //Get Review
 $review_id = isset($_GET["review"]) ? (int) $_GET["review"] : die("Invalid review id.");
 
-$review = $porm->readOne("SELECT * FROM p_review WHERE id = $review_id", [], "CfaReview");
+$review = $porm->readOne("
+SELECT *
+FROM p_review
+WHERE id = $review_id
+AND employee_id NOT IN(
+	SELECT employee_id
+	FROM p_review_active
+	WHERE review_time = p_review.review_time
+)
+"
+, [], "CfaReview");
+
+//Invalid Review
+$review or die("Invalid review.");
 
 $display_time = CfaEmployee::$review_times[$review->review_time][0];
 
@@ -92,11 +105,6 @@ include '../includes/header.php';
 	}
 	
 	?>
-	
-	<div class="form-group">
-		<label for="commentInput">New Comment</label>
-		<textarea type="text" class="form-control" id="commentInput" name="p_comment[-1]"></textarea>
-		</div>
 	
    <button type="submit" name="edit_review" class="btn btn-default">Edit Review</button>
 </form>

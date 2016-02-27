@@ -3,8 +3,7 @@
 //Testing Stuff
 include '../includes/init.php';
 
-
-$review_id = (int) $_GET["id"];
+$review_id = isset($_GET["id"]) ? (int) $_GET["id"] : "";
 
 $review = $porm->get($review_id, "CfaReview");
 
@@ -20,7 +19,7 @@ include '../includes/header.php';
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 id="upcoming">Compare Reviews</h1>
 		
-		<form action="" method="post">
+		<form action="compare.php" method="post">
 			<div class="col-md-6">
 				<h2>Review 1</h2>
 				<div class="form-group">
@@ -57,7 +56,7 @@ include '../includes/header.php';
 					<select name="employee[0]" class="form-control">
 					<?php
 					
-					$employees = $porm->read("SELECT * FROM teammemberinfo ORDER BY lName, fName ASC", [], "CfaEmployee");
+					$employees = CfaEmployee::getAll();
 					
 					foreach($employees as $e)
 					{
@@ -132,11 +131,29 @@ include '../includes/header.php';
 			if(isset($_POST["compare"]))
 			{
 				$time = $_POST["time"][0];
-				$employee_id = $_POST["employee"][0];
+				$type = $_POST["type"][0];
 				
-				$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				if($type == "specific")
+				{
+					$employee_id = $_POST["employee"][0];
 				
-				$review->displayAllAverages();
+					$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				}
+				
+				else
+				{
+					$review = $porm->readOne("SELECT * FROM p_review WHERE position = ?", [$type], "CfaReview");
+				}
+				
+				if($review)
+				{
+					$review->displayAllAverages();
+				}
+				
+				else
+				{
+					print "<h3>No Results</h3>";
+				}
 			}
 			
 			?>
@@ -149,11 +166,29 @@ include '../includes/header.php';
 			if(isset($_POST["compare"]))
 			{
 				$time = $_POST["time"][1];
-				$employee_id = $_POST["employee"][1];
+				$type = $_POST["type"][1];
 				
-				$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				if($type == "specific")
+				{
+					$employee_id = $_POST["employee"][1];
 				
-				$review->displayAllAverages();
+					$review = $porm->readOne("SELECT * FROM p_review WHERE employee_id = $employee_id AND review_time = $time", [], "CfaReview");
+				}
+				
+				else
+				{
+					$review = $porm->readOne("SELECT * FROM p_review WHERE position = ?", [$type], "CfaReview");
+				}
+				
+				if($review)
+				{
+					$review->displayAllAverages();
+				}
+				
+				else
+				{
+					print "<h3>No Results</h3>";
+				}
 			}
 			
 			?>

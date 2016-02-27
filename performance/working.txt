@@ -1,1 +1,12 @@
-Work on manager dashboard design
+Finished:
+Main comments from manager's on admin's reviews
+Publishing/unpublishing results
+
+Current:
+Disabling editing of published reviews
+Custom reviews
+Displaying success messages
+
+After:
+Employee logins
+Work on rankings for employees
