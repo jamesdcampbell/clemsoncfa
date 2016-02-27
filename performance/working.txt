@@ -1,11 +1,13 @@
 Finished:
 Main comments from manager's on admin's reviews
 Publishing/unpublishing results
+Ignoring reviews
+Disabling editing of published reviews
 
 Current:
-Disabling editing of published reviews
-Custom reviews
 Displaying success messages
+Add Hire Dates
+Report data
 
 After:
 Employee logins

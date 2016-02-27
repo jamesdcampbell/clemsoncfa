@@ -75,6 +75,7 @@
 		                                        phoneNumber: { editable: true },
 		                                        emailAddress: { editable: true },
 												position: { editable: true, nullable:false },
+												hireDate: { editable: true, nullable:false },
 		                                        canLogin: { type: "boolean", editable: true}
 		                                    }
 		                                }
@@ -92,8 +93,9 @@
 		                            { field: "firstName", title: "FirstName", width: "110px" },
 		                            { field: "lastName", title: "LastName", width: "110px" },
 		                            { field: "phoneNumber", title: "Phone #", width: "100px" },
-		                            { field: "emailAddress", title: "Email", width: "200px" },
+		                            { field: "emailAddress", title: "Email", width: "100px" },
 		                            { field: "position", title: "Front/Back", width: "75px" },
+									{ field: "hireDate", title: "Hired YYYY-MM-DD", width: "150px" },
 		                            { field: "canLogin", title: "Manager", width: "75px" },
 		                            { command: ["edit", "destroy"], title: "&nbsp;" }],
 		                        editable: "popup"

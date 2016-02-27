@@ -12,10 +12,10 @@
     <title>CFA Performance Review System</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom theme styles for this template -->
-    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
+     <link href="../bootstrap/css/dashboard.css" rel="stylesheet"> 
 	
 	<!-- Custom styles for this template -->
 	<link href="../bootstrap/css/custom.css" rel="stylesheet">
@@ -32,10 +32,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">Performance Review System</a>
+          <a class="navbar-brand employer_prs" href="index.php">Performance Review System</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class=" nav navbar-nav navbar-right employer_nav">
             <li><a href="/">CFA Home</a></li>
             <li><a href="/performance/admin/">Admin</a></li>
             <li><a href="/performance/manager/">Manager</a></li>

@@ -21,7 +21,7 @@
 
 		// return all data from team member info table
 		if($module == "1"){
-			$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position as position, login AS canLogin FROM TeamMemberInfo");		
+			$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position as position, hire_date AS hireDate, login AS canLogin FROM TeamMemberInfo");		
 			
 			if($query->execute()) {
 				$data = array();
@@ -36,12 +36,13 @@
 		elseif ($module == "2") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("UPDATE TeamMemberInfo SET fName=:fName,lName=:lName,phone=:pNumber,email=:eAddress,position=:position,login=:canLogin WHERE id=:memberID");
+			$query = $db->prepare("UPDATE TeamMemberInfo SET fName=:fName,lName=:lName,phone=:pNumber,email=:eAddress,hire_date=:hire_date,position=:position,login=:canLogin WHERE id=:memberID");
 			$query->bindValue(':fName',$data[0]->firstName);
 			$query->bindValue(':lName',$data[0]->lastName);
 			$query->bindValue(':pNumber',$data[0]->phoneNumber);
 			$query->bindValue(':eAddress',$data[0]->emailAddress);
 			$query->bindValue(':position',$data[0]->position);
+			$query->bindValue(':hire_date',$data[0]->hireDate);
 			$query->bindValue(':memberID',$data[0]->memberID);
 			
 			if($data[0]->canLogin == 1) {		
@@ -53,7 +54,7 @@
 
 			if($query->execute()) {
 				// grab updated info back out and return to grid
-				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, login AS canLogin FROM TeamMemberInfo WHERE id=:memberID");
+				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, hire_date AS hireDate, login AS canLogin FROM TeamMemberInfo WHERE id=:memberID");
 				$query->bindValue(':memberID',$data[0]->memberID);
 				$query->execute();
 
@@ -114,12 +115,13 @@
 			$query->bindValue(':email',$data[0]->emailAddress);
 			$query->execute();
 								
-			$query = $db->prepare("INSERT INTO TeamMemberInfo (fName,lName,phone,email,,position,login,password) VALUES (:fName,:lName,:pNumber,:eAddress,:position,:canLogin,'7b4f075f3914bbd4bf9a26623d95954fa0dac20a')");		
+			$query = $db->prepare("INSERT INTO TeamMemberInfo (fName,lName,phone,email,position,hire_date,login,password) VALUES (:fName,:lName,:pNumber,:eAddress,:position,:hireDate,:canLogin,'7b4f075f3914bbd4bf9a26623d95954fa0dac20a')");		
 			$query->bindValue(':fName',$data[0]->firstName);
 			$query->bindValue(':lName',$data[0]->lastName);
 			$query->bindValue(':pNumber',$data[0]->phoneNumber);
 			$query->bindValue(':eAddress',$data[0]->emailAddress);
 			$query->bindValue(':position',$data[0]->position);
+			$query->bindValue(':hireDate',$data[0]->hireDate);
 
 			if($data[0]->canLogin == 1) {				
 				$query->bindValue(':canLogin',"true");		
