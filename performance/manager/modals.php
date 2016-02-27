@@ -12,7 +12,7 @@
 				<label>Employee</label>
 				<select name="employee" class="form-control">
 				<?php
-				$employees = $porm->read("SELECT * FROM teammemberinfo ORDER by lName, fName ASC", [], "CfaEmployee");
+				$employees = CfaEmployee::getAll();
 				
 				foreach($employees as $e)
 				{

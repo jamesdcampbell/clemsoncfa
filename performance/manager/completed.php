@@ -93,11 +93,6 @@ include '../includes/header.php';
 	
 	?>
 	
-	<div class="form-group">
-		<label for="commentInput">New Comment</label>
-		<textarea type="text" class="form-control" id="commentInput" name="p_comment[-1]"></textarea>
-		</div>
-	
    <button type="submit" name="edit_review" class="btn btn-default">Edit Review</button>
 </form>
         </div>

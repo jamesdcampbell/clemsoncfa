@@ -3,7 +3,6 @@
 //Testing Stuff
 include '../includes/init.php';
 
-
 $review_id = isset($_GET["id"]) ? (int) $_GET["id"] : "";
 
 $review = $porm->get($review_id, "CfaReview");
@@ -57,7 +56,7 @@ include '../includes/header.php';
 					<select name="employee[0]" class="form-control">
 					<?php
 					
-					$employees = $porm->read("SELECT * FROM teammemberinfo ORDER BY lName, fName ASC", [], "CfaEmployee");
+					$employees = CfaEmployee::getAll();
 					
 					foreach($employees as $e)
 					{
