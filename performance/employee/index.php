@@ -2,7 +2,6 @@
 //Testing Stuff
 include '../includes/init.php';
 include '../includes/header.php';
-$id = $_SESSION["id"];
 $id = 81; //testing
 ?>
 
