@@ -90,7 +90,7 @@ class CfaQuestion
 			<div class="form-group">
 				<label class="col-sm-2">Action</label>
 				<div class="col-sm-10">
-					<button class='btn btn-warning edit' type="submit" name="edit">Edit</button>
+					<button class='btn btn-info edit' type="submit" name="edit">Edit</button>
 					<button class='btn btn-danger delete' type="submit" name="delete">Delete</button>
 				</div>
 			</div>
