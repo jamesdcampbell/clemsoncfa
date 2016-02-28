@@ -166,9 +166,19 @@ if(isset($_POST["request"]))
               <tbody>
 			  <?php
 			  
-			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
+			  $completed = $porm->read("
+SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id
+FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id ORDER BY review_date", [], "CfaEmployee");
+AND TeamMemberInfo.id = employee_id
+AND TeamMemberInfo.id NOT IN(
+	SELECT employee_id
+	FROM p_review_active
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = p_review.review_time
+)
+ORDER BY review_date"
+				, [], "CfaEmployee");
 
 			  foreach($completed as $c)
 				{
