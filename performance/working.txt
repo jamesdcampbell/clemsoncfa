@@ -1,1 +1,4 @@
+Ignoring reviews for managers
+Employee logins
+Disabling editing of published reviews
 Work on rankings for employees
