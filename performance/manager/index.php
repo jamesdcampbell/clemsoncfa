@@ -39,7 +39,7 @@ if(isset($_POST["request"]))
 	$email = new Email;
 	$email->subject = "CFA Review Request";
 	$email->body = "{$user->fName} {$user->lName} has requested that the employee {$employee->fName} {$employee->lName} be reviewed for the following reasons:\n\n{$request->reason}\n\nPlease use the following link to review the employee:\nhttp://clemsoncfa.com/performance/manager/review.php?id={$request->id}";
-	$email->sendEmail();
+	$email->sendEmail(true);
 	
 	BS::alert("The request was created successfully.", "success");
 }
