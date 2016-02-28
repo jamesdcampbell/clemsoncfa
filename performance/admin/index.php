@@ -11,7 +11,8 @@ include '../includes/header.php';
 		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1>Admin Dashboard</h1>
-		  <h2>Completed Reviews</h2>
+		  <h2>Completed Reviews  <a href="questions.php"><button class="btn btn-default btn-sm rightfloat">
+		  View Questions</button></a></h2>
 		  <?php
 		  
 		  $completed = CfaReview::getCompleted();
