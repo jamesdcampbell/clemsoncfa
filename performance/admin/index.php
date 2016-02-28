@@ -19,7 +19,7 @@ include '../includes/header.php';
 		  foreach(CfaEmployee::$review_times as $time => $value)
 		  {
 			  //Skip Custom Reviews
-			  if($time == "0" || empty($completed[$time]))
+			  if(empty($completed[$time]))
 			  {
 				  continue;
 			  }

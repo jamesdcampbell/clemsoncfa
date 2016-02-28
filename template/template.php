@@ -82,7 +82,7 @@
 										<a href="../manage.php">Site Management</a>
 									</li>
 									<li>
-										<a href="../performance">Performance Reviews</a>
+										<a href="../performance/manager/">Performance Reviews</a>
 									</li>
 									<li>
 										<a href="../logout.php">Logout</a>
