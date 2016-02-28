@@ -5,6 +5,7 @@ Publishing/unpublishing results
 Current:
 Ignoring reviews for managers
 Disabling editing of published reviews
+Custom reviews
 
 After:
 Employee logins

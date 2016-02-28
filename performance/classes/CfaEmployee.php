@@ -56,6 +56,36 @@ AND id NOT IN(
 		return $porm->read($sql, [], "CfaEmployee");
 	}
 	
+	
+	//Get Ignored Reviews form Employees
+	static function getIgnored($type)
+	{
+		global $porm;
+		
+		//Security
+		$type = (int) $type;
+		
+		$interval = CfaEmployee::$review_times[$type][0];
+		$upper_limit = CfaEmployee::$review_times[$type][1];
+			
+		$sql = "
+SELECT * FROM TeamMemberInfo
+WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL $interval)
+AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL $upper_limit)
+AND TeamMemberInfo.login = 'false'
+AND id IN(
+	SELECT employee_id FROM p_review_ignore
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = $type
+)
+AND id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = $type
+)";
+		return $porm->read($sql, [], "CfaEmployee");
+	}
+	
 	static function getAll()
 	{
 		global $porm;

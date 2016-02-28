@@ -34,7 +34,7 @@ if(isset($_POST["request"]))
 	
 	$porm->create($request);
 	
-	print "<div class='alert alert-success col-md-offset-2 col-md-12'>The request was created successfully.</div>";
+	BS::alert("The request was created successfully.", "success");
 }
 ?>
     <div class="container-fluid">
@@ -186,7 +186,75 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date", [], "CfaEmployee");
 			  ?>
               </tbody>
             </table>
+          </div><!--end of completed reviews-->
+		  
+		  <h2 id="ignored">Ignored Reviews</h2>
+          <div class="table-responsive">
+		  
+		  <div class="panel-group" id="ignore_accordion" role="tablist" aria-multiselectable="true">
+			<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="ignore_heading">
+			<h4 class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#ignore_accordion" href="#ignore_collapse" aria-expanded="true" aria-controls="collapse">
+				View Ignored Reviews
+			</a>
+			</h4>
+			</div>
+			
+			<div id="ignore_collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ignore_heading">
+			<div class="panel-body">
+			
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Review Type</th>
+				  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+			  <?php
+
+			foreach(CfaEmployee::$review_times as $type => $type_array)
+			{
+				if($type == "0")
+				{
+					continue;
+				}
+				
+				$ignored = CfaEmployee::getIgnored($type);
+				
+				if(!count($ignored))
+				{
+					continue;
+				}
+			  
+			  foreach($ignored as $e)
+			  {
+				  print "<tr>";
+				  $fields = ["id", "fName", "lName"];
+				  foreach($fields as $field)
+				  {
+					  print "<td>" . $e->{$field} . "</td>";
+				  }
+				  
+				  $type_display = $type_array[0];
+				  print "<td>$type_display</td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='unignore' class='btn btn-default'>Unignore</button></form></td>";
+				  print "</tr>";
+			  }
+			}
+			  ?>
+              </tbody>
+            </table>
+			      </div>
+			</div>
+			</div><!--end of accordion panel-->
+			</div><!--end of accordion-->
           </div>
+		  
         </div>
       </div>
     </div>
