@@ -6,10 +6,19 @@
 		
 		private $to = "";
 		
-		private function getEmailAddresses()
+		private function getEmailAddresses($dev = false)
 		{
 			include 'dbConnections.php';	
-			$query = $db->prepare("SELECT email FROM TeamMemberInfo WHERE login='true'");
+			if($dev)
+			{
+				$email = " AND email = 'sheldonjuncker@gmail.com'";
+			}
+			
+			else
+			{
+				$email = "";
+			}
+			$query = $db->prepare("SELECT email FROM TeamMemberInfo WHERE login='true'$email");
 			$query->execute();
 			
 			// grab first email address out and then format with commas before
@@ -21,9 +30,9 @@
 			}
 		}
 		
-		public function sendEmail()
+		public function sendEmail($dev = false)
 		{			
-			$this->getEmailAddresses();
+			$this->getEmailAddresses($dev);
 			mail($this->to,$this->subject,$this->body,'From: no-reply@clemsoncfa.com');
 			
 		}	

@@ -14,6 +14,8 @@ else
 	exit;
 }
 
+#Email
+include "../../includes/email.php";
 
 #PORM
 include '../porm/porm.php';
