@@ -44,6 +44,11 @@ WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL $interval)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL $upper_limit)
 AND TeamMemberInfo.login = 'false'
 AND id NOT IN(
+	SELECT employee_id FROM p_review_ignore
+	WHERE employee_id = TeamMemberInfo.id
+	AND review_time = $type
+)
+AND id NOT IN(
 	SELECT employee_id FROM p_review
 	WHERE employee_id = TeamMemberInfo.id
 	AND review_time = $type

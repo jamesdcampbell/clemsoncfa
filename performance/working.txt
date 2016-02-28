@@ -1,4 +1,11 @@
+Finished:
+Main comments from manager's on admin's reviews
+Publishing/unpublishing results
+
+Current:
 Ignoring reviews for managers
-Employee logins
 Disabling editing of published reviews
+
+After:
+Employee logins
 Work on rankings for employees

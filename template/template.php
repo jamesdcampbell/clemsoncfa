@@ -5,6 +5,12 @@
 	 * Misc: File is usually included in other files and displayPage() is called	 
 	 */
 
+	 /*
+		Some security configuration for the main site that is needed to allow employees to login.
+	 */
+	 
+	 
+	 
 	function displayPage($sideBar, $mainContent)
 	{
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 

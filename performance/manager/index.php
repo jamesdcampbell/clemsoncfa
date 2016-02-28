@@ -6,6 +6,24 @@ include '../includes/header.php';
 //Modal Dropdowns for Forms
 include 'modals.php';
 
+//Ignore a Review Form
+if(isset($_POST["ignore"]))
+{
+	$time = $_POST["time"];
+	$employee = $_POST["employee"];
+	$porm->con->query("INSERT INTO p_review_ignore(employee_id, review_time) VALUES($employee, $time)");
+	BS::alert("Successfully ignored the review.", "success");
+}
+
+//Unignore a Review Form
+if(isset($_POST["unignore"]))
+{
+	$time = $_POST["time"];
+	$employee = $_POST["employee"];
+	$porm->con->query("DELETE FROM p_review_ignore WHERE employee_id = $employee AND review_time = $time");
+	BS::alert("Successfully unignored the review.", "success");
+}
+
 //Request Review Form
 if(isset($_POST["request"]))
 {
@@ -67,7 +85,7 @@ if(isset($_POST["request"]))
                   <th>Last Name</th>
                   <th>Hire Date</th>
                   <th>Review Type</th>
-				  <th>Review</th>
+				  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +102,7 @@ if(isset($_POST["request"]))
 				  
 				  $type_display = $type_array[0];
 				  print "<td>$type_display</td>";
-				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn'>Review</a></td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='ignore' class='btn btn-default'>Ignore</button></form></td>";
 				  print "</tr>";
 			  }
 			  ?>
@@ -150,15 +168,10 @@ if(isset($_POST["request"]))
 			  
 			  $completed = $porm->read("SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id FROM p_review, TeamMemberInfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmployee");
+AND TeamMemberInfo.id = employee_id ORDER BY review_date", [], "CfaEmployee");
 
-			  $count = 0;
 			  foreach($completed as $c)
 				{
-					if($count > 9)
-					{
-						break;
-					}
 					print "<tr>";
 					$fields = ["fName", "lName", "review_time"];
 					print "<td>{$c->id}</td>";
@@ -168,18 +181,11 @@ AND TeamMemberInfo.id = employee_id ORDER BY review_date LIMIT 11", [], "CfaEmpl
 					}
 					print "<td><a href='completed.php?review={$c->review_id}' class='btn'>Edit/View</a></td>";
 					print "</tr>";
-					$count++;
 				}
 			  
 			  ?>
               </tbody>
             </table>
-			<?php
-			if(count($completed) > 10)
-			{
-				print '<a href="completed.php" class="btn btn-primary">View All</a>';
-			}
-			?>
           </div>
         </div>
       </div>
