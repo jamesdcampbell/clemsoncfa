@@ -62,7 +62,7 @@ include 'modals.php';
           <h1>Edit Questions</h1>
 		  
 		<div class="form-group">
-			<button class="btn btn-success" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
+			<button class="btn btn-success add" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
 		</div>
 		  
 		  <h2>General Questions</h2>
@@ -130,7 +130,7 @@ include 'modals.php';
 		  ?>
 		  
 		<div class="form-group">
-			<button class="btn btn-success" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
+			<button class="btn btn-success add" data-toggle="modal" data-target="#questionModal" data->Add Question</button>
 		</div>
 		
         </div>
