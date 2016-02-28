@@ -24,7 +24,8 @@ if(isset($_POST["submit_review"]))
 {
 	//Create new Review
 	$request_id = isset($_GET["request"]) ? $_GET["request"] : false;
-	CfaReview::create($id, $employee_id, $review_time, $request_id, $_POST);
+	$review_id = CfaReview::create($id, $employee_id, $review_time, $request_id, $_POST);
+	BS::alert("The <a href='completed.php?review={$review_id}'>review</a> was created successfully.", "success");
 }
 
 ?>
@@ -78,7 +79,7 @@ include '../includes/header.php';
     <textarea type="text" class="form-control" id="commentInput" name="p_comment['review']"></textarea>
   </div>
    <br>
-   <button type="submit" name="submit_review" class="submit">Submit Review</button>
+   <button type="submit" name="submit_review" class="btn btn-default">Submit Review</button>
    <br><br>
 </form>
         </div>

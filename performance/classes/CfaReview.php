@@ -158,6 +158,8 @@ AND p_comment.question_id = p_question.id
 			$comment->comment_text = $value;
 			$porm->create($comment);
 		}
+		
+		return $review->id;
 	}
 	
 	//Edit a Completed Review

@@ -3,9 +3,9 @@ Main comments from manager's on admin's reviews
 Publishing/unpublishing results
 
 Current:
-Ignoring reviews for managers
 Disabling editing of published reviews
 Custom reviews
+Displaying success messages
 
 After:
 Employee logins
