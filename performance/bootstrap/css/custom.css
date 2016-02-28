@@ -107,11 +107,20 @@ radio
 	font-size: 12px;
 }
 
+.employer_nav
+{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.employer_prs
+{
+	
+	font-weight: bold;
+	font-size: 22px;
+}
+
 .panel-heading:nth-of-type(even){background-color: rgb(200,200,200)}
-
-	
-	
-
 
 
 tr:nth-of-type(odd){background-color: rgb(200,200,200);}
