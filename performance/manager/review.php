@@ -7,7 +7,7 @@ include '../includes/init.php';
 //Get Employee
 $employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
 
-$employee = $porm->readOne("SELECT * FROM TeamMemberInfo WHERE id = '$employee_id'", [], "CfaEmployee");
+$employee = $porm->readOne("SELECT * FROM teammemberinfo WHERE id = '$employee_id'", [], "CfaEmployee");
 
 if(!$employee)
 {
@@ -53,7 +53,7 @@ include '../includes/header.php';
   <h2 lass="page-header">Questions</h2>
 	<?php
 	//Get Questions from Database
-	$questions = $porm->read("SELECT * FROM p_question WHERE (review_time = 0 OR review_time = $review_time) AND active = 1", [], "CfaQuestion");
+	$questions = $porm->read("SELECT * FROM p_question WHERE (review_time = -1 OR review_time = $review_time) AND active = 1", [], "CfaQuestion");
 	
 	$q_num = 1;
 	foreach($questions as $q)

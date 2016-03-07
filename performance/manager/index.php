@@ -38,8 +38,8 @@ if(isset($_POST["request"]))
 	//Send Email
 	$email = new Email;
 	$email->subject = "CFA Review Request";
-	$email->body = "{$user->fName} {$user->lName} has requested that the employee {$employee->fName} {$employee->lName} be reviewed for the following reasons:\n\n{$request->reason}\n\nPlease use the following link to review the employee:\nhttp://clemsoncfa.com/performance/manager/review.php?id={$request->id}";
-	$email->sendEmail(true);
+	$email->body = "{$user->fName} {$user->lName} has requested that the employee {$employee->fName} {$employee->lName} be reviewed for the following reasons:\n\n{$request->reason}\n\nPlease use the following link to review the employee:\nhttp://clemsoncfa.com/performance/manager/review.php?request={$request->id}&employee={$employee->id}";
+	$email->sendEmail();
 	
 	BS::alert("The request was created successfully.", "success");
 }
@@ -109,7 +109,7 @@ if(isset($_POST["request"]))
 				  
 				  $type_display = $type_array[0];
 				  print "<td>$type_display</td>";
-				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='ignore' class='btn btn-default'>Ignore</button></form></td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='ignore' class='btn btn-default'>Postpone</button></form></td>";
 				  print "</tr>";
 			  }
 			  ?>
@@ -124,7 +124,7 @@ if(isset($_POST["request"]))
 			</div><!--end of accordion-->
           </div>
 		  
-		  <h2>Review Requests <button class="btn btn-default btn-sm rightfloat" data-toggle="modal" data-target="#requestModal">Request Review</button></h2>
+		  <h2>Requested Reviews <button class="btn btn-default btn-sm rightfloat" data-toggle="modal" data-target="#requestModal">Request a Review</button></h2>
 		  <div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -175,13 +175,13 @@ if(isset($_POST["request"]))
 			  
 			  $completed = $porm->read("
 SELECT fName, lName, review_time, teammemberinfo.id, p_review.id as review_id
-FROM p_review, TeamMemberInfo
+FROM p_review, teammemberinfo
 WHERE manager_id = $id
-AND TeamMemberInfo.id = employee_id
-AND TeamMemberInfo.id NOT IN(
+AND teammemberinfo.id = employee_id
+AND teammemberinfo.id NOT IN(
 	SELECT employee_id
 	FROM p_review_active
-	WHERE employee_id = TeamMemberInfo.id
+	WHERE employee_id = teammemberinfo.id
 	AND review_time = p_review.review_time
 )
 ORDER BY review_date"
@@ -205,7 +205,7 @@ ORDER BY review_date"
             </table>
           </div><!--end of completed reviews-->
 		  
-		  <h2 id="ignored">Ignored Reviews</h2>
+		  <h2 id="ignored">Postponed Reviews</h2>
           <div class="table-responsive">
 		  
 		  <div class="panel-group" id="ignore_accordion" role="tablist" aria-multiselectable="true">
@@ -213,7 +213,7 @@ ORDER BY review_date"
 			<div class="panel-heading" role="tab" id="ignore_heading">
 			<h4 class="panel-title">
 			<a role="button" data-toggle="collapse" data-parent="#ignore_accordion" href="#ignore_collapse" aria-expanded="true" aria-controls="collapse">
-				View Ignored Reviews
+				View Postponed Reviews
 			</a>
 			</h4>
 			</div>
@@ -259,7 +259,7 @@ ORDER BY review_date"
 				  
 				  $type_display = $type_array[0];
 				  print "<td>$type_display</td>";
-				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='unignore' class='btn btn-default'>Unignore</button></form></td>";
+				  print "<td><a href='review.php?employee={$e->id}&time=$type' class='btn btn-default'>Review</a><form style='display:inline;' action='' method='post'><input type='hidden' name='employee' value='{$e->id}'><input type='hidden' name='time' value='$type'><button type='submit' name='unignore' class='btn btn-default'>Unpostpone</button></form></td>";
 				  print "</tr>";
 			  }
 			}

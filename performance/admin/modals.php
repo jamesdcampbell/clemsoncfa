@@ -1,11 +1,11 @@
-<!-- Post Review Modal -->
+<!-- Employee Post Review Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 	 <form action="" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Post Review</h4>
+        <h4 class="modal-title">Publish Review</h4>
       </div>
       <div class="modal-body">
 	  <p>This will show the review to the employee. Optionally, a rank may be specified so that the employee can see how they compare to others.</p>
@@ -21,6 +21,49 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="submit" name="post" class="btn btn-primary">Post</button>
+      </div>
+	  </form>
+    </div>
+  </div>
+</div>
+
+<!-- Manager Post Review Modal -->
+<div class="modal fade" id="postManagerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+	 <form action="" method="post">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Publish Review</h4>
+      </div>
+      <div class="modal-body">
+	  <p>This will publish the review averages to the managers specified who will each receive a notification email.</p>
+			<div class="form-group">
+				<label>Managers</label>
+				<?php
+				$managers = CfaEmployee::getManagers();
+				
+				foreach($managers as $m)
+				{
+					//Is it already published to this manager?
+					$checked = "";
+					
+					$result = $porm->read("SELECT * FROM p_review_published WHERE review_time = {$review->review_time} AND employee_id = {$review->employee_id} AND manager_id = {$m->id}", []);
+					
+					if(count($result))
+					{
+						$checked = " checked";
+					}
+					
+					print "<div class='form-group'>
+						<input type='checkbox' name='manager[{$m->id}]'$checked> {$m->fName} {$m->lName}</div>";
+				}
+				?>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" name="post-manager" class="btn btn-primary">Post</button>
       </div>
 	  </form>
     </div>
@@ -68,7 +111,8 @@
 			<div class="form-group">
 				<label>Review Time</label>
 				<select name="review_time" class="form-control">
-					<option value="0">All</option>
+					<option value="-1">All</option>
+					<option value="0">Custom</option>
 					<option value="30">30 Day</option>
 					<option value="60">60 Day</option>
 					<option value="90">90 Day</option>

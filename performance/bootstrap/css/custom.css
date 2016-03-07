@@ -93,8 +93,6 @@ radio
 	float: right;
 	margin-right: 30px;
 	margin-top: 2px;
-	font-weight: bold;
-	
 }
 
 .question_header
@@ -126,7 +124,25 @@ radio
 tr:nth-of-type(odd){background-color: rgb(200,200,200);}
 tr:nth-of-type(even){background-color: rgb(200,200,200);}
 
+@media screen{
+	.screen_hidden{
+		display:none;
+	}
+}
 
+@media print{
+	.print_hidden{
+		display:none;
+	}
+	
+	.print_break_after{
+		page-break-after:always;
+	}
+	
+	.print_break_after:last-of-type{
+		page-break-after:auto;
+	}
+}
 
 
 

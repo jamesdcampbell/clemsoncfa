@@ -69,7 +69,7 @@ include 'modals.php';
 		  <p>These questions appear on every review.</p>
 		  <?php
 			$count = 0;
-			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = -1 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
 			foreach($questions as $q)
 			{
 				$q->displayQuestion($count);
@@ -77,6 +77,22 @@ include 'modals.php';
 			}
 		  ?>
 
+		  <h2>Custom Review Questions</h2>
+		  <p>These questions appear only on custom employee reviews.</p>
+		  <?php
+			$questions = $porm->read("SELECT * FROM p_question WHERE review_time = 0 AND active = 1 ORDER BY short_desc", [], "CfaQuestion");
+			$count = 0;
+			foreach($questions as $q)
+			{
+				foreach($questions as $q)
+				{
+					$q->displayQuestion($count);
+					$count++;
+				}
+				$count++;
+			}
+		  ?>
+		  
 		  <h2>30-Day Questions</h2>
 		  <p>These questions appear only on the 30-Day reviews.</p>
 		  <?php

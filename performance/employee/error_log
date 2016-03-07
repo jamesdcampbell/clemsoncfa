@@ -1,0 +1,18 @@
+[28-Feb-2016 09:53:05] PHP Parse error:  syntax error, unexpected '[' in /home4/clemsonc/public_html/performance/employee/index.php on line 27
+[28-Feb-2016 09:56:02] PHP Parse error:  syntax error, unexpected '[' in /home4/clemsonc/public_html/performance/employee/index.php on line 27
+[28-Feb-2016 10:49:16 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:49:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 63
+[28-Feb-2016 10:51:28 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:51:28 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:52:07 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:52:07 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:52:08 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:52:08 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:52:09 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:52:09 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:52:27 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:52:27 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:53:42 America/Denver] PHP Parse error:  syntax error, unexpected '1' (T_LNUMBER) in /home4/clemsonc/public_html/performance/porm/config.php on line 6
+[28-Feb-2016 10:53:53 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:53:53 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:54:48 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4

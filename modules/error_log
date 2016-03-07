@@ -1,18 +1,22 @@
-[24-Apr-2013 19:39:41 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 293
-[24-Apr-2013 19:40:48 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 249
-[24-Apr-2013 19:49:26 America/Denver] PHP Notice:  Undefined index: motdEmail in /home4/clemsonc/public_html/modules/edits.php on line 26
-[24-Apr-2013 19:49:26 America/Denver] PHP Notice:  Undefined index: lsNotesEmail in /home4/clemsonc/public_html/modules/edits.php on line 38
-[25-Apr-2013 11:16:56 America/Denver] PHP Notice:  Undefined index: motdEmail in /home4/clemsonc/public_html/modules/edits.php on line 26
-[25-Apr-2013 11:16:56 America/Denver] PHP Notice:  Undefined index: notesEmail in /home4/clemsonc/public_html/modules/edits.php on line 32
-[25-Apr-2013 11:16:56 America/Denver] PHP Notice:  Undefined index: lsNotesEmail in /home4/clemsonc/public_html/modules/edits.php on line 38
-[25-Apr-2013 11:17:32 America/Denver] PHP Notice:  Undefined index: notesEmail in /home4/clemsonc/public_html/modules/edits.php on line 32
-[25-Apr-2013 11:17:32 America/Denver] PHP Notice:  Undefined index: lsNotesEmail in /home4/clemsonc/public_html/modules/edits.php on line 38
-[25-Apr-2013 22:52:39 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 101
-[25-Apr-2013 22:56:08 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 101
-[28-Apr-2013 17:25:00 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/members.php on line 94
-[01-May-2013 18:57:34 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 101
-[04-May-2013 20:13:21 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getIssues.php on line 120
-[04-May-2013 20:17:36 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 101
-[04-May-2013 20:17:59 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getLeadership.php on line 101
-[05-May-2013 11:32:56 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getIssues.php on line 120
-[05-May-2013 11:33:26 America/Denver] PHP Notice:  Undefined property: stdClass::$emailOut in /home4/clemsonc/public_html/modules/getIssues.php on line 58
+[28-Feb-2016 10:39:18 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home4/clemsonc/public_html/modules/authenticate.php on line 26
+[28-Feb-2016 10:39:32 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home4/clemsonc/public_html/modules/authenticate.php on line 26
+[28-Feb-2016 10:39:34 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home4/clemsonc/public_html/modules/authenticate.php on line 26
+[28-Feb-2016 10:40:03 America/Denver] PHP Parse error:  syntax error, unexpected ';' in /home4/clemsonc/public_html/modules/authenticate.php on line 26
+[28-Feb-2016 10:42:09 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:42:09 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:42:12 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:42:12 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:42:15 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:42:15 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:42:21 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:42:21 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:42:41 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:42:41 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:45:02 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:45:02 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:45:13 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:45:13 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:45:20 America/Denver] PHP Notice:  Undefined index: id in /home4/clemsonc/public_html/modules/authenticate.php on line 37
+[28-Feb-2016 10:45:20 America/Denver] PHP Notice:  Undefined index: email in /home4/clemsonc/public_html/modules/authenticate.php on line 38
+[28-Feb-2016 10:45:43 America/Denver] PHP Parse error:  syntax error, unexpected 'exit' (T_EXIT), expecting identifier (T_STRING) in /home4/clemsonc/public_html/modules/authenticate.php on line 27
+[28-Feb-2016 10:45:57 America/Denver] PHP Warning:  print_r() expects parameter 2 to be boolean, array given in /home4/clemsonc/public_html/modules/authenticate.php on line 26

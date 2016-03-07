@@ -21,7 +21,7 @@
 		// retrieve customer care log
 		if($module == "1") {
 			$query = $db->prepare("SELECT id AS uniqueID, customerName AS custName, callDate AS dateCall, callTime, callTakenByID AS callTakenBy,
-									incidentDate AS doi, incidentTime AS toi, details, followUp, address, phoneOne, phoneTwo, tMemberIssue, handled FROM Incident");
+									incidentDate AS doi, incidentTime AS toi, details, followUp, address, phoneOne, phoneTwo, tMemberIssue, handled FROM incident");
 			$query->execute();
 
 			$data = array();
@@ -36,7 +36,7 @@
 		elseif ($module == "2") {
 			$data = json_decode($_GET['models']);
 			echo $_GET['models'];
-			$query = $db->prepare("DELETE FROM Incident WHERE id=:issueID");
+			$query = $db->prepare("DELETE FROM incident WHERE id=:issueID");
 			$query->bindValue(":issueID",$data[0]->uniqueID);
 			$query->execute();									
 		}
@@ -56,7 +56,7 @@
 			$handled = htmlspecialchars($_GET['handled']);
 			$followUp = htmlspecialchars($_GET['followUp']);
 
-			$query = $db->prepare("INSERT INTO Incident (customerName,callDate,callTime,callTakenByID,incidentDate,incidentTime,details,
+			$query = $db->prepare("INSERT INTO incident (customerName,callDate,callTime,callTakenByID,incidentDate,incidentTime,details,
 									followUp,address,phoneOne,phoneTwo,tMemberIssue,handled) VALUES 
 								(:custName,:dir,:tir,:callTakenBy,:doi,:toi,:details,:followUp,:addr,:phoneOne,:phoneTwo,:tMemberIssue,:handled)");
 			$query->bindValue(':custName',$custName);
@@ -80,7 +80,7 @@
 			$id = $_GET['id'];
 
 			$query = $db->prepare("SELECT id AS uniqueID, customerName AS custName, callDate AS dateCall, callTime, callTakenByID AS callTakenBy,
-									incidentDate AS doi, incidentTime AS toi, details, followUp, address, phoneOne, phoneTwo, tMemberIssue, handled FROM Incident WHERE id=:id");
+									incidentDate AS doi, incidentTime AS toi, details, followUp, address, phoneOne, phoneTwo, tMemberIssue, handled FROM incident WHERE id=:id");
 			$query->bindValue(':id',$id);
 			$query->execute();
 
@@ -108,7 +108,7 @@
 			$handled = htmlspecialchars($_GET['handled']);
 			$followUp = htmlspecialchars($_GET['followUp']);
 
-			$query = $db->prepare("UPDATE Incident SET customerName=:custName,callDate=:dir,callTime=:tir,callTakenByID=:callTakenBy
+			$query = $db->prepare("UPDATE incident SET customerName=:custName,callDate=:dir,callTime=:tir,callTakenByID=:callTakenBy
 									,incidentDate=:doi,incidentTime=:toi,details=:details,
 									followUp=:followUp,address=:addr,phoneOne=:phoneOne,phoneTwo=:phoneTwo,
 									tMemberIssue=:tMemberIssue,handled=:handled WHERE id=:id"); 

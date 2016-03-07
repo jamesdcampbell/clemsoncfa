@@ -26,8 +26,7 @@ class Porm
 		
 		//Connect to Database
 		try {
-			$this->con = new PDO('mysql:host=localhost;dbname=_cfa','root','');
-			//$this->con = new PDO($porm_config['pdo_string'], $porm_config['user'], $porm_config['pass']);
+			$this->con = new PDO($porm_config['pdo_string'], $porm_config['user'], $porm_config['pass']);
 			
 			$this->con->query("USE {$this->dbname}");
 			
@@ -44,7 +43,7 @@ class Porm
 			Update	(UPDATE)
 			Delete	(DELETE)
 	*/
-	
+
 	//Create (INSERT into Table)
 	public function create($row)
 	{
@@ -265,5 +264,4 @@ class Porm
 		return $stmt;
 	}
 }
-
 ?>

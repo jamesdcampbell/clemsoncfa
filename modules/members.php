@@ -21,7 +21,7 @@
 
 		// return all data from team member info table
 		if($module == "1"){
-			$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position as position, hire_date AS hireDate, login AS canLogin FROM TeamMemberInfo");		
+			$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position as position, hire_date AS hireDate, login AS canLogin FROM teammemberinfo");		
 			
 			if($query->execute()) {
 				$data = array();
@@ -36,7 +36,7 @@
 		elseif ($module == "2") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("UPDATE TeamMemberInfo SET fName=:fName,lName=:lName,phone=:pNumber,email=:eAddress,hire_date=:hire_date,position=:position,login=:canLogin WHERE id=:memberID");
+			$query = $db->prepare("UPDATE teammemberinfo SET fName=:fName,lName=:lName,phone=:pNumber,email=:eAddress,hire_date=:hire_date,position=:position,login=:canLogin WHERE id=:memberID");
 			$query->bindValue(':fName',$data[0]->firstName);
 			$query->bindValue(':lName',$data[0]->lastName);
 			$query->bindValue(':pNumber',$data[0]->phoneNumber);
@@ -54,7 +54,7 @@
 
 			if($query->execute()) {
 				// grab updated info back out and return to grid
-				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, hire_date AS hireDate, login AS canLogin FROM TeamMemberInfo WHERE id=:memberID");
+				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, hire_date AS hireDate, login AS canLogin FROM teammemberinfo WHERE id=:memberID");
 				$query->bindValue(':memberID',$data[0]->memberID);
 				$query->execute();
 
@@ -68,11 +68,11 @@
 		elseif($module == "3") {
 			$data = json_decode($_GET['models']);
 			
-			$query = $db->prepare("SELECT COUNT(*) AS numMan FROM TeamMemberInfo WHERE login='true'");
+			$query = $db->prepare("SELECT COUNT(*) AS numMan FROM teammemberinfo WHERE login='true'");
 			$query->execute();
 			$numPeep = $query->fetch(PDO::FETCH_ASSOC);
 
-			$query = $db->prepare("SELECT login FROM TeamMemberInfo WHERE id=:memberID");
+			$query = $db->prepare("SELECT login FROM teammemberinfo WHERE id=:memberID");
 			$query->bindValue(':memberID',$data[0]->memberID);
 			$query->execute();
 			$manager = $query->fetch(PDO::FETCH_ASSOC);
@@ -85,20 +85,20 @@
 			
 			if((!$man && ($numPeep['numMan'] >= 1)) || ($man && ($numPeep['numMan'] > 1)))
 			{
-				$query = $db->prepare("SELECT CONCAT(fName, ' ', lName) AS name, email FROM TeamMemberInfo WHERE id=:memberID");
+				$query = $db->prepare("SELECT CONCAT(fName, ' ', lName) AS name, email FROM teammemberinfo WHERE id=:memberID");
 				$query->bindValue(':memberID',$data[0]->memberID);
 				$query->execute();
 				
 				$preservedData = $query->fetch(PDO::FETCH_ASSOC);
 				
 				// preserve member information for logging purposes
-				$query = $db->prepare("INSERT INTO TeamMemberInfoLog (time,operation,user,name,email) VALUES (NOW(),'Delete Member',:user,:name,:email)");
+				$query = $db->prepare("INSERT INTO teammemberinfolog (time,operation,user,name,email) VALUES (NOW(),'Delete Member',:user,:name,:email)");
 				$query->bindValue(':user',$_SESSION['email']);
 				$query->bindValue(':name',$preservedData['name']);
 				$query->bindValue(':email',$preservedData['email']);
 				$query->execute();
 				
-				$query = $db->prepare("DELETE FROM TeamMemberInfo WHERE id=:memberID");
+				$query = $db->prepare("DELETE FROM teammemberinfo WHERE id=:memberID");
 				$query->bindValue(':memberID',$data[0]->memberID);
 	
 				$query->execute();
@@ -109,13 +109,13 @@
 			$data = json_decode($_GET['models']);
 						
 			// preserve member information for logging purposes
-			$query = $db->prepare("INSERT INTO TeamMemberInfoLog (time,operation,user,name,email) VALUES (NOW(),'Add Member',:user,:name,:email)");
+			$query = $db->prepare("INSERT INTO teammemberinfolog (time,operation,user,name,email) VALUES (NOW(),'Add Member',:user,:name,:email)");
 			$query->bindValue(':user',$_SESSION['email']);
 			$query->bindValue(':name',$data[0]->firstName . " " . $data[0]->lastName);
 			$query->bindValue(':email',$data[0]->emailAddress);
 			$query->execute();
 								
-			$query = $db->prepare("INSERT INTO TeamMemberInfo (fName,lName,phone,email,position,hire_date,login,password) VALUES (:fName,:lName,:pNumber,:eAddress,:position,:hireDate,:canLogin,'7b4f075f3914bbd4bf9a26623d95954fa0dac20a')");		
+			$query = $db->prepare("INSERT INTO teammemberinfo (fName,lName,phone,email,position,hire_date,login,password) VALUES (:fName,:lName,:pNumber,:eAddress,:position,:hireDate,:canLogin,'7b4f075f3914bbd4bf9a26623d95954fa0dac20a')");		
 			$query->bindValue(':fName',$data[0]->firstName);
 			$query->bindValue(':lName',$data[0]->lastName);
 			$query->bindValue(':pNumber',$data[0]->phoneNumber);
@@ -132,7 +132,7 @@
 
 			if($query->execute()) {
 				// grab data just inserted and return it to data grid
-				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, login AS canLogin FROM TeamMemberInfo ORDER BY id DESC LIMIT 1");
+				$query = $db->prepare("SELECT id AS memberID, fName AS firstName, lName AS lastName, phone AS phoneNumber, email AS emailAddress, position, login AS canLogin FROM teammemberinfo ORDER BY id DESC LIMIT 1");
 				$query->execute();
 				
 				$returnData = array();

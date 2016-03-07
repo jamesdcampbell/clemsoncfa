@@ -1,1 +1,6 @@
-<?php//Includes use "../"chdir("porm");include 'includes/init.php';?>
+<?php
+
+header("location: manager");
+exit;
+
+?>

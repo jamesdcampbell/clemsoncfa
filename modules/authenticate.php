@@ -11,16 +11,18 @@
 		$password = $_POST['password'];
 
 		$password = sha1($password);
+		
+		$query = $db->prepare("SELECT id, email FROM teammemberinfo WHERE email = :username AND password = :password AND login='true'");
 
-		$query = $db->prepare("SELECT id, email FROM TeamMemberInfo WHERE email = :username AND password = :password AND login='true'");
 		$query->bindValue(':username',$username);
 		$query->bindValue(':password',$password);
 
 		$query->execute();
 
 		$rows = $query->fetch(PDO::FETCH_ASSOC);
+		
 		$num = $query->rowCount();
-
+		
 		if($num > 0) {
 			
 

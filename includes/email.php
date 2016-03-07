@@ -11,14 +11,14 @@
 			include 'dbConnections.php';	
 			if($dev)
 			{
-				$email = " AND email = 'sheldonjuncker@gmail.com'";
+				$email = " AND email = 'vickijordancfa@gmail.com'";
 			}
 			
 			else
 			{
 				$email = "";
 			}
-			$query = $db->prepare("SELECT email FROM TeamMemberInfo WHERE login='true'$email");
+			$query = $db->prepare("SELECT email FROM teammemberinfo WHERE login='true'$email");
 			$query->execute();
 			
 			// grab first email address out and then format with commas before
