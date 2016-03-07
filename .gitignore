@@ -1,4 +1,3 @@
 logs.txt
 sql/*
-*.txt
 includes/dbConnections.php
