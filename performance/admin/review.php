@@ -57,8 +57,6 @@ if(isset($_POST["post-manager"]))
 			//Send published results to manager
 			$manager = $porm->get($m, "CfaEmployee");
 			$manager->sendEmail("CFA Published Review", "<pre>The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}</pre>");
-			
-			print("<pre>The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}</pre>");
 		}
 	}
 	
@@ -69,8 +67,9 @@ if(isset($_POST["post-manager"]))
 	foreach($managers as $m)
 	{
 		$porm->read($sql = "INSERT INTO p_review_published(employee_id, review_time, manager_id) VALUES({$review->employee_id}, {$review->review_time}, $m)");
-		print "<pre>$sql</pre>";
 	}
+	
+	BS::alert("Successfully published the reviews.", "success");
 }
 
 $note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");
