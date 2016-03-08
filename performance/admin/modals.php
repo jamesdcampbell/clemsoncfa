@@ -56,7 +56,7 @@
 					}
 					
 					print "<div class='form-group'>
-						<input type='checkbox' name='manager[{$m->id}]'$checked> {$m->fName} {$m->lName}</div>";
+						<input type='checkbox' name='manager[{$m->id}]' value='{$m->id}'$checked> {$m->fName} {$m->lName}</div>";
 				}
 				?>
 			</div>

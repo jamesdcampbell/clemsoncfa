@@ -33,8 +33,12 @@
 		public function sendEmail($dev = false)
 		{			
 			$this->getEmailAddresses($dev);
-			mail($this->to,$this->subject,$this->body,'From: no-reply@clemsoncfa.com');
-			
-		}	
+			mail($this->to,$this->subject,$this->body,'From: no-reply@clemsoncfa.com');	
+		}
+		
+		public function sendTo($address)
+		{
+			mail($address,$this->subject,$this->body,'From: no-reply@clemsoncfa.com');	
+		}
 	}
 ?>

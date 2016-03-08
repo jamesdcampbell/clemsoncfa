@@ -44,8 +44,33 @@ if(isset($_POST["post"]))
 //Publish to Managers
 if(isset($_POST["post-manager"]))
 {
-	$managers = $_POST["manager"];
+	$managers = isset($_POST["manager"]) ? $_POST["manager"] : [];
 	
+	//Send Emails to Managers
+	foreach($managers as $m)
+	{
+		//Is it already published to this manager?
+		$result = $porm->read("SELECT * FROM p_review_published WHERE review_time = {$review->review_time} AND employee_id = {$review->employee_id} AND manager_id = $m", []);
+		
+		if(!count($result))
+		{
+			//Send published results to manager
+			$manager = $porm->get($m, "CfaEmployee");
+			$manager->sendEmail("CFA Published Review", "<pre>The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}</pre>");
+			
+			print("<pre>The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}</pre>");
+		}
+	}
+	
+	//Clear published reviews
+	$porm->read("DELETE FROM p_review_published WHERE review_time = {$review->review_time} AND employee_id = {$review->employee_id}");
+	
+	//Add published reviews
+	foreach($managers as $m)
+	{
+		$porm->read($sql = "INSERT INTO p_review_published(employee_id, review_time, manager_id) VALUES({$review->employee_id}, {$review->review_time}, $m)");
+		print "<pre>$sql</pre>";
+	}
 }
 
 $note = $porm->readOne("SELECT * FROM p_admin_comment WHERE employee_id = {$employee->id} AND review_time = {$review->review_time}", [], "CfaAdminComment");

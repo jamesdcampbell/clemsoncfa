@@ -27,6 +27,17 @@ class CfaEmployee{
 		"0" =>  ["Custom Review", ""]
 	];
 	
+	//Send Email
+	public function sendEmail($subject, $body)
+	{
+		$email = $this->email;
+		
+		$e = new Email;
+		$e->subject = $subject;
+		$e->body = $body;
+		$e->sendTo($email);
+	}
+	
 	//Get Employees with Upcoming Reviews
 	static function getUpcoming($type)
 	{

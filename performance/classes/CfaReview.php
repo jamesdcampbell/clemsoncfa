@@ -119,6 +119,12 @@ AND p_comment.question_id = p_question.id
 		
 	}
 	
+	//Get Display Time (30 => 30 Day)
+	public function getDisplayTime()
+	{
+		return CfaEmployee::$review_times[$this->review_time][0];
+	}
+	
 	//Create a New Review
 	static function create($manager_id, $employee_id, $review_time, $request_id, $post)
 	{
