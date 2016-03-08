@@ -56,7 +56,7 @@ if(isset($_POST["post-manager"]))
 		{
 			//Send published results to manager
 			$manager = $porm->get($m, "CfaEmployee");
-			$manager->sendEmail("CFA Published Review", "<pre>The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}</pre>");
+			$manager->sendEmail("CFA Published Review", "The {$review->getDisplayTime()} review results for employee {$employee->fName} {$employee->lName} have been made available at:\n\nhttp://clemsoncfa.com/performance/manager/published.php?employee={$review->employee_id}&time={$review->review_time}");
 		}
 	}
 	
