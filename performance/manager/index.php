@@ -34,12 +34,39 @@ if(isset($_POST["request"]))
 	
 	$porm->create($request);
 	
+	//Get Managers
+	$managers = [];
+	
+	if(isset($_POST["all"]))
+	{
+		$managers = CfaEmployee::getManagers();
+	}
+	
+	else
+	{
+		foreach($_POST["manager"] as $manager_id)
+		{
+			$managers[] = $porm->get($manager_id, "CfaEmployee");
+		}
+	}
+	
+	//Add Managers
+	foreach($managers as $manager)
+	{
+		$porm->read("INSERT INTO p_review_assigned(request_id, manager_id) VALUES({$request->id}, {$manager->id})");
+	}
+	
 	$employee = $porm->get($_POST["employee"], "CfaEmployee");
 	//Send Email
 	$email = new Email;
 	$email->subject = "CFA Review Request";
 	$email->body = "{$user->fName} {$user->lName} has requested that the employee {$employee->fName} {$employee->lName} be reviewed for the following reasons:\n\n{$request->reason}\n\nPlease use the following link to review the employee:\nhttp://clemsoncfa.com/performance/manager/review.php?request={$request->id}&employee={$employee->id}";
-	$email->sendEmail();
+	//$email->sendEmail();
+	
+	foreach($managers as $manager)
+	{
+		$manager->sendEmail($email->subject, $email->body);
+	}
 	
 	BS::alert("The request was created successfully.", "success");
 }
@@ -138,7 +165,7 @@ if(isset($_POST["request"]))
 				<tbody>
 				<?php
 				
-				$requests = $porm->read("SELECT * FROM p_request WHERE employee_id NOT IN (SELECT employee_id FROM p_review WHERE manager_id = $id AND request_id = p_request.id) ORDER BY request_date DESC", [], "CfaRequest");
+				$requests = $porm->read("SELECT * FROM p_request WHERE employee_id NOT IN (SELECT employee_id FROM p_review WHERE manager_id = $id AND request_id = p_request.id) AND requester_id IN (SELECT manager_id FROM p_review_assigned WHERE request_id = p_request.id) ORDER BY request_date DESC", [], "CfaRequest");
 				
 				foreach($requests as $request)
 				{

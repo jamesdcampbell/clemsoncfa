@@ -23,6 +23,26 @@
 			</div>
 			
 			<div class="form-group">
+				<label>Assigned Managers</label>
+				<p>
+				<input type="checkbox" name="all" onclick="$('#assigned_managers').fadeToggle()" checked>All Managers
+				</p>
+				<?php
+				
+				$managers = CfaEmployee::getManagers();
+				
+				print "<div id='assigned_managers' style='display:none;'>";
+				foreach($managers as $m)
+				{
+					print "<div class='form-group'>
+						<input type='checkbox' name='manager[{$m->id}]' value='{$m->id}'> {$m->fName} {$m->lName}</div>";
+				}
+				print "</div>";
+				
+				?>
+			</div>
+			
+			<div class="form-group">
 				<label>Reason for Review</label>
 				<textarea class="form-control" name="reason"></textarea>
 			</div>
