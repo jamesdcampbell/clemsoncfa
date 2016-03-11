@@ -165,7 +165,20 @@ if(isset($_POST["request"]))
 				<tbody>
 				<?php
 				
-				$requests = $porm->read("SELECT * FROM p_request WHERE employee_id NOT IN (SELECT employee_id FROM p_review WHERE manager_id = $id AND request_id = p_request.id) AND requester_id IN (SELECT manager_id FROM p_review_assigned WHERE request_id = p_request.id) ORDER BY request_date DESC", [], "CfaRequest");
+				$requests = $porm->read("
+	SELECT * FROM p_request
+	WHERE employee_id NOT IN(
+	SELECT employee_id FROM p_review
+	WHERE manager_id = $id
+	AND request_id = p_request.id)
+	AND (
+		requester_id IN (
+			SELECT manager_id FROM p_review_assigned
+			WHERE request_id = p_request.id
+		)
+		OR employee_id = requester_id
+	)
+	ORDER BY request_date DESC", [], "CfaRequest");
 				
 				foreach($requests as $request)
 				{
@@ -176,7 +189,7 @@ if(isset($_POST["request"]))
 					print "<td>{$manager->fName} {$manager->lName}</td>";
 					print "<td>{$employee->fName} {$employee->lName}</td>";
 					print "<td>{$request->reason}</td>";
-					print "<td><a href='review.php?employee={$employee->id}&request={$request->id}'>Review</td>";
+					print "<td><a href='review.php?employee={$employee->id}&request={$request->id}'>Review</a></td>";
 					print "</tr>";
 				}
 				
