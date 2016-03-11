@@ -3,13 +3,7 @@
 	 * Purpose: this single file displays all pages. It should be included in all other pages and 
 	 * the appropriate parameters should be passed in to render the page correctly.
 	 * Misc: File is usually included in other files and displayPage() is called	 
-	 */
-
-	 /*
-		Some security configuration for the main site that is needed to allow employees to login.
-	 */
-	 
-	 
+	 */ 
 	 
 	function displayPage($sideBar, $mainContent)
 	{

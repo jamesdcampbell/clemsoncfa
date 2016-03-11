@@ -12,7 +12,7 @@
 
 		$password = sha1($password);
 		
-		$query = $db->prepare("SELECT id, email FROM teammemberinfo WHERE email = :username AND password = :password AND login='true'");
+		$query = $db->prepare("SELECT id, email, login FROM teammemberinfo WHERE email = :username AND password = :password");
 
 		$query->bindValue(':username',$username);
 		$query->bindValue(':password',$password);
@@ -34,7 +34,17 @@
 				// set session variable
 				$_SESSION['id'] = $rows['id'];
 				$_SESSION['email'] = $rows['email'];
-				header("Location: ../home.php");
+				
+				//Employees can only acces the employee section of performance reviews
+				if($rows["login"] == "false")
+				{
+					header("location: /performance/employee/");
+				}
+				
+				else
+				{
+					header("Location: ../home.php");
+				}
 			}						
 		} else {
 			header("Location: ../index.php");
