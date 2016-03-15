@@ -2,100 +2,58 @@
 include "performance/includes/init.php";
 include "header.php";
 
-		// preparing SQL statement
+		//Get Employees
 		$employees = CfaEmployee::getAll();
+?>
 
-		// fetch the results from the query that was executed	
-		$sideBar = "<h3>Team Members</h3>";
-		foreach($employees as $row)
-		{
-			$sideBar .= '<button type="button" class="lateName" name="id" value="' . $row->id . '">' . $row->fName . " " . $row->lName . '</button><br />';
-		}
+<div class="container-fluid">
+      <div class="row">
+        <?php
+		include "../manager/manager_side.php";
+		?>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1>Employee Late Log</h1>
+		  <h2>View Logs  <a href="#"><button class="btn btn-default btn-sm rightfloat">
+		  Add Late Log</button></a></h2>
+		  <form id="late-log-form">
+			<div class="form-group">
+			<select name="employee" class="form-control" onchange="document.getElementById('late-log-form').submit();">
+			<?php
+			foreach($employees as $e)
+			{
+				$selected = (isset($_GET["employee"]) and $_GET["employee"] == $e->id) ? " selected" : "";
+				print "\t<option value='{$e->id}'$selected>{$e->fullName()}</option>";
+			}
+			?>
+			</select>
+			</div>
+		  </form>
+		  
+			<?php
+			if(isset($_GET["employee"]))
+			{
+				$employee_id = $_GET["employee"];
+				$late = $porm->read("
+				SELECT CONCAT(fName, ' ', lName) AS employeeName, arrivalTime, scheduledTime, `date`, comments, managerName
+				FROM teammemberlate, teammemberinfo
+				WHERE memberID = ?
+				AND teammemberinfo.id = ?", [$employee_id, $employee_id]);
+				
+				$fields = [
+					["employeeName", "Employee Name"],
+					["managerName", "Manager Name"],
+					["date", "Date of Incident"],
+					["arrivalTime", "Arrival Time"],
+					["scheduledTime", "Scheduled Time"],
+					["comments", "Comments"]
+				];
+				CfaTable::generate($fields, $late);
+			}
+			?>
+        </div>
+      </div>
+    </div>
 
-		// call displayPage() (in template.php)	 
-		/*displayPage($sideBar,'<div id="box1">
-			<h2 id="sName">Late Log - Select a name</h2>
-						<div id="grid" style="display: none;">
-							<script>
-							$(document).ready(function() {																																			        
-		                        var dataSource = new kendo.data.DataSource({
-		                            transport: {
-		                                read:  {
-		                                    url: "",
-		                                    dataType: "json"
-		                                },
-		                                update: {
-		                                    url: "",
-		                                    dataType: "json"
-		                                },
-		                                destroy: {
-		                                    url: "",
-		                                    dataType: "json"
-		                                },
-		                                create: {
-		                                    url: "",
-		                                    dataType: "json"
-		                                },
-		                                parameterMap: function(options, operation) {
-		                                    if (operation !== "read" && options.models) {
-		                                        return {models: kendo.stringify(options.models)};
-		                                    }
-		                                }
-		                            },
-		                            batch: true,
-		                            pageSize: 10,					                          
-		                            schema: {
-		                                model: {
-		                                    id: "uniqueID",
-		                                    fields: {
-		                                    	uniqueID: { editable: false, nullable: true },
-		                                        memID: { editable: false, nullable: true },
-		                                        name: { editable: true, validation: { required: true } },	                                        
-		                                        date: { editable: true, type: "date" },
-		                                        timeArrived: { editable: true, validation: { required: true } },
-		                                        schedTime: { editable: true, validation: { required: true } },
-		                                        managerName: { editable: true },
-		                                        comments: { editable: true, validation: { required: true } }
-		                                    }
-		                                }
-		                            }
-		                        });
-
-			                    $("#grid").kendoGrid({
-			                        dataSource: dataSource,
-			                        sortable: true,
-			                        pageable: true,		                        
-			                        height: 500,
-			                        toolbar: ["create"],
-			                        columns: [				                            
-			                            { field: "name", title: "Employee Name", width: "120px" },
-			                            { field: "date", title: "Date", format: "{0:MM/dd/yyyy}", width: "90px" },
-			                            { field: "timeArrived", title: "Time Arrived", width: "100px" },
-			                            { field: "schedTime", title: "Sched. Arrival", width: "110px" },
-			                            { field: "managerName", title: "Manager Name", width: "115px" },
-			                            { field: "comments", title: "Comments", width: "140px",editor: textareaEditor },		                            
-			                            { command: ["edit", "destroy"], title: "&nbsp;"}],
-			                        editable: "popup"
-			                    });	
-
-			                    $(".lateName").click(function () {
-			                    		
-			                    	$("#sName").html("Late Log - " + $(this).html());	
-			                    	$("#grid").show();			
-									var grid = $("#grid").data("kendoGrid");
-									grid.dataSource.transport.options.read.url = "/modules/getLate.php?id=" + $(this).attr("value") + "&q=1";
-									grid.dataSource.transport.options.update.url = "/modules/getLate.php?id=" + $(this).attr("value") + "&q=2"; 
-									grid.dataSource.transport.options.destroy.url = "/modules/getLate.php?id=" + $(this).attr("value") + "&q=3"; 
-									grid.dataSource.transport.options.create.url = "/modules/getLate.php?id=" + $(this).attr("value") + "&q=4"; 
-									dataSource.read();					        					    		
-								});
-
-			                    function textareaEditor(container, options) {
-										    	$("<textarea data-bind=\"value: " + options.field + "\" cols=\"19\" rows=\"4\"></textarea>")
-		        								.appendTo(container);
-								}													        					    												
-							});
-						</script>
-						</div>
-						</div>');*/
+<?php
+include "footer.php";
 ?>

@@ -38,6 +38,12 @@ class CfaEmployee{
 		$e->sendTo($email);
 	}
 	
+	//Get Full Name
+	public function fullName($space = " ")
+	{
+		return $this->fName . $space . $this->lName;
+	}
+	
 	//Get Employees with Upcoming Reviews
 	static function getUpcoming($type)
 	{
