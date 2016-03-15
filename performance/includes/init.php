@@ -1,5 +1,8 @@
 <?php
 
+//Set Current Working Directory
+chdir($_SERVER["DOCUMENT_ROOT"] . "/performance/includes");
+
 error_reporting(E_ALL);
 ini_set("display_errors", "1");
 
