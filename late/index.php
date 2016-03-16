@@ -1,6 +1,7 @@
 <?php
-include "performance/includes/init.php";
+include "../performance/includes/init.php";
 include "header.php";
+include __DIR__ . "/modals.php";
 
 		//Get Employees
 		$employees = CfaEmployee::getAll();
@@ -13,11 +14,11 @@ include "header.php";
 		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1>Employee Late Log</h1>
-		  <h2>View Logs  <a href="#"><button class="btn btn-default btn-sm rightfloat">
-		  Add Late Log</button></a></h2>
+		  <h2>View Logs <button data-toggle="modal" data-target="#lateModal" class="btn btn-default btn-sm rightfloat">Add Late Log</button></h2>
 		  <form id="late-log-form">
 			<div class="form-group">
 			<select name="employee" class="form-control" onchange="document.getElementById('late-log-form').submit();">
+				<option value="-1">Select an Employee:</option>
 			<?php
 			foreach($employees as $e)
 			{
