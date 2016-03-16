@@ -3,8 +3,22 @@ include "../performance/includes/init.php";
 include "header.php";
 include __DIR__ . "/modals.php";
 
-		//Get Employees
-		$employees = CfaEmployee::getAll();
+//Get Employees
+$employees = CfaEmployee::getAll();
+
+//Add Late Log
+if(isset($_POST["late"]))
+{
+	$late = new CfaLateLog;
+	$late->date = $_POST["date"];
+	$late->memberID = $_POST["employee"];
+	$late->arrivalTime = $_POST["time_arrived"];
+	$late->scheduledTime = $_POST["time_scheduled"];
+	$late->managerName = $user->fName . " " . $user->lName;
+	$late->comments = $_POST["comment"];
+	$porm->create($late);
+	BS::alert("Successfully added the late log.", "success");
+}
 ?>
 
 <div class="container-fluid">
