@@ -22,9 +22,18 @@ if(isset($_POST["late"]))
 
 if(isset($_POST["delete"]))
 {
-	$log = $porm->get($_POST["log"], "CfaLateLog");
+	if(!$user->isAdmin())
+	{
+		BS::alert("You do not have permissions to delete this late log.", "danger");
+	}
+	
+	else
+	{
+		$log = $porm->get($_POST["log"], "CfaLateLog");
 	$porm->delete($log);
 	BS::alert("Successfully deleted the late log.", "success");
+	}
+	
 }
 ?>
 
@@ -74,7 +83,15 @@ if(isset($_POST["delete"]))
 				
 				foreach($late as $l)
 				{
-					$l->action = "<form method='post'><input type='hidden' name='log' value='{$l->id}'><input type='submit' name='delete' value='Delete' class='form-control btn btn-danger'></form>";
+					if($user->isAdmin())
+					{
+						$l->action = "<form method='post'><input type='hidden' name='log' value='{$l->id}'><input type='submit' name='delete' value='Delete' class='form-control btn btn-danger'></form>";
+					}
+					
+					else
+					{
+						$l->action = "None";
+					}
 				}
 				
 				if(count($late))

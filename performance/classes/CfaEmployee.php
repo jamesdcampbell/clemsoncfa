@@ -44,6 +44,12 @@ class CfaEmployee{
 		return $this->fName . $space . $this->lName;
 	}
 	
+	//Is Admin
+	public function isAdmin()
+	{
+		return ($this->email == "sheldonjuncker@gmail.com" || $this->email == "vickijordancfa@gmail.com");
+	}
+	
 	//Get Employees with Upcoming Reviews
 	static function getUpcoming($type)
 	{
