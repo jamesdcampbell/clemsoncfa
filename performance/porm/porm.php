@@ -21,14 +21,13 @@ class Porm
 		else
 		{
 			$this->dbname = $porm_config['default_db'];
-		}
-		
+		}		
 		
 		//Connect to Database
 		try {
 			$this->con = new PDO($porm_config['pdo_string'], $porm_config['user'], $porm_config['pass']);
 			
-			$this->con->query("USE {$this->dbname}");
+			$this->con->query("USE `{$this->dbname}`");
 			
 		} catch (PDOException $e) {
 			print $e->getMessage();
@@ -66,7 +65,7 @@ class Porm
 				continue;
 			
 			$vals[] = $val;
-			$props[] = $prop;
+			$props[] = "`" . $prop . "`";
 			$qmarks[] = '?';
 		}
 			
@@ -142,7 +141,7 @@ class Porm
 	public function get($id, $class)
 	{
 		$table = $this->getTableName(new $class);
-		
+
 		$result = $this->readOne("SELECT * FROM $table WHERE id = ?", [$id], $class);
 		
 		return $result;
@@ -244,9 +243,9 @@ class Porm
 	public function getTableName($class)
 	{
 		global $porm_config;
-		
+
 		$name = get_class($class);
-		return $porm_config['dbs'][$this->dbname][$name];
+		return '`' . $porm_config['dbs'][$this->dbname][$name] . '`';
 	}
 	
 	//Create Statement and Bind Values

@@ -19,6 +19,13 @@ if(isset($_POST["late"]))
 	$porm->create($late);
 	BS::alert("Successfully added the late log.", "success");
 }
+
+if(isset($_POST["delete"]))
+{
+	$log = $porm->get($_POST["log"], "CfaLateLog");
+	$porm->delete($log);
+	BS::alert("Successfully deleted the late log.", "success");
+}
 ?>
 
 <div class="container-fluid">
@@ -49,19 +56,32 @@ if(isset($_POST["late"]))
 			{
 				$employee_id = $_GET["employee"];
 				$late = $porm->read("
-				SELECT CONCAT(fName, ' ', lName) AS employeeName, arrivalTime, scheduledTime, `date`, comments, managerName
+				SELECT teammemberlate.id AS id, CONCAT(fName, ' ', lName) AS employeeName, arrivalTime, scheduledTime, `date`, comments, managerName
 				FROM teammemberlate, teammemberinfo
 				WHERE memberID = ?
-				AND teammemberinfo.id = ?", [$employee_id, $employee_id]);
+				AND teammemberinfo.id = ?
+				ORDER BY `date` DESC
+				", [$employee_id, $employee_id], "CfaEmployee");
 				
 				$fields = [
-					["employeeName", "Employee Name"],
 					["managerName", "Manager Name"],
 					["date", "Date of Incident"],
 					["arrivalTime", "Arrival Time"],
 					["scheduledTime", "Scheduled Time"],
-					["comments", "Comments"]
+					["comments", "Comments"],
+					["action", "Action"]
 				];
+				
+				foreach($late as $l)
+				{
+					$l->action = "<form method='post'><input type='hidden' name='log' value='{$l->id}'><input type='submit' name='delete' value='Delete' class='form-control btn btn-danger'></form>";
+				}
+				
+				if(count($late))
+				{
+					print "<h2>{$late[0]->employeeName}</h2>";
+				}
+				
 				CfaTable::generate($fields, $late);
 			}
 			?>
