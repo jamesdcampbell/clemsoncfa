@@ -87,7 +87,7 @@ if(isset($_POST["delete"]))
 			];
 			
 			array_map(function($el){
-				$el->action = "<form method='post'><input type='hidden' name='care_id' value='{$el->id}'><input type='submit' name='edit' value='View/Edit' class='btn btn-warning form-control'><input type='submit' name='delete' value='Delete' class='btn btn-danger form-control'></form>";
+				$el->action = "<form method='post'><input type='hidden' name='care_id' value='{$el->id}'><a href='edit.php?id={$el->id}' class='btn btn-warning'>View/Edit</a><input type='submit' name='delete' value='Delete' class='btn btn-danger form-control'></form>";
 			}, $care);
 			
 			print "<h2>Care Log Results <button data-toggle='modal' data-target='#careModal' class='btn btn-default'>New Care Log</button></h2>";
