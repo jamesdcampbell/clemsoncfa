@@ -2,6 +2,8 @@
 include "../performance/includes/init.php";
 include "header.php";
 
+include __DIR__ . "/modals.php";
+
 $name = "";
 $phone = "";
 $address = "";
@@ -15,7 +17,7 @@ $address = "";
 		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1>Customer Care Log</h1>
-		  <h2>Search Care Log</h2>
+		  <h2>Search Care Log (design needed)</h2>
 		  <p>You can search for customer care logs by the customer's name, phone number, or address.</p>
 		  <form class="form-horizontal" style="width:50%;">
 			<div class="form-group">
@@ -65,7 +67,7 @@ $address = "";
 				$el->action = "<form method='post'><input type='hidden' name='care_id' value='{$el->id}'><input type='submit' name='edit' value='View/Edit' class='btn btn-warning form-control'><input type='submit' name='delete' value='Delete' class='btn btn-danger form-control'></form>";
 			}, $care);
 			
-			print "<h2>Care Log Results</h2>";
+			print "<h2>Care Log Results <button data-toggle='modal' data-target='#careModal' class='btn btn-default'>New Care Log</button></h2>";
 			CfaTable::generate($fields, $care);
 			?>
         </div>
