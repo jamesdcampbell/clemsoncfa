@@ -8,6 +8,29 @@ $name = "";
 $phone = "";
 $address = "";
 
+//Create new Care Log
+if(isset($_POST["care"]))
+{
+	$i = new CfaIncident;
+	foreach($i->fields as $f)
+	{
+		if(isset($_POST[$f]))
+		{
+			$i->{$f} = $_POST[$f];
+		}
+	}
+	$porm->create($i);
+	BS::alert("Created a new incident successfully.", "success");
+}
+
+//Create new Care Log
+if(isset($_POST["delete"]))
+{
+	$id = $_POST["care_id"];
+	$incident = $porm->get($id, "CfaIncident");
+	$porm->delete($incident);
+	BS::alert("Deleted the incident successfully.", "success");
+}
 ?>
 
 <div class="container-fluid">

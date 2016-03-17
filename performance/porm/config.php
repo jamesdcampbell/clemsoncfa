@@ -22,7 +22,8 @@ $porm_config = [
 			'CfaAnswer' => 'p_answer',
 			'CfaRequest' => 'p_request',
 			'CfaAdminComment' => 'p_admin_comment',
-			'CfaLateLog' => 'teammemberlate'
+			'CfaLateLog' => 'teammemberlate',
+			'CfaIncident' => 'incident'
 		],
 	],
 	
