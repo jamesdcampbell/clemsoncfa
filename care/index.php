@@ -8,6 +8,51 @@ $name = "";
 $phone = "";
 $address = "";
 
+//Search Form
+$parts = [];
+$sql = "1 ";
+if(isset($_GET["search"]))
+{
+	$type = $_GET["search_by"];
+	$text = $_GET["search_text"];
+	
+	if($type == "name")
+	{
+		$parts = explode(" ", $text);
+		foreach($parts as $part)
+		{
+			$sql .= " AND customerName LIKE ?";
+		}
+	}
+	
+	else if($type == "phone")
+	{
+		$parts = preg_split("/[^\d]/", $text);
+		
+		foreach($parts as $part)
+		{
+			$sql .= " AND phoneOne LIKE ?";
+		}
+	}
+	
+	else if($type == "address")
+	{
+		$parts = explode(" ", $text);
+		
+		foreach($parts as $part)
+		{
+			$sql .= " AND address LIKE ?";
+		}
+	}
+	
+	foreach($parts as &$part)
+	{
+		$part = "%$part%";
+	}
+	
+	$sql = "($sql)";
+}
+
 //Create new Care Log
 if(isset($_POST["care"]))
 {
@@ -74,7 +119,7 @@ if(isset($_POST["delete"]))
 			<?php
 			$care = $porm->read("
 			SELECT id, customerName AS custName, callDate AS dateCall, callTime, callTakenByID AS callTakenBy, incidentDate AS doi, incidentTime AS toi, details, followUp, address, phoneOne, phoneTwo, tMemberIssue, handled
-			FROM incident");
+			FROM incident WHERE $sql", $parts);
 			
 			$fields = [
 				["custName", "Customer Name"],
