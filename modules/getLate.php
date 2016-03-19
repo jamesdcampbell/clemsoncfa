@@ -21,9 +21,9 @@
 
 		// retrieve data
 		if($module == "1"){
-			$query = $db->prepare("SELECT TeamMemberLate.id AS uniqueID, TeamMemberInfo.id AS memID, CONCAT(TeamMemberInfo.fName, ' ', TeamMemberInfo.lName) AS name,
-									TeamMemberLate.date, TeamMemberLate.arrivalTime AS timeArrived, TeamMemberLate.scheduledTime AS schedTime, TeamMemberLate.managerName, 
-									TeamMemberLate.comments FROM TeamMemberLate INNER JOIN TeamMemberInfo ON TeamMemberLate.memberID=TeamMemberInfo.id WHERE TeamMemberLate.memberID=:memberID");
+			$query = $db->prepare("SELECT teammemberlate.id AS uniqueID, teammemberinfo.id AS memID, CONCAT(teammemberinfo.fName, ' ', teammemberinfo.lName) AS name,
+									teammemberlate.date, teammemberlate.arrivalTime AS timeArrived, teammemberlate.scheduledTime AS schedTime, teammemberlate.managerName, 
+									teammemberlate.comments FROM teammemberlate INNER JOIN teammemberinfo ON teammemberlate.memberID=teammemberinfo.id WHERE teammemberlate.memberID=:memberID");
 			$query->bindValue(':memberID', $memberID);
 			$query->execute();
 
@@ -38,7 +38,7 @@
 		elseif ($module == "2") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("UPDATE TeamMemberLate SET date=:date,arrivalTime=:aTime,scheduledTime=:sTime,managerName=:manName,comments=:comments WHERE id=:uniqueID");
+			$query = $db->prepare("UPDATE teammemberlate SET date=:date,arrivalTime=:aTime,scheduledTime=:sTime,managerName=:manName,comments=:comments WHERE id=:uniqueID");
 			$query->bindValue(':date',$data[0]->date);
 			$query->bindValue(':aTime',$data[0]->timeArrived);
 			$query->bindValue(':sTime',$data[0]->schedTime);
@@ -47,9 +47,9 @@
 			$query->bindValue(':uniqueID',$data[0]->uniqueID);
 
 			if($query->execute()) {
-				$query = $db->prepare("SELECT TeamMemberLate.id AS uniqueID, TeamMemberInfo.id AS memID, CONCAT(TeamMemberInfo.fName, ' ', TeamMemberInfo.lName) AS name,
-									TeamMemberLate.date, TeamMemberLate.arrivalTime AS timeArrived, TeamMemberLate.scheduledTime AS schedTime, TeamMemberLate.managerName, 
-									TeamMemberLate.comments FROM TeamMemberLate INNER JOIN TeamMemberInfo ON TeamMemberLate.memberID=TeamMemberInfo.id WHERE TeamMemberLate.id=:uniqueID");
+				$query = $db->prepare("SELECT teammemberlate.id AS uniqueID, teammemberinfo.id AS memID, CONCAT(teammemberinfo.fName, ' ', teammemberinfo.lName) AS name,
+									teammemberlate.date, teammemberlate.arrivalTime AS timeArrived, teammemberlate.scheduledTime AS schedTime, teammemberlate.managerName, 
+									teammemberlate.comments FROM teammemberlate INNER JOIN teammemberinfo ON teammemberlate.memberID=teammemberinfo.id WHERE teammemberlate.id=:uniqueID");
 				$query->bindValue(':uniqueID',$data[0]->uniqueID);
 				$query->execute();
 
@@ -63,7 +63,7 @@
 		elseif ($module == "3") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("DELETE FROM TeamMemberLate WHERE id=:lateID");
+			$query = $db->prepare("DELETE FROM teammemberlate WHERE id=:lateID");
 			$query->bindValue(':lateID',$data[0]->uniqueID);
 
 			$query->execute();
@@ -72,7 +72,7 @@
 		elseif ($module == "4") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("INSERT INTO TeamMemberLate (memberID,date,arrivalTime,scheduledTime,managerName,comments) VALUES
+			$query = $db->prepare("INSERT INTO teammemberlate (memberID,date,arrivalTime,scheduledTime,managerName,comments) VALUES
 																(:memID,:date,:aTime,:sTime,:manName,:comments)");
 			$query->bindValue(':memID',$memberID);
 			$query->bindValue(':date',$data[0]->date);
@@ -82,9 +82,9 @@
 			$query->bindValue(':comments',$data[0]->comments);
 
 			if($query->execute()) {
-				$query = $db->prepare("SELECT TeamMemberLate.id AS uniqueID, TeamMemberInfo.id AS memID, CONCAT(TeamMemberInfo.fName, ' ', TeamMemberInfo.lName) AS name,
-									TeamMemberLate.date, TeamMemberLate.arrivalTime AS timeArrived, TeamMemberLate.scheduledTime AS schedTime, TeamMemberLate.managerName, 
-									TeamMemberLate.comments FROM TeamMemberLate INNER JOIN TeamMemberInfo ON TeamMemberLate.memberID=TeamMemberInfo.id ORDER BY TeamMemberLate.id DESC LIMIT 1");
+				$query = $db->prepare("SELECT teammemberlate.id AS uniqueID, teammemberinfo.id AS memID, CONCAT(teammemberinfo.fName, ' ', teammemberinfo.lName) AS name,
+									teammemberlate.date, teammemberlate.arrivalTime AS timeArrived, teammemberlate.scheduledTime AS schedTime, teammemberlate.managerName, 
+									teammemberlate.comments FROM teammemberlate INNER JOIN teammemberinfo ON teammemberlate.memberID=teammemberinfo.id ORDER BY teammemberlate.id DESC LIMIT 1");
 				$query->execute();
 
 				$returnData = array();

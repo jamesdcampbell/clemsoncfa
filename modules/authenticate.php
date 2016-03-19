@@ -11,16 +11,18 @@
 		$password = $_POST['password'];
 
 		$password = sha1($password);
+		
+		$query = $db->prepare("SELECT id, email, login FROM teammemberinfo WHERE email = :username AND password = :password");
 
-		$query = $db->prepare("SELECT id, email FROM TeamMemberInfo WHERE email = :username AND password = :password AND login='true'");
 		$query->bindValue(':username',$username);
 		$query->bindValue(':password',$password);
 
 		$query->execute();
 
 		$rows = $query->fetch(PDO::FETCH_ASSOC);
+		
 		$num = $query->rowCount();
-
+		
 		if($num > 0) {
 			
 
@@ -32,7 +34,17 @@
 				// set session variable
 				$_SESSION['id'] = $rows['id'];
 				$_SESSION['email'] = $rows['email'];
-				header("Location: ../home.php");
+				
+				//Employees can only acces the employee section of performance reviews
+				if($rows["login"] == "false")
+				{
+					header("location: /performance/employee/");
+				}
+				
+				else
+				{
+					header("Location: ../home.php");
+				}
 			}						
 		} else {
 			header("Location: ../index.php");

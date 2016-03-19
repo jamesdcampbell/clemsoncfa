@@ -1,7 +1,7 @@
 <?php
 
 /*
-	This is the PORM class for the TeamMemberInfo table.
+	This is the PORM class for the teammemberinfo table.
 	It represents an employee.
 */
 
@@ -27,6 +27,29 @@ class CfaEmployee{
 		"0" =>  ["Custom Review", ""]
 	];
 	
+	//Send Email
+	public function sendEmail($subject, $body)
+	{
+		$email = $this->email;
+		
+		$e = new Email;
+		$e->subject = $subject;
+		$e->body = $body;
+		$e->sendTo($email);
+	}
+	
+	//Get Full Name
+	public function fullName($space = " ")
+	{
+		return $this->fName . $space . $this->lName;
+	}
+	
+	//Is Admin
+	public function isAdmin()
+	{
+		return ($this->email == "sheldonjuncker@gmail.com" || $this->email == "vickijordancfa@gmail.com");
+	}
+	
 	//Get Employees with Upcoming Reviews
 	static function getUpcoming($type)
 	{
@@ -39,18 +62,18 @@ class CfaEmployee{
 		$upper_limit = CfaEmployee::$review_times[$type][1];
 			
 		$sql = "
-SELECT * FROM TeamMemberInfo
+SELECT * FROM teammemberinfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL $interval)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL $upper_limit)
-AND TeamMemberInfo.login = 'false'
+AND teammemberinfo.login = 'false'
 AND id NOT IN(
 	SELECT employee_id FROM p_review_ignore
-	WHERE employee_id = TeamMemberInfo.id
+	WHERE employee_id = teammemberinfo.id
 	AND review_time = $type
 )
 AND id NOT IN(
 	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
+	WHERE employee_id = teammemberinfo.id
 	AND review_time = $type
 )";
 		return $porm->read($sql, [], "CfaEmployee");
@@ -69,18 +92,18 @@ AND id NOT IN(
 		$upper_limit = CfaEmployee::$review_times[$type][1];
 			
 		$sql = "
-SELECT * FROM TeamMemberInfo
+SELECT * FROM teammemberinfo
 WHERE CURRENT_DATE() > DATE_ADD(hire_date, INTERVAL $interval)
 AND CURRENT_DATE() <= DATE_ADD(hire_date, INTERVAL $upper_limit)
-AND TeamMemberInfo.login = 'false'
+AND teammemberinfo.login = 'false'
 AND id IN(
 	SELECT employee_id FROM p_review_ignore
-	WHERE employee_id = TeamMemberInfo.id
+	WHERE employee_id = teammemberinfo.id
 	AND review_time = $type
 )
 AND id NOT IN(
 	SELECT employee_id FROM p_review
-	WHERE employee_id = TeamMemberInfo.id
+	WHERE employee_id = teammemberinfo.id
 	AND review_time = $type
 )";
 		return $porm->read($sql, [], "CfaEmployee");
@@ -90,6 +113,13 @@ AND id NOT IN(
 	{
 		global $porm;
 		return $porm->read("SELECT * FROM teammemberinfo WHERE login = 'false' ORDER BY lName, fName ASC", [], "CfaEmployee");
+	}
+	
+	//Get All Managers
+	static function getManagers()
+	{
+		global $porm;
+		return $porm->read("SELECT * FROM teammemberinfo WHERE login = 'true' ORDER BY lName, fName ASC", [], "CfaEmployee");
 	}
 }
 ?>

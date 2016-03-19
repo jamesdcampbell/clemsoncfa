@@ -23,7 +23,10 @@
 	function doWork($tableName,$emailSubject)
 	{
 		include '../includes/dbConnections.php';		
-		
+			
+		//Table names must be lower case
+		$tableName = strtolower($tableName);
+			
 		$option= $_GET['q'];
 
 		// read goals

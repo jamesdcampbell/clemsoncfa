@@ -1,8 +1,17 @@
 <?php
 //Testing Stuff
 include '../includes/init.php';
+
+//Request Review Form
+if(isset($_POST["request"]))
+{
+	$porm->read("INSERT INTO p_request_employee(requester_id, employee_id, reason) VALUES($id, $id, ?)", [$_POST["reason"]]);
+	
+	BS::alert("The request was created successfully.", "success");
+}
+
+include 'modals.php';
 include '../includes/header.php';
-$id = 81; //testing
 ?>
 
     <div class="container-fluid">
@@ -12,7 +21,7 @@ $id = 81; //testing
 		?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		
-		  <h1 class="page-header" id="upcoming">My Performance</h1>
+		  <h1 class="page-header" id="upcoming">My Performance <button class="btn btn-default btn-sm rightfloat" data-toggle="modal" data-target="#requestModal">Request a Review</button></h1>
 		<?php
 		//Run through days and print
 		foreach(CfaEmployee::$review_times as $time => $value)

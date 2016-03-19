@@ -1,0 +1,43 @@
+[28-Feb-2016 09:53:00] PHP Parse error:  syntax error, unexpected '[' in /home4/clemsonc/public_html/performance/manager/index.php on line 104
+[28-Feb-2016 10:09:51] PHP Parse error:  syntax error, unexpected '[' in /home4/clemsonc/public_html/performance/manager/index.php on line 104
+[28-Feb-2016 10:15:00 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:15:00 America/Denver] PHP Fatal error:  Call to a member function prepare() on null in /home4/clemsonc/public_html/performance/porm/porm.php on line 257
+[28-Feb-2016 10:15:03 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:15:03 America/Denver] PHP Fatal error:  Call to a member function prepare() on null in /home4/clemsonc/public_html/performance/porm/porm.php on line 257
+[28-Feb-2016 10:15:49 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:15:49 America/Denver] PHP Fatal error:  Call to a member function prepare() on null in /home4/clemsonc/public_html/performance/porm/porm.php on line 257
+[28-Feb-2016 10:18:21 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:18:21 America/Denver] PHP Fatal error:  Call to a member function prepare() on null in /home4/clemsonc/public_html/performance/porm/porm.php on line 257
+[28-Feb-2016 10:18:59 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:18:59 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 53
+[28-Feb-2016 10:27:29 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:27:29 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 53
+[28-Feb-2016 10:48:53 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:48:53 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 53
+[28-Feb-2016 10:48:54 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:48:54 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 53
+[28-Feb-2016 10:48:57 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:48:57 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 53
+[28-Feb-2016 10:50:08 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:50:08 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 54
+[28-Feb-2016 10:50:14 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:50:14 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 54
+[28-Feb-2016 10:50:55 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:50:55 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:51:16 America/Denver] PHP Notice:  Undefined index:  in /home4/clemsonc/public_html/performance/porm/porm.php on line 250
+[28-Feb-2016 10:51:16 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:55:08 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:56:24 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:56:45 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:56:48 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:57:26 America/Denver] PHP Parse error:  syntax error, unexpected '2' (T_LNUMBER) in /home4/clemsonc/public_html/performance/porm/config.php on line 6
+[28-Feb-2016 10:57:44 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 10:58:08 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/manager_side.php on line 4
+[28-Feb-2016 11:41:31 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 56
+[28-Feb-2016 15:23:03 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 56
+[28-Feb-2016 15:23:08 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 56
+[28-Feb-2016 15:29:15 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/index.php on line 149
+[28-Feb-2016 15:30:25 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/index.php on line 149
+[28-Feb-2016 15:30:49 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/manager/index.php on line 149
+[28-Feb-2016 15:34:18 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 56
+[28-Feb-2016 15:34:26 America/Denver] PHP Notice:  Trying to get property of non-object in /home4/clemsonc/public_html/performance/includes/init.php on line 56

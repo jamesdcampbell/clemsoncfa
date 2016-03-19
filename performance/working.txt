@@ -3,10 +3,11 @@ Main comments from manager's on admin's reviews
 Publishing/unpublishing results
 Ignoring reviews
 Disabling editing of published reviews
+Add Hire Dates
+Sending emails
 
 Current:
 Displaying success messages
-Add Hire Dates
 Report data
 
 After:

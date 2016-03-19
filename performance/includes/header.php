@@ -12,13 +12,13 @@
     <title>CFA Performance Review System</title>
 
     <!-- Bootstrap core CSS -->
-   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/performance/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom theme styles for this template -->
-     <link href="../bootstrap/css/dashboard.css" rel="stylesheet"> 
+     <link href="/performance/bootstrap/css/dashboard.css" rel="stylesheet"> 
 	
 	<!-- Custom styles for this template -->
-	<link href="../bootstrap/css/custom.css" rel="stylesheet">
+	<link href="/performance/bootstrap/css/custom.css" rel="stylesheet">
   </head>
 
   <body>
@@ -41,9 +41,6 @@
             <li><a href="/performance/manager/">Manager</a></li>
             <li><a href="/performance/employee/">Employee</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>

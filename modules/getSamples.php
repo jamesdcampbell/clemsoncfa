@@ -20,7 +20,7 @@
 
 		// retrieve sampling data
 		if ($module == "1") {
-			$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM Sampling");							
+			$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM sampling");							
 			$query->execute();
 
 			$data = array();
@@ -35,7 +35,7 @@
 		elseif ($module == "2") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("UPDATE Sampling SET date=:date,product=:prod,units=:units,samplesGiven=:sGiven,wholeProduct=:wProd,comments=:comments WHERE id=:sampleID");
+			$query = $db->prepare("UPDATE sampling SET date=:date,product=:prod,units=:units,samplesGiven=:sGiven,wholeProduct=:wProd,comments=:comments WHERE id=:sampleID");
 			$query->bindValue(':sampleID',$data[0]->uniqueID);
 			$query->bindValue(':date',$data[0]->date);
 			$query->bindValue(':prod',$data[0]->product);
@@ -45,7 +45,7 @@
 			$query->bindValue(':comments',$data[0]->comments);
 
 			if($query->execute()) {
-				$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM Sampling WHERE id=:sampleID");	
+				$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM sampling WHERE id=:sampleID");	
 				$query->bindValue(':sampleID',$data[0]->uniqueID);
 				$query->execute();
 
@@ -60,7 +60,7 @@
 		elseif ($module == "3") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("DELETE FROM Sampling WHERE id=:issueID");
+			$query = $db->prepare("DELETE FROM sampling WHERE id=:issueID");
 			$query->bindValue(':issueID',$data[0]->uniqueID);
 
 			$query->execute();				
@@ -69,7 +69,7 @@
 		elseif ($module == "4") {
 			$data = json_decode($_GET['models']);
 
-			$query = $db->prepare("INSERT INTO Sampling (date,product,units,samplesGiven, comments) VALUES (:date,:prod,:units,:sGiven,:comments)");
+			$query = $db->prepare("INSERT INTO sampling (date,product,units,samplesGiven, comments) VALUES (:date,:prod,:units,:sGiven,:comments)");
 			$query->bindValue(':date',$data[0]->date);
 			$query->bindValue(':prod',$data[0]->product);
 			$query->bindValue(':units',$data[0]->units);
@@ -79,7 +79,7 @@
 
 			if($query->execute()){
 
-				$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM Sampling ORDER BY id DESC LIMIT 1");
+				$query = $db->prepare("SELECT id AS uniqueID, date, product, units, samplesGiven, wholeProduct, comments FROM sampling ORDER BY id DESC LIMIT 1");
 				$query->execute();
 				
 				$returnData = array();

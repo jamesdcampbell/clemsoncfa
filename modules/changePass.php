@@ -12,7 +12,7 @@
     	$newPassConf = $_GET['newPassConf'];
 
     	// select old hash from userID
-    	$query = $db->prepare("SELECT password FROM TeamMemberInfo WHERE id=:userID");
+    	$query = $db->prepare("SELECT password FROM teammemberinfo WHERE id=:userID");
     	$query->bindValue(":userID",$_SESSION['id']);
     	$query->execute();
 
@@ -22,7 +22,7 @@
     	if($data['password'] == sha1($currPass)) {
     		if(($newPass == $newPassConf) && (sha1($newPass) != "7b4f075f3914bbd4bf9a26623d95954fa0dac20a")) {
     			$newPass = sha1($newPass);
-    			$query = $db->prepare("UPDATE TeamMemberInfo SET password=:pass WHERE id=:userID");
+    			$query = $db->prepare("UPDATE teammemberinfo SET password=:pass WHERE id=:userID");
     			$query->bindValue(":userID",$_SESSION['id']);
     			$query->bindValue(":pass",$newPass);
     			if($query->execute())

@@ -17,7 +17,7 @@
 	} else {
 		include '../includes/dbConnections.php';
 
-		$query = $db->prepare("UPDATE HomePage SET motd=:motd, notes=:notes, leaderShipNotes=:lsNotes");
+		$query = $db->prepare("UPDATE homepage SET motd=:motd, notes=:notes, leaderShipNotes=:lsNotes");
 		$query->bindValue(':motd',$_POST['motd']);
 		$query->bindValue(':notes',$_POST['notes']);
 		$query->bindValue(':lsNotes',$_POST['lsNotes']);

@@ -6,29 +6,10 @@ include '../includes/init.php';
 //Manager's Reviews
 $employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
 
+include '../includes/header.php';
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
-
-    <title>CFA Performance Review System</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../bootstrap/css/dashboard.css" rel="stylesheet">
-  </head>
-
-  <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -74,7 +55,7 @@ $employee_id = isset($_GET["employee"]) ? (int) $_GET["employee"] : "";
     <label for="employeeInput">Employee</label>
     <select name="employee" class="form-control" id="employeeInput">
 		<?php
-		$query = $db->query("SELECT * FROM TeamMemberInfo WHERE fname != '' ORDER BY lname, fname");
+		$query = $db->query("SELECT * FROM teammemberinfo WHERE fname != '' ORDER BY lname, fname");
 		foreach($query as $employee)
 		{
 			$selected = $employee["id"] == $employee_id ? "selected" : "";
